@@ -1,0 +1,18 @@
+---
+dist: xenial
+language: python
+python:
+  - 3.7
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - black --check --verbose .
+  - pylama
+  - isort --recursive --check-only --diff
+  - pip list --outdated
+
+
+notifications:
+  email: false
