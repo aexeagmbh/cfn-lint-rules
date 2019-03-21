@@ -1,0 +1,8 @@
+---
+version: '2'
+services:
+  rules:
+    build: .
+    volumes:
+      - ./:/usr/src/app/
+    command: black .
