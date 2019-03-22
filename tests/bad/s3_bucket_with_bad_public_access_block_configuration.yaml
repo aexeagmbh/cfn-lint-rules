@@ -10,7 +10,7 @@ Resources:
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false  # this value should be true (W9301)
         # BlockPublicPolicy: true  # this key should be present and the value true (W9301)
-        IgnorePublicAcls: true
+        # IgnorePublicAcls: true  # this key should be present and the value true (W9301)
         RestrictPublicBuckets: true
   TestBucket2:
     Type: AWS::S3::Bucket

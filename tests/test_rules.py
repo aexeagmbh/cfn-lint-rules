@@ -1,12 +1,8 @@
-from pathlib import Path
-
 import cfnlint.decode.cfn_yaml
 import pytest
 from cfnlint import Runner
 from cfnlint.core import get_rules
-
-GOOD_TEMPLATE_FIXTURES_PATH = Path("tests/good").resolve()
-BAD_TEMPLATE_FIXTURES_PATH = Path("tests/bad").resolve()
+from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, GOOD_TEMPLATE_FIXTURES_PATH
 
 
 @pytest.mark.parametrize(
@@ -31,7 +27,7 @@ def test_good(filename):
 @pytest.mark.parametrize(
     "filename,error_count",
     [
-        ("s3_bucket_with_bad_public_access_block_configuration.yaml", 4),
+        ("s3_bucket_with_bad_public_access_block_configuration.yaml", 5),
         ("s3_bucket_without_bucket_encryption.yaml", 1),
         ("s3_bucket_without_public_access_block_configuration.yaml", 1),
     ],
