@@ -42,7 +42,7 @@ class S3BucketPublicAccess(CloudFormationLintRule):
                     detail_path = path + [key]
                     message = f"Property {'/'.join(detail_path)} is missing and should be true"
                     matches.append(RuleMatch(detail_path, message))
-                elif value is not True:
+                elif not (value is True or value == "true"):
                     detail_path = path + [key]
                     message = f"Property {'/'.join(detail_path)} should be true"
                     matches.append(RuleMatch(detail_path, message))
