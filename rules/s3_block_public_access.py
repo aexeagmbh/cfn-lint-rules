@@ -11,8 +11,6 @@ class S3BucketPublicAccess(CloudFormationLintRule):
     tags = ["s3", "security"]
 
     def match(self, cfn):
-        """Basic Rule Matching"""
-
         matches = []
 
         resources = cfn.get_resources(["AWS::S3::Bucket"])
