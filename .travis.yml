@@ -12,6 +12,7 @@ script:
   - black --check --verbose .
   - pylama
   - isort --recursive --check-only --diff
+  - yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml
   - pip list --outdated
 
 
