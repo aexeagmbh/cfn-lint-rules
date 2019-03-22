@@ -1,0 +1,5 @@
+---
+include_checks:
+  - I
+append_rules:
+  - rules/
