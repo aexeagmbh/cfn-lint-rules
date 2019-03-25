@@ -9,7 +9,6 @@ from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, GOOD_TEMPLATE_FIXTURES_PATH
     "filename", (p.name for p in GOOD_TEMPLATE_FIXTURES_PATH.glob("*.yaml"))
 )
 def test_good(filename):
-    filename = "tests/good/s3_bucket.yaml"
     regions = ["us-east-1"]
 
     template = cfnlint.decode.cfn_yaml.load(filename)
