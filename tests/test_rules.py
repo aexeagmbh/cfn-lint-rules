@@ -6,7 +6,7 @@ from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, GOOD_TEMPLATE_FIXTURES_PATH
 
 
 @pytest.mark.parametrize(
-    "filename", (p.name for p in GOOD_TEMPLATE_FIXTURES_PATH.glob("*.yaml"))
+    "filename", (p.as_posix() for p in GOOD_TEMPLATE_FIXTURES_PATH.glob("*.yaml"))
 )
 def test_good(filename):
     regions = ["us-east-1"]
@@ -33,7 +33,7 @@ def test_good(filename):
 )
 def test_bad(filename, error_count):
     regions = ["us-east-1"]
-    filename = BAD_TEMPLATE_FIXTURES_PATH / filename
+    filename = (BAD_TEMPLATE_FIXTURES_PATH / filename).as_posix()
 
     template = cfnlint.decode.cfn_yaml.load(filename)
     rules = get_rules(

@@ -4,7 +4,9 @@ from rules.s3_bucket_encryption import S3BucketEncryption
 
 
 def test_bad_s3_bucket_encryption():
-    filename = BAD_TEMPLATE_FIXTURES_PATH / "s3_bucket_without_bucket_encryption.yaml"
+    filename = (
+        BAD_TEMPLATE_FIXTURES_PATH / "s3_bucket_without_bucket_encryption.yaml"
+    ).as_posix()
     expected_errors = [
         (
             5,

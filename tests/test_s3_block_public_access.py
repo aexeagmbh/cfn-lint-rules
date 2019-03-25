@@ -50,6 +50,6 @@ from rules.s3_block_public_access import S3BucketPublicAccess
     ],
 )
 def test_bad_s3_bucket_encryption(filename, expected_errors):
-    filename = BAD_TEMPLATE_FIXTURES_PATH / filename
+    filename = (BAD_TEMPLATE_FIXTURES_PATH / filename).as_posix()
 
     assert_all_matches(filename, expected_errors)
