@@ -7,7 +7,6 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
     description = "Validate Metadata AxChangesetAutoApprove schema"
     # source_url = ""
     tags = ["metadata"]
-    experimental = True
 
     allowed_template_ax_changeset_auto_approve_keys = {
         "Add",
