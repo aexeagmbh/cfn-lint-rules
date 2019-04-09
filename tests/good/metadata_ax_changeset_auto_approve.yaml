@@ -1,0 +1,33 @@
+---
+Metadata:
+  AxChangesetAutoApprove:
+    Add:
+      - AWS::S3::Bucket
+    ModifyConditionalReplacement:
+      - AWS::S3::Bucket
+      - AWS::SQS::Queue
+    ModifyReplacement:
+      - AWS::SQS::Queue
+    Remove:
+      - AWS::SQS::Queue
+
+Resources:
+  TestBucket:
+    Type: AWS::S3::Bucket
+    Metadata:
+      AxChangesetAutoApprove:
+        ModifyConditionalReplacement: true
+        ModifyReplacement: true
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  TestQueue:
+    Type: AWS::SQS::Queue

@@ -1,5 +1,5 @@
 black==18.9b0
-cfn-lint==0.17.0
+cfn-lint==0.18.1
 ipython==7.4.0
 isort==4.3.16
 pylama==7.6.6
