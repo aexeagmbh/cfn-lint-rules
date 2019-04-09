@@ -15,8 +15,8 @@ Resources:
     Type: AWS::S3::Bucket
     Metadata:
       AxChangesetAutoApprove:
-        ModifyConditionalReplacement: true
-        ModifyReplacement: true
+        ModifyConditionalReplacement: foobar
+        ModifyReplacement: 123
     Properties:
       BucketEncryption:
         ServerSideEncryptionConfiguration:
@@ -30,3 +30,9 @@ Resources:
 
   TestQueue:
     Type: AWS::SQS::Queue
+    Metadata:
+      AxChangesetAutoApprove:
+        ModifyReplacement:
+          - AWS::SQS::Queue
+          - 34
+        BadKey: true

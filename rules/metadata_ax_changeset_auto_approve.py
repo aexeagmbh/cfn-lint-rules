@@ -15,6 +15,11 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
         "ModifyReplacement",
         "Remove",
     }
+    allowed_resource_ax_changeset_auto_approve_keys = {
+        "ModifyConditionalReplacement",
+        "ModifyReplacement",
+    }
+
     base_path = ["Metadata", "AxChangesetAutoApprove"]
 
     def initialize(self, cfn):
@@ -34,6 +39,19 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
             matches.extend(
                 self.check_template_ax_changeset_auto_approve(
                     template_ax_changeset_auto_approve
+                )
+            )
+
+        for resource_name, resource in cfn.get_resources().items():
+            resource_metadata = resource.get("Metadata", {})
+            if "AxChangesetAutoApprove" not in resource_metadata:
+                continue
+            resource_ax_changeset_auto_approve = resource_metadata[
+                "AxChangesetAutoApprove"
+            ]
+            matches.extend(
+                self.check_resource_ax_changeset_auto_approve(
+                    resource_name, resource_ax_changeset_auto_approve
                 )
             )
 
@@ -70,7 +88,6 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
         }
 
         for key, value in available_items.items():
-            # yield from self.check_template_ax_changeset_auto_approve_key(key, value)
             key_path = self.base_path + [key]
             if not isinstance(value, list):
                 path_str = "/".join(key_path)
@@ -88,3 +105,39 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
                             path,
                             f"{path_str} {element} is not a resource type used in this template",
                         )
+
+    def check_resource_ax_changeset_auto_approve(
+        self, resource_name, resource_ax_changeset_auto_approve
+    ):
+        base_path = ["Resources", resource_name, "Metadata", "AxChangesetAutoApprove"]
+
+        if not isinstance(resource_ax_changeset_auto_approve, dict):
+            path_str = "/".join(base_path)
+            yield RuleMatch(self.base_path, f"{path_str} must be a mapping.")
+            return  # stop any further checks, we need resource_ax_changeset_auto_approve to be a dict for them
+
+        excess_keys = (
+            resource_ax_changeset_auto_approve.keys()
+            - self.allowed_resource_ax_changeset_auto_approve_keys
+        )
+        allowed_keys = ", ".join(
+            sorted(self.allowed_resource_ax_changeset_auto_approve_keys)
+        )
+        for excess_key in excess_keys:
+            path = base_path + [excess_key]
+            path_str = "/".join(path)
+            yield RuleMatch(
+                path,
+                f"{path_str} key {excess_key} is not allowed. Allowed keys for AxChangesetAutoApprove: {allowed_keys}.",
+            )
+
+        available_items = {
+            k: v
+            for k, v in resource_ax_changeset_auto_approve.items()
+            if k in self.allowed_resource_ax_changeset_auto_approve_keys
+        }
+        for key, value in available_items.items():
+            key_path = base_path + [key]
+            if not isinstance(value, bool):
+                path_str = "/".join(key_path)
+                yield RuleMatch(key_path, f"{path_str} must be a boolean.")

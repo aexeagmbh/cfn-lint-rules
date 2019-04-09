@@ -33,6 +33,26 @@ def test_bad_metadata_ax_changeset_auto_approve():
             MetadataAxChangesetAutoApprove,
             "Metadata/AxChangesetAutoApprove/BadKey key BadKey is not allowed. Allowed keys for AxChangesetAutoApprove: Add, ModifyConditionalReplacement, ModifyReplacement, Remove.",
         ),
+        (
+            18,
+            MetadataAxChangesetAutoApprove,
+            "Resources/TestBucket/Metadata/AxChangesetAutoApprove/ModifyConditionalReplacement must be a boolean.",
+        ),
+        (
+            19,
+            MetadataAxChangesetAutoApprove,
+            "Resources/TestBucket/Metadata/AxChangesetAutoApprove/ModifyReplacement must be a boolean.",
+        ),
+        (
+            35,
+            MetadataAxChangesetAutoApprove,
+            "Resources/TestQueue/Metadata/AxChangesetAutoApprove/ModifyReplacement must be a boolean.",
+        ),
+        (
+            38,
+            MetadataAxChangesetAutoApprove,
+            "Resources/TestQueue/Metadata/AxChangesetAutoApprove/BadKey key BadKey is not allowed. Allowed keys for AxChangesetAutoApprove: ModifyConditionalReplacement, ModifyReplacement.",
+        ),
     ]
 
     assert_all_matches(filename, expected_errors)

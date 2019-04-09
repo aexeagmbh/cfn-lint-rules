@@ -29,7 +29,7 @@ def test_good(filename):
         ("s3_bucket_with_bad_public_access_block_configuration.yaml", 5),
         ("s3_bucket_without_bucket_encryption.yaml", 1),
         ("s3_bucket_without_public_access_block_configuration.yaml", 1),
-        ("metadata_ax_changeset_auto_approve.yaml", 5),
+        ("metadata_ax_changeset_auto_approve.yaml", 9),
     ],
 )
 def test_bad(filename, error_count):
