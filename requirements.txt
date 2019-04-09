@@ -1,4 +1,4 @@
-black==18.9b0
+black==19.3b0
 cfn-lint==0.18.1
 ipython==7.4.0
 isort==4.3.17
