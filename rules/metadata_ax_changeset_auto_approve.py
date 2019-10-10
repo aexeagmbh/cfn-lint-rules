@@ -1,4 +1,4 @@
-from cfnlint import CloudFormationLintRule, RuleMatch
+from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
 
 class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
