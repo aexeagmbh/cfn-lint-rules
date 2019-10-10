@@ -5,4 +5,4 @@ services:
     build: .
     volumes:
       - ./:/usr/src/app/
-    command: black .
+    command: ./run_tests.sh

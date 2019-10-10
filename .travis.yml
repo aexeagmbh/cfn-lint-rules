@@ -5,17 +5,22 @@ python:
   - 3.7
   - 3.6
 
+env:
+  global:
+    - PIPENV_IGNORE_VIRTUALENVS=1
+
 install:
+  - pipenv sync --dev
   - pip install -r requirements.txt
 
 script:
-  - pytest
-  - black --check --verbose .
-  - pylama
-  - isort --recursive --check-only --diff
-  - yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
-  - pip list --outdated
-
+  - pipenv run pytest
+  - pipenv run black --check --verbose .
+  - pipenv run pylama
+  - pipenv run isort --recursive --check-only --diff
+  - pipenv run yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
+  - pipenv check
+  - pipenv check --unused rules || true
 
 notifications:
   email: false
