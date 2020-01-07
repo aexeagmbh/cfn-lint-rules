@@ -4,9 +4,4 @@
 [tool.black]
 # See https://github.com/ambv/black/blob/master/pyproject.toml
 line-length = 88
-target_version = ['py36', 'py37']
-exclude = '''
-/(
-    _template
-)/
-'''
+target_version = ['py37', 'py38']
