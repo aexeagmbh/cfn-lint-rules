@@ -17,7 +17,7 @@ script:
   - pipenv run pylama
   - pipenv run isort --recursive --check-only --diff
   - pipenv run yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
-  - pipenv check
+  - PIPENV_PYUP_API_KEY="" pipenv check
   - pipenv check --unused rules || true
 
 notifications:
