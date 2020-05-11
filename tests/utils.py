@@ -29,8 +29,7 @@ def assert_all_matches(filename, expected_errors, region="us-east-1"):
         if lint_rule_class_name.startswith("rules."):
             lint_rule_class_name = lint_rule_class_name[len("rules.") :]
 
-        for errs_idx in range(len(errs)):
-            match = errs[errs_idx]
+        for errs_idx, match in enumerate(errs):
             match_rule_class = match.rule.__class__
             match_rule_class_name = (
                 f"{match_rule_class.__module__}.{match_rule_class.__name__}"
