@@ -5,3 +5,16 @@
 # See https://github.com/ambv/black/blob/master/pyproject.toml
 line-length = 88
 target_version = ['py37', 'py38']
+
+
+[tool.isort]
+balanced_wrapping = true
+combine_as_imports = true
+default_section = "THIRDPARTY"
+include_trailing_comma = true
+indent = "    "
+known_first_party = [
+    "rules",
+]
+line_length = 88
+multi_line_output = 3

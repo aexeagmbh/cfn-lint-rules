@@ -1,6 +1,5 @@
-from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, assert_all_matches
-
 from rules.s3_bucket_encryption import S3BucketEncryption
+from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, assert_all_matches
 
 
 def test_bad_s3_bucket_encryption():

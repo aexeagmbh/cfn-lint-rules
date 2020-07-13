@@ -1,7 +1,7 @@
 import pytest
-from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, assert_all_matches
 
 from rules.s3_block_public_access import S3BucketPublicAccess
+from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, assert_all_matches
 
 
 @pytest.mark.parametrize(
