@@ -4,21 +4,15 @@ language: python
 python:
   - 3.8
 
-env:
-  global:
-    - PIPENV_IGNORE_VIRTUALENVS=1
-
 install:
-  - pipenv sync --dev
+  - python -m pip install -r ./requirements/dev.txt
 
 script:
-  - pipenv run pytest
-  - pipenv run black --check --verbose .
-  - pipenv run pylama
-  - pipenv run isort --check-only --diff .
-  - pipenv run yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
-  - PIPENV_PYUP_API_KEY="" pipenv check
-  - pipenv check --unused rules || true
+  - pytest
+  - black --check --verbose .
+  - pylama
+  - isort --check-only --diff .
+  - yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
 
 notifications:
   email: false

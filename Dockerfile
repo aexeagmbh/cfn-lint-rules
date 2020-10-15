@@ -1,11 +1,9 @@
 FROM python:3.8-buster
 
-RUN pip install pipenv
 WORKDIR /tmp
-COPY Pipfile .
-COPY Pipfile.lock .
-RUN pipenv install --system --dev
-RUN rm Pipfile Pipfile.lock
+COPY requirements requirements
+RUN python -m pip install -r ./requirements/dev.txt
+RUN rm -rf ./requirements
 
 RUN useradd uid1000 --home-dir /home/uid1000 --uid 1000
 RUN mkdir -p /home/uid1000 && chown uid1000: /home/uid1000

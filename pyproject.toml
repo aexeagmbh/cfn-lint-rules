@@ -18,3 +18,17 @@ known_first_party = [
 ]
 line_length = 88
 multi_line_output = 3
+
+
+[tool.winky]
+target_branch = "winky"
+
+[[tool.winky.pip_compile]]
+file = "./requirements/base.in"
+hashes = true
+python = "3.8"
+
+[[tool.winky.pip_compile]]
+file = "./requirements/dev.in"
+hashes = true
+python = "3.8"
