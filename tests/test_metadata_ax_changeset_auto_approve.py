@@ -43,12 +43,12 @@ def test_bad_metadata_ax_changeset_auto_approve():
             "Resources/TestBucket/Metadata/AxChangesetAutoApprove/ModifyReplacement must be a boolean.",
         ),
         (
-            35,
+            37,
             MetadataAxChangesetAutoApprove,
             "Resources/TestQueue/Metadata/AxChangesetAutoApprove/ModifyReplacement must be a boolean.",
         ),
         (
-            38,
+            40,
             MetadataAxChangesetAutoApprove,
             "Resources/TestQueue/Metadata/AxChangesetAutoApprove/BadKey key BadKey is not allowed. Allowed keys for AxChangesetAutoApprove: ModifyConditionalReplacement, ModifyReplacement.",
         ),

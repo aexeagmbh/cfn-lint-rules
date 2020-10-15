@@ -30,6 +30,8 @@ Resources:
 
   TestQueue:
     Type: AWS::SQS::Queue
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Metadata:
       AxChangesetAutoApprove:
         ModifyReplacement:
