@@ -13,17 +13,17 @@ aws-sam-translator==1.27.0 \
     --hash=sha256:3258122f4cd671ba3dc141382dd0412c123db9f1317bed8b26e7229f63634454 \
     --hash=sha256:d1901bd6e382e27bfad03ca151a3cccc782796ec48ed7bf34660517ce44284a6 \
     # via cfn-lint
-boto3==1.15.16 \
-    --hash=sha256:454a8dfb7b367a058c7967ef6b4e2a192c318f10761769fd1003cf7f2f5a7db9 \
-    --hash=sha256:557320fe8b65cfc85953e6a63d2328e8efec95bf4ec383b92fa2d01119209716 \
+boto3==1.16.4 \
+    --hash=sha256:60c78f96c690974cd388270e4c82e4807f5034c5544f8a26ec3c3844df726cff \
+    --hash=sha256:8611d07488bb36b509d9a79a4ab593cf1c96f9c0d177733007568cbfa1079914 \
     # via aws-sam-translator
-botocore==1.18.16 \
-    --hash=sha256:e586e4d6eddbca31e6447a25df9972329ea3de64b1fb0eb17e7ab0c9b91f7720 \
-    --hash=sha256:f0616d2c719691b94470307cee8adf89ceb1657b7b6f9aa1bf61f9de5543dbbb \
+botocore==1.19.4 \
+    --hash=sha256:c78fe2fb4790e9f06dc40a28402893f12088c4aa88b739475827d9674972f1c4 \
+    --hash=sha256:cd5d2fceef451ee28b149a0c7de848710daab52d8273330e092ccc316d42b2c7 \
     # via boto3, s3transfer
-cfn-lint==0.38.0 \
-    --hash=sha256:51d810bf63ee244a1b347e88d7ea53fa60308b4d36503bb86844c6ea280a6ff2 \
-    --hash=sha256:c89b70933fc2e7066acfd293c86cbd7f507fe4d764347fe23c3f8f17c54b4b2c \
+cfn-lint==0.39.0 \
+    --hash=sha256:5f48c8be94f7b3575dad5a26138a0f2aaf310ce7c2378bfa4f23a36e1c761121 \
+    --hash=sha256:cd5e813aa6656caf3a1ff7fd6edb473463cd4242cbc96e87365cf3963fb8a078 \
     # via -r base.in
 decorator==4.4.2 \
     --hash=sha256:41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760 \
@@ -80,9 +80,9 @@ six==1.15.0 \
     --hash=sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259 \
     --hash=sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced \
     # via aws-sam-translator, cfn-lint, jsonschema, junit-xml, python-dateutil
-urllib3==1.25.10 \
-    --hash=sha256:91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a \
-    --hash=sha256:e7983572181f5e1522d9c98453462384ee92a0be7fac5f1413a1e35c56cc0461 \
+urllib3==1.25.11 \
+    --hash=sha256:8d7eaa5a82a1cac232164990f04874c594c9453ec55eef02eab885aa02fc17a2 \
+    --hash=sha256:f5321fbe4bf3fefa0efd0bfe7fb14e90909eb62a48ccda331726b4319897dd5e \
     # via botocore
 
 # WARNING: The following packages were not pinned, but pip requires them to be
