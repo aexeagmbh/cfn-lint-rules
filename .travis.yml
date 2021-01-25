@@ -8,11 +8,11 @@ install:
   - python -m pip install -r ./requirements/dev.txt
 
 script:
-  - pytest
-  - black --check --verbose .
-  - pylama
-  - isort --check-only --diff .
-  - yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
+  - python -m pytest
+  - python -m black --check --verbose .
+  - python -m pylama
+  - python -m isort --check-only --diff .
+  - python -m yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
 
 notifications:
   email: false
