@@ -73,13 +73,13 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[mi
             - self.allowed_template_ax_changeset_auto_approve_keys
         )
         for excess_key in excess_keys:
-            path = self.base_path + [excess_key]
-            path_str = "/".join(path)
+            excess_key_path = self.base_path + [excess_key]
+            path_str = "/".join(excess_key_path)
             allowed_keys = ", ".join(
                 sorted(self.allowed_template_ax_changeset_auto_approve_keys)
             )
             yield RuleMatch(
-                path,
+                excess_key_path,
                 f"{path_str} key {excess_key} is not allowed. Allowed keys for AxChangesetAutoApprove: {allowed_keys}.",
             )
 
@@ -97,7 +97,7 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[mi
                 continue
 
             for list_idx, element in enumerate(value):
-                path = key_path + [str(list_idx)]
+                path = [*key_path, list_idx]
                 path_str = "/".join(key_path) + f"[{list_idx}]"
                 if not isinstance(element, str):
                     yield RuleMatch(path, f"{path_str} must be a string.")
