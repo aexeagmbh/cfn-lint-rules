@@ -1,7 +1,10 @@
+from typing import List
+
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
+from cfnlint.template import Template
 
 
-class S3BucketPublicAccess(CloudFormationLintRule):
+class S3BucketPublicAccess(CloudFormationLintRule):  # type: ignore[misc]
     """Rule description """
 
     id = "W9301"
@@ -10,7 +13,7 @@ class S3BucketPublicAccess(CloudFormationLintRule):
     source_url = "https://aws.amazon.com/about-aws/whats-new/2018/11/introducing-amazon-s3-block-public-access/"
     tags = ["s3", "security"]
 
-    def match(self, cfn):
+    def match(self, cfn: Template) -> List[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::S3::Bucket"])

@@ -13,6 +13,7 @@ script:
   - python -m pylama
   - python -m isort --check-only --diff .
   - python -m yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
+  - python -m mypy .
 
 notifications:
   email: false

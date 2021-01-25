@@ -9,7 +9,7 @@ from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, GOOD_TEMPLATE_FIXTURES_PATH
 @pytest.mark.parametrize(
     "filename", (p.as_posix() for p in GOOD_TEMPLATE_FIXTURES_PATH.glob("*.yaml"))
 )
-def test_good(filename):
+def test_good(filename: str) -> None:
     regions = ["us-east-1"]
 
     template = cfnlint.decode.cfn_yaml.load(filename)
@@ -34,7 +34,7 @@ def test_good(filename):
         ("unresolved_object.yaml", 2),
     ],
 )
-def test_bad(filename, error_count):
+def test_bad(filename: str, error_count: int) -> None:
     regions = ["us-east-1"]
     filename = (BAD_TEMPLATE_FIXTURES_PATH / filename).as_posix()
 

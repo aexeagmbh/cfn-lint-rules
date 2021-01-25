@@ -1,7 +1,10 @@
+from typing import List
+
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
+from cfnlint.template import Template
 
 
-class S3BucketEncryption(CloudFormationLintRule):
+class S3BucketEncryption(CloudFormationLintRule):  # type: ignore[misc]
     """Rule description """
 
     id = "W9302"
@@ -12,7 +15,7 @@ class S3BucketEncryption(CloudFormationLintRule):
     )
     tags = ["s3", "security"]
 
-    def match(self, cfn):
+    def match(self, cfn: Template) -> List[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::S3::Bucket"])

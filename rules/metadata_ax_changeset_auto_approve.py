@@ -1,7 +1,10 @@
+from typing import Dict, Iterator, List
+
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
+from cfnlint.template import Template
 
 
-class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
+class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[misc]
     id = "E9401"
     shortdesc = "Validate Metadata AxChangesetAutoApprove schema"
     description = "Validate Metadata AxChangesetAutoApprove schema"
@@ -21,13 +24,13 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
 
     base_path = ["Metadata", "AxChangesetAutoApprove"]
 
-    def initialize(self, cfn):
+    def initialize(self, cfn: Template) -> None:
         self.used_cloudformation_resource_types = {
             resource.get("Type") for resource in cfn.get_resources().values()
         }
 
-    def match(self, cfn):
-        matches = []
+    def match(self, cfn: Template) -> List[RuleMatch]:
+        matches: List[RuleMatch] = []
 
         template_metadata = cfn.template.get("Metadata", {})
 
@@ -57,8 +60,8 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
         return matches
 
     def check_template_ax_changeset_auto_approve(
-        self, template_ax_changeset_auto_approve
-    ):
+        self, template_ax_changeset_auto_approve: Dict[str, List[str]]
+    ) -> Iterator[RuleMatch]:
         if not isinstance(template_ax_changeset_auto_approve, dict):
             yield RuleMatch(
                 self.base_path, "Metadata/AxChangesetAutoApprove must be a mapping."
@@ -94,7 +97,7 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
                 continue
 
             for list_idx, element in enumerate(value):
-                path = key_path + [list_idx]
+                path = key_path + [str(list_idx)]
                 path_str = "/".join(key_path) + f"[{list_idx}]"
                 if not isinstance(element, str):
                     yield RuleMatch(path, f"{path_str} must be a string.")
@@ -106,8 +109,8 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
                         )
 
     def check_resource_ax_changeset_auto_approve(
-        self, resource_name, resource_ax_changeset_auto_approve
-    ):
+        self, resource_name: str, resource_ax_changeset_auto_approve: Dict[str, bool]
+    ) -> Iterator[RuleMatch]:
         base_path = ["Resources", resource_name, "Metadata", "AxChangesetAutoApprove"]
 
         if not isinstance(resource_ax_changeset_auto_approve, dict):
@@ -130,7 +133,7 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):
                 f"{path_str} key {excess_key} is not allowed. Allowed keys for AxChangesetAutoApprove: {allowed_keys}.",
             )
 
-        available_items = {
+        available_items: Dict[str, bool] = {
             k: v
             for k, v in resource_ax_changeset_auto_approve.items()
             if k in self.allowed_resource_ax_changeset_auto_approve_keys

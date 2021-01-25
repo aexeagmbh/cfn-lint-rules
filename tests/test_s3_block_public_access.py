@@ -1,7 +1,9 @@
+from typing import List
+
 import pytest
 
 from rules.s3_block_public_access import S3BucketPublicAccess
-from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, assert_all_matches
+from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, ExpectedError, assert_all_matches
 
 
 @pytest.mark.parametrize(
@@ -49,7 +51,9 @@ from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, assert_all_matches
         ),
     ],
 )
-def test_bad_s3_bucket_encryption(filename, expected_errors):
+def test_bad_s3_bucket_encryption(
+    filename: str, expected_errors: List[ExpectedError]
+) -> None:
     filename = (BAD_TEMPLATE_FIXTURES_PATH / filename).as_posix()
 
     assert_all_matches(filename, expected_errors)

@@ -1,14 +1,20 @@
 from pathlib import Path
+from typing import List, Tuple, Type
 
 import cfnlint.decode.cfn_yaml
 from cfnlint import Runner
 from cfnlint.core import get_rules
+from cfnlint.rules import CloudFormationLintRule
+
+ExpectedError = Tuple[int, Type[CloudFormationLintRule], str]
 
 BAD_TEMPLATE_FIXTURES_PATH = Path("tests/bad").resolve()
 GOOD_TEMPLATE_FIXTURES_PATH = Path("tests/good").resolve()
 
 
-def assert_all_matches(filename, expected_errors, region="us-east-1"):
+def assert_all_matches(
+    filename: str, expected_errors: List[ExpectedError], region: str = "us-east-1"
+) -> None:
     regions = [region]
     template = cfnlint.decode.cfn_yaml.load(filename)
     rules = get_rules(
