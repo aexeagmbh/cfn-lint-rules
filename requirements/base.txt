@@ -8,24 +8,24 @@ attrs==20.3.0 \
     --hash=sha256:31b2eced602aa8423c2aea9c76a724617ed67cf9513173fd3a4f03e3a929c7e6 \
     --hash=sha256:832aa3cde19744e49938b91fea06d69ecb9e649c93ba974535d08ad92164f700
     # via jsonschema
-aws-sam-translator==1.33.0 \
-    --hash=sha256:505d18b0bad8702bfba80fc5bc78d9c4b003ab009a9e42648561bdf1fd67bf01 \
-    --hash=sha256:89c5c997164231b847634d8034d3534d3a048d88f4b66b2897f6251366e640f5 \
-    --hash=sha256:9f3767614746a38300ee988ef70d6f862e71e59ea536252bbf9a319daaac1fff
+aws-sam-translator==1.34.0 \
+    --hash=sha256:1cfc8ba13c43e8c425fdcd6c246fdd90899a3ed89310d84a72ccdf082e4146d7 \
+    --hash=sha256:857c62a03e3bb4a3f7074e867f52ced636dc06192c8216e00732122f21a206c2 \
+    --hash=sha256:a22d505ddc0c48e3cf0ff0127096bdc1231d20c852509201ffba47dc8e683a1a
     # via cfn-lint
-boto3==1.16.59 \
-    --hash=sha256:550a513315194292651bb6cc96e94185bfc4dc6b299c3cf1594882bdd16b3905 \
-    --hash=sha256:f8a2f0bf929af92c4d254d1e495f6642dd335818cc7172e1bdc3dfe28655fb94
+boto3==1.16.63 \
+    --hash=sha256:1c0003609e63e8cff51dee7a49e904bcdb20e140b5f7a10a03006289fd8c8dc1 \
+    --hash=sha256:c919dac9773115025e1e2a7e462f60ca082e322bb6f4354247523e4226133b0b
     # via aws-sam-translator
-botocore==1.19.59 \
-    --hash=sha256:33959aa19cb6d336c47495c871b00d8670de0023b53bbbbd25790ba0bc5cefe9 \
-    --hash=sha256:67d273b5dcc5033edb2def244ecab51ca24351becf5c1644de279e5653e4e932
+botocore==1.19.63 \
+    --hash=sha256:ad4adfcc195b5401d84b0c65d3a89e507c1d54c201879c8761ff10ef5c361e21 \
+    --hash=sha256:d3694f6ef918def8082513e5ef309cd6cd83b612e9984e3a66e8adc98c650a92
     # via
     #   boto3
     #   s3transfer
-cfn-lint==0.44.4 \
-    --hash=sha256:8f7e249353d2335a5346994cc179ef2364c0ad2161cdf036ee6817ab3cea816b \
-    --hash=sha256:fd822f4520246cb9a37e3b6b62530e772e195f19d1bcd08a9e48d0e4dff3ffb4
+cfn-lint==0.44.5 \
+    --hash=sha256:1966fc96d2c70db70b525d495a6a912e223802b4d33bfd9876992cdb9bdaaf44 \
+    --hash=sha256:6889c171eb2bbbe9e175149d8bada8ae627137748c42b04581e79469dc6b35e7
     # via -r base.in
 decorator==4.4.2 \
     --hash=sha256:41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760 \
@@ -101,9 +101,9 @@ six==1.15.0 \
     #   jsonschema
     #   junit-xml
     #   python-dateutil
-urllib3==1.26.2 \
-    --hash=sha256:19188f96923873c92ccb987120ec4acaa12f0461fa9ce5d3d0772bc965a39e08 \
-    --hash=sha256:d8ff90d979214d7b4f8ce956e80f4028fc6860e4431f731ea4a8c08f23f99473
+urllib3==1.26.3 \
+    --hash=sha256:1b465e494e3e0d8939b50680403e3aedaa2bc434b7d5af64dfd3c958d7f5ae80 \
+    --hash=sha256:de3eedaad74a2683334e282005cd8d7f22f4d55fa690a2a1020a416cb0a47e73
     # via botocore
 
 # WARNING: The following packages were not pinned, but pip requires them to be
