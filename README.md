@@ -12,6 +12,7 @@ W9301 S3BucketPublicAccess
 W9302 S3BucketEncryption
 W9303 CloudfrontDistributionLogging
 W9304 CloudfrontDistributionComment
+W9305 CertificateManagerCertificateNameTag
 
 ## Metadata (E94XX)
 E9401 MetadataAxChangesetAutoApprove
