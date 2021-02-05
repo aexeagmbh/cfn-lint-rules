@@ -6,7 +6,5 @@ set -ex
 pytest
 black .
 pylama
-isort --recursive
+isort .
 yamllint tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .travis.yml .cfnlintrc
-pipenv check
-pipenv check --unused rules || true

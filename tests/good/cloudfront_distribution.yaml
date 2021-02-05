@@ -1,0 +1,22 @@
+---
+Resources:
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Comment: !Ref AWS::StackName
+        DefaultCacheBehavior:
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: default
+          ViewerProtocolPolicy: redirect-to-https
+        Enabled: true
+        Logging:
+          Bucket: myawslogbucket.s3.amazonaws.com
+          IncludeCookies: true
+          Prefix: !Ref AWS::StackName
+        Origins:
+          - CustomOriginConfig:
+              OriginProtocolPolicy: "https-only"
+            DomainName: example.com
+            Id: default

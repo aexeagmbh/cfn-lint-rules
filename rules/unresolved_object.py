@@ -7,7 +7,7 @@ from cfnlint.template import Template
 class UnresolvedObject(CloudFormationLintRule):  # type: ignore[misc]
     """Rule description """
 
-    id = "E9402"
+    id = "E9101"
     shortdesc = "Resolve objects"
     description = "Validate that Fn::Sub does not contain unresolved objects"
     source_url = "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html"
