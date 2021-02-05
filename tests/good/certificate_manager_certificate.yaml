@@ -1,0 +1,18 @@
+---
+Resources:
+  Certificate1:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: example.com
+      Tags:
+        - Key: Name
+          Value: !Sub example.com (${AWS::StackName})
+  Certificate2:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: subdomain.example.com
+      Tags:
+        - Key: Name
+          Value: !Sub subdomain.example.com (${AWS::StackName})
+        - Key: foo
+          Value: bar

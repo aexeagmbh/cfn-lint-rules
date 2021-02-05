@@ -11,6 +11,7 @@ E9101 UnresolvedObject
 W9301 S3BucketPublicAccess
 W9302 S3BucketEncryption
 W9303 CloudfrontDistributionLogging
+W9304 CloudfrontDistributionComment
 
 ## Metadata (E94XX)
 E9401 MetadataAxChangesetAutoApprove

@@ -1,0 +1,13 @@
+---
+Resources:
+  Certificate1:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: example.com
+  Certificate2:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: example.com
+      Tags:
+        - Key: foo
+          Value: bar
