@@ -19,7 +19,7 @@ Resources:
                   - codepipeline:StartPipelineExecution
                 Effect: Allow
                 Resource:
-                  - !Sub 'arn:aws:codepipeline:${AWS::Region}:${AWS::AccountId}:<troposphere.Ref
+                  - !Sub 'arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:<troposphere.Ref
                     object at 0x7f9e52755bb0>'
             Version: '2012-10-17'
           PolicyName: StartCodePipeline
@@ -28,7 +28,7 @@ Resources:
       ScheduleExpression: cron(0 1 * * ? *)
       State: ENABLED
       Targets:
-        - Arn: !Sub 'arn:aws:codepipeline:${AWS::Region}:${AWS::AccountId}:<troposphere.Ref object at 0x7f9e52755bb0>'
+        - Arn: !Sub 'arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:<troposphere.Ref object at 0x7f9e52755bb0>'
           Id: Target0
           RoleArn: !GetAtt 'CodePipelineEventsRole.Arn'
     Type: AWS::Events::Rule
