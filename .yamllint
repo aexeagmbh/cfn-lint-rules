@@ -4,7 +4,7 @@ extends: default
 
 rules:
   line-length:
-    max: 130
+    max: 135
     allow-non-breakable-words: true
   indentation:
     spaces: 2
