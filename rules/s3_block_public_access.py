@@ -5,7 +5,7 @@ from cfnlint.template import Template
 
 
 class S3BucketPublicAccess(CloudFormationLintRule):  # type: ignore[misc]
-    """Rule description """
+    """Rule description"""
 
     id = "W9301"
     shortdesc = "Enable S3 Block Public Access"

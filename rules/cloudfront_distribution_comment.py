@@ -5,7 +5,7 @@ from cfnlint.template import Template
 
 
 class CloudfrontDistributionComment(CloudFormationLintRule):  # type: ignore[misc]
-    """Rule description """
+    """Rule description"""
 
     id = "W9304"
     shortdesc = "Enable Cloudfront Distribution Comment"

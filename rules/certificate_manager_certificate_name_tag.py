@@ -5,7 +5,7 @@ from cfnlint.template import Template
 
 
 class CertificateManagerCertificateNameTag(CloudFormationLintRule):  # type: ignore[misc]
-    """Rule description """
+    """Rule description"""
 
     id = "W9305"
     shortdesc = "Tag Certificate With Name"

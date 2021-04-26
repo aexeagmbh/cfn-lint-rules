@@ -5,7 +5,7 @@ from cfnlint.template import Template
 
 
 class CloudfrontDistributionLogging(CloudFormationLintRule):  # type: ignore[misc]
-    """Rule description """
+    """Rule description"""
 
     id = "W9303"
     shortdesc = "Enable Cloudfront Distribution Logging"

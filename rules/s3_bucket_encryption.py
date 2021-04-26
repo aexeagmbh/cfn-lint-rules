@@ -5,7 +5,7 @@ from cfnlint.template import Template
 
 
 class S3BucketEncryption(CloudFormationLintRule):  # type: ignore[misc]
-    """Rule description """
+    """Rule description"""
 
     id = "W9302"
     shortdesc = "Configure S3 Server-Side Encryption"

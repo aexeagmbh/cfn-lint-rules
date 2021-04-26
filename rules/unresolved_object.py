@@ -5,7 +5,7 @@ from cfnlint.template import Template
 
 
 class UnresolvedObject(CloudFormationLintRule):  # type: ignore[misc]
-    """Rule description """
+    """Rule description"""
 
     id = "E9101"
     shortdesc = "Resolve objects"
