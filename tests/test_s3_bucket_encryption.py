@@ -1,4 +1,4 @@
-from rules.s3_bucket_encryption import S3BucketEncryption
+from cfn_lint_ax.rules import S3BucketEncryption
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, assert_all_matches
 
 

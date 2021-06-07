@@ -1,4 +1,4 @@
-from rules.metadata_ax_changeset_auto_approve import MetadataAxChangesetAutoApprove
+from cfn_lint_ax.rules import MetadataAxChangesetAutoApprove
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, assert_all_matches
 
 

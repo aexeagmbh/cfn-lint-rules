@@ -2,7 +2,7 @@ from typing import List
 
 import pytest
 
-from rules.s3_block_public_access import S3BucketPublicAccess
+from cfn_lint_ax.rules import S3BucketPublicAccess
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, ExpectedError, assert_all_matches
 
 

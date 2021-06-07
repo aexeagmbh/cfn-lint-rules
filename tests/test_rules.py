@@ -14,7 +14,10 @@ def test_good(filename: str) -> None:
 
     template = cfnlint.decode.cfn_yaml.load(filename)
     rules = get_rules(
-        ["rules"], ignore_rules=[], include_rules=["I"], include_experimental=True
+        ["cfn_lint_ax.rules"],
+        ignore_rules=[],
+        include_rules=["I"],
+        include_experimental=True,
     )
 
     good_runner = Runner(rules, filename, template, regions, [])
@@ -40,7 +43,10 @@ def test_bad(filename: str, error_count: int) -> None:
 
     template = cfnlint.decode.cfn_yaml.load(filename)
     rules = get_rules(
-        ["rules"], ignore_rules=[], include_rules=["I"], include_experimental=True
+        ["cfn_lint_ax.rules"],
+        ignore_rules=[],
+        include_rules=["I"],
+        include_experimental=True,
     )
 
     good_runner = Runner(

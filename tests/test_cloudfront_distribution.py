@@ -2,8 +2,10 @@ from typing import List
 
 import pytest
 
-from rules.cloudfront_distribution_comment import CloudfrontDistributionComment
-from rules.cloudfront_distribution_logging import CloudfrontDistributionLogging
+from cfn_lint_ax.rules import (
+    CloudfrontDistributionComment,
+    CloudfrontDistributionLogging,
+)
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, ExpectedError, assert_all_matches
 
 

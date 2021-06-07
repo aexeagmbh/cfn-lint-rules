@@ -2,9 +2,7 @@ from typing import List
 
 import pytest
 
-from rules.certificate_manager_certificate_name_tag import (
-    CertificateManagerCertificateNameTag,
-)
+from cfn_lint_ax.rules import CertificateManagerCertificateNameTag
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, ExpectedError, assert_all_matches
 
 

@@ -18,7 +18,10 @@ def assert_all_matches(
     regions = [region]
     template = cfnlint.decode.cfn_yaml.load(filename)
     rules = get_rules(
-        ["rules"], ignore_rules=[], include_rules=["I"], include_experimental=True
+        ["cfn_lint_ax.rules"],
+        ignore_rules=[],
+        include_rules=["I"],
+        include_experimental=True,
     )
     runner = Runner(rules=rules, filename=filename, template=template, regions=regions)
     runner.transform()
