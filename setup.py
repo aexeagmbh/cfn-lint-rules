@@ -30,5 +30,5 @@ setup(
         "cfn_lint_ax.rules",
     ],
     python_requires=">=3.8",
-    install_requires=["cfn-lint >= 0.50"],
+    install_requires=["cfn-lint >= 0.49"],
 )
