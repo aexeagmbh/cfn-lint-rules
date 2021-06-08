@@ -2,9 +2,9 @@ from pathlib import Path
 from typing import List, Tuple, Type
 
 import cfnlint.decode.cfn_yaml
-from cfnlint import Runner
 from cfnlint.core import get_rules
 from cfnlint.rules import CloudFormationLintRule
+from cfnlint.runner import Runner
 
 ExpectedError = Tuple[int, Type[CloudFormationLintRule], str]
 

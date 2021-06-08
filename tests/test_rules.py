@@ -1,7 +1,7 @@
 import cfnlint.decode.cfn_yaml
 import pytest
-from cfnlint import Runner
 from cfnlint.core import get_rules
+from cfnlint.runner import Runner
 
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, GOOD_TEMPLATE_FIXTURES_PATH
 
