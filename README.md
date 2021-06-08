@@ -1,24 +1,57 @@
-# User Rules (E9XXX)
+cfn-lint-serverless
+===================
 
-## Basic Template Errors (E90XX)
+![Testing](https://github.com/aexeagmbh/cfn-lint-rules/actions/workflows/tests.yml/badge.svg)](https://github.com/aexeagmbh/cfn-lint-rules/actions/workflows/tests.yml)
+[![PyPI version](https://badge.fury.io/py/cfn-lint-ax.svg)](https://badge.fury.io/py/cfn-lint-ax)
 
-## Functions (E91XX)
-E9101 UnresolvedObject
+Additional rules for [cfn-lint](https://github.com/aws-cloudformation/cfn-lint).
 
-## Parameters (E92XX)
+Installation
+------------
 
-## Resources (E93XX)
-W9301 S3BucketPublicAccess
-W9302 S3BucketEncryption
-W9303 CloudfrontDistributionLogging
-W9304 CloudfrontDistributionComment
-W9305 CertificateManagerCertificateNameTag
+```bash
+pip install cfn-lint cfn-lint-ax
+```
 
-## Metadata (E94XX)
-E9401 MetadataAxChangesetAutoApprove
 
-## Outputs (E96XX)
+Usage
+-----
 
-## Mappings (E97XX)
+```bash
+cfn-lint template.yaml -a cfn_lint_ax.rules
+```
 
-## Conditions (E98XX)
+
+Run Tests
+---------
+```bash
+docker-compose build --pull
+docker-compose run --rm rules
+```
+
+
+User Rules (E9XXX)
+------------------
+
+### Basic Template Errors (E90XX)
+
+### Functions (E91XX)
+* E9101 UnresolvedObject
+
+### Parameters (E92XX)
+
+### Resources (E93XX)
+* W9301 S3BucketPublicAccess
+* W9302 S3BucketEncryption
+* W9303 CloudfrontDistributionLogging
+* W9304 CloudfrontDistributionComment
+* W9305 CertificateManagerCertificateNameTag
+
+### Metadata (E94XX)
+* E9401 MetadataAxChangesetAutoApprove
+
+### Outputs (E96XX)
+
+### Mappings (E97XX)
+
+### Conditions (E98XX)

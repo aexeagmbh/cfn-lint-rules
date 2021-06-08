@@ -42,6 +42,15 @@ jobs:
         run: |
           python -m mypy .
         if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+      - name: Build package
+        run: |
+          python -m build --sdist --wheel .
+        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+        id: build-package
+      - name: Check long description
+        run: |
+          python -m twine check dist/*
+        if: ${{ !cancelled() && steps.build-package.outcome == 'success' }}
       - uses: aexeagmbh/gh-actions-ntfy-slack@main
         with:
           job-status: ${{ job.status }}
