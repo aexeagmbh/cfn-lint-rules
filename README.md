@@ -1,5 +1,5 @@
-cfn-lint-serverless
-===================
+cfn-lint-ax
+===========
 
 [![Testing](https://github.com/aexeagmbh/cfn-lint-rules/actions/workflows/tests.yml/badge.svg)](https://github.com/aexeagmbh/cfn-lint-rules/actions/workflows/tests.yml)
 [![PyPI version](https://badge.fury.io/py/cfn-lint-ax.svg)](https://badge.fury.io/py/cfn-lint-ax)
