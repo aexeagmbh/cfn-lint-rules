@@ -4,7 +4,7 @@ from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
 
 
-class UnresolvedObject(CloudFormationLintRule):  # type: ignore[misc]
+class IntrinsicFunctionSubUnresolvedObject(CloudFormationLintRule):  # type: ignore[misc]
     """Rule description"""
 
     id = "E9101"

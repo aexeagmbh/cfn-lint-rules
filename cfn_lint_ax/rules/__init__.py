@@ -1,19 +1,15 @@
-from .certificate_manager_certificate_name_tag import (
-    CertificateManagerCertificateNameTag,
-)
-from .cloudfront_distribution_comment import CloudfrontDistributionComment
-from .cloudfront_distribution_logging import CloudfrontDistributionLogging
-from .metadata_ax_changeset_auto_approve import MetadataAxChangesetAutoApprove
-from .s3_block_public_access import S3BucketPublicAccess
-from .s3_bucket_encryption import S3BucketEncryption
-from .unresolved_object import UnresolvedObject
+from .certificate_manager import CertificateManagerCertificateNameTag
+from .cloud_front import CloudfrontDistributionComment, CloudfrontDistributionLogging
+from .intrinsic_function import IntrinsicFunctionSubUnresolvedObject
+from .metadata import MetadataAxChangesetAutoApprove
+from .s3 import S3BucketEncryption, S3BucketPublicAccess
 
 __all__ = [
     "CertificateManagerCertificateNameTag",
     "CloudfrontDistributionComment",
     "CloudfrontDistributionLogging",
+    "IntrinsicFunctionSubUnresolvedObject",
     "MetadataAxChangesetAutoApprove",
-    "S3BucketPublicAccess",
     "S3BucketEncryption",
-    "UnresolvedObject",
+    "S3BucketPublicAccess",
 ]
