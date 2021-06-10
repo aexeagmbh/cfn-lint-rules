@@ -30,6 +30,7 @@ def test_good(filename: str) -> None:
 @pytest.mark.parametrize(
     "filename,error_count",
     [
+        ("ecs_fargate_cluster.yaml", 1),
         ("metadata_ax_changeset_auto_approve.yaml", 9),
         ("s3_bucket_with_bad_public_access_block_configuration.yaml", 5),
         ("s3_bucket_without_bucket_encryption.yaml", 1),

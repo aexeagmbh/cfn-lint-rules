@@ -41,6 +41,7 @@ User Rules (E9XXX)
 ### Parameters (E92XX)
 
 ### Resources (E93XX)
+* I9301 EcsServiceFargatePlatformVersionNotOutdated
 * W9301 S3BucketPublicAccess
 * W9302 S3BucketEncryption
 * W9303 CloudfrontDistributionLogging

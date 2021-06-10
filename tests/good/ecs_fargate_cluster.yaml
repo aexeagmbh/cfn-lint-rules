@@ -1,0 +1,34 @@
+---
+Resources:
+  ECSService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: my-cluster
+      DesiredCount: 1
+      TaskDefinition: my-task-defintion
+
+  FargateService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: my-cluster
+      DesiredCount: 1
+      TaskDefinition: my-task-defintion
+      LaunchType: FARGATE
+
+  FargateServiceWithPlatformVersion:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: my-cluster
+      DesiredCount: 1
+      TaskDefinition: my-task-defintion
+      LaunchType: FARGATE
+      PlatformVersion: 1.4.0
+
+  FargateServiceWithPlatformVersion2:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: my-cluster
+      DesiredCount: 1
+      TaskDefinition: my-task-defintion
+      LaunchType: FARGATE
+      PlatformVersion: LATEST
