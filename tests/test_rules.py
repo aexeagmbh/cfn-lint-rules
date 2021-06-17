@@ -1,3 +1,5 @@
+import re
+
 import cfnlint.decode.cfn_yaml
 import pytest
 from cfnlint.core import get_rules
@@ -57,3 +59,37 @@ def test_bad(filename: str, error_count: int) -> None:
     errs = good_runner.run()
 
     assert len(errs) == error_count, errs
+
+
+def _ax_rules():
+    rules = cfnlint.core.get_rules(["cfn_lint_ax.rules"], [], [])
+    ax_rules = [
+        rule for rule in rules if rule.__module__.startswith("cfn_lint_ax.rules.")
+    ]
+    return ax_rules
+
+
+@pytest.fixture(scope="session")
+def ax_rules():
+    return _ax_rules()
+
+
+@pytest.fixture(scope="session", params=_ax_rules())
+def ax_rule(request):
+    return request.param
+
+
+def test_rule_ids_are_unique(ax_rules):
+    rule_ids = set()
+    for rule in ax_rules:
+        assert rule.id not in rule_ids, f"Rule Id {rule.id} is used multiple times"
+        rule_ids.add(rule.id)
+
+
+rule_id_re = re.compile("^[IWE]9\d\d\d$")
+
+
+def test_rule_id(ax_rule):
+    assert rule_id_re.match(
+        ax_rule.id
+    ), f"{ax_rule.__class__} id {ax_rule.id} does not match {rule_id_re.pattern}"

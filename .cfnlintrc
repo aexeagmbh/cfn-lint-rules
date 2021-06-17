@@ -2,4 +2,4 @@
 include_checks:
   - I
 append_rules:
-  - rules/
+  - cfn_lint_ax/rules/
