@@ -1,5 +1,6 @@
 from .certificate_manager import CertificateManagerCertificateNameTag
 from .cloud_front import CloudfrontDistributionComment, CloudfrontDistributionLogging
+from .code_build import CodeBuildProjectCloudWatchLogs
 from .ecs import EcsServiceFargatePlatformVersionNotOutdated
 from .intrinsic_function import IntrinsicFunctionSubUnresolvedObject
 from .metadata import MetadataAxChangesetAutoApprove
@@ -9,6 +10,7 @@ __all__ = [
     "CertificateManagerCertificateNameTag",
     "CloudfrontDistributionComment",
     "CloudfrontDistributionLogging",
+    "CodeBuildProjectCloudWatchLogs",
     "EcsServiceFargatePlatformVersionNotOutdated",
     "IntrinsicFunctionSubUnresolvedObject",
     "MetadataAxChangesetAutoApprove",

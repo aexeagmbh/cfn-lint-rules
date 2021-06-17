@@ -47,6 +47,7 @@ User Rules (E9XXX)
 * W9303 CloudfrontDistributionLogging
 * W9304 CloudfrontDistributionComment
 * W9305 CertificateManagerCertificateNameTag
+* W9306 CodeBuildProjectCloudWatchLogs
 
 ### Metadata (E94XX)
 * E9401 MetadataAxChangesetAutoApprove
