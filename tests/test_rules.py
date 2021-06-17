@@ -1,8 +1,11 @@
 import re
+from typing import List
 
 import cfnlint.decode.cfn_yaml
 import pytest
+from _pytest.fixtures import SubRequest
 from cfnlint.core import get_rules
+from cfnlint.rules import CloudFormationLintRule
 from cfnlint.runner import Runner
 
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, GOOD_TEMPLATE_FIXTURES_PATH
@@ -61,8 +64,8 @@ def test_bad(filename: str, error_count: int) -> None:
     assert len(errs) == error_count, errs
 
 
-def _ax_rules():
-    rules = cfnlint.core.get_rules(["cfn_lint_ax.rules"], [], [])
+def _ax_rules() -> List[CloudFormationLintRule]:
+    rules = get_rules(["cfn_lint_ax.rules"], [], [])
     ax_rules = [
         rule for rule in rules if rule.__module__.startswith("cfn_lint_ax.rules.")
     ]
@@ -70,26 +73,26 @@ def _ax_rules():
 
 
 @pytest.fixture(scope="session")
-def ax_rules():
+def ax_rules() -> List[CloudFormationLintRule]:
     return _ax_rules()
 
 
 @pytest.fixture(scope="session", params=_ax_rules())
-def ax_rule(request):
+def ax_rule(request: SubRequest) -> CloudFormationLintRule:
     return request.param
 
 
-def test_rule_ids_are_unique(ax_rules):
+def test_rule_ids_are_unique(ax_rules: List[CloudFormationLintRule]) -> None:
     rule_ids = set()
     for rule in ax_rules:
         assert rule.id not in rule_ids, f"Rule Id {rule.id} is used multiple times"
         rule_ids.add(rule.id)
 
 
-rule_id_re = re.compile("^[IWE]9\d\d\d$")
+rule_id_re = re.compile(r"^[IWE]9\d\d\d$")
 
 
-def test_rule_id(ax_rule):
+def test_rule_id(ax_rule: CloudFormationLintRule) -> None:
     assert rule_id_re.match(
         ax_rule.id
     ), f"{ax_rule.__class__} id {ax_rule.id} does not match {rule_id_re.pattern}"
