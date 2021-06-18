@@ -27,6 +27,11 @@ from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, ExpectedError, assert_all_ma
                     CodeBuildProjectCloudWatchLogs,
                     "Property Resources/Project3/Properties/LogsConfig/CloudWatchLogs/GroupName should be a Ref to a LogGroup.",
                 ),
+                (
+                    72,
+                    CodeBuildProjectCloudWatchLogs,
+                    "Property Resources/Project4/Properties/LogsConfig/CloudWatchLogs/GroupName should be a Ref to a LogGroup.",
+                ),
             ],
         ),
     ],
