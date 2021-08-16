@@ -34,15 +34,15 @@ bleach==4.0.0 \
     --hash=sha256:c1685a132e6a9a38bf93752e5faab33a9517a6c0bb2f37b785e47bf253bdb51d \
     --hash=sha256:ffa9221c6ac29399cc50fcc33473366edd0cf8d5e2cbbbb63296dc327fb67cc8
     # via readme-renderer
-boto3==1.18.16 \
-    --hash=sha256:23e55b7cde2b35c79c63d4d52c761fdc2141f70f02df76f68882776a33dfcb63 \
-    --hash=sha256:806111acfb70715dfbe9d9f0d6089e7a9661a6d6bb422b17e035fc32e17f3f37
+boto3==1.18.21 \
+    --hash=sha256:00748c760dc30be61c6db4b092718f6a9f8d27c767da0e232695a65adb75cde8 \
+    --hash=sha256:59b6e8e79b2114e21388288a06a004f2a9378b1e0fc58466a35da8fb74fe2dd8
     # via
     #   -r base.txt
     #   aws-sam-translator
-botocore==1.21.16 \
-    --hash=sha256:697b577d62a8893bce56c74ee53e54f04e69b14e42a6591e109c49b5675c19ed \
-    --hash=sha256:b0e342b8c554f34f9f1cb028fbc20aff535fefe0c86a4e2cae7201846cd6aa4a
+botocore==1.21.21 \
+    --hash=sha256:12cfe74b0a5c44afb34bdd86c1f8ad74bc2ad9ec168eaed9040ef70cb3db944f \
+    --hash=sha256:fa5ac13829d24fcdd385e82c3b6d78e22d93f427cca8dac38158cae84a8cc2f5
     # via
     #   -r base.txt
     #   boto3
@@ -146,9 +146,9 @@ idna==3.2 \
     --hash=sha256:14475042e284991034cb48e06f6851428fb14c4dc953acd9be9a5e95c7b6dd7a \
     --hash=sha256:467fbad99067910785144ce333826c71fb0e63a425657295239737f7ecd125f3
     # via requests
-importlib-metadata==4.6.3 \
-    --hash=sha256:0645585859e9a6689c523927a5032f2ba5919f1f7d0e84bd4533312320de1ff9 \
-    --hash=sha256:51c6635429c77cf1ae634c997ff9e53ca3438b495f10a55ba28594dd69764a8b
+importlib-metadata==4.6.4 \
+    --hash=sha256:7b30a78db2922d78a6f47fb30683156a14f3c6aa5cc23f77cc8967e9ab2d002f \
+    --hash=sha256:ed5157fef23a4bc4594615a0dd8eba94b2bb36bf2a343fa3d8bb2fa0a62a99d5
     # via
     #   keyring
     #   twine
@@ -209,9 +209,9 @@ junit-xml==1.9 \
     # via
     #   -r base.txt
     #   cfn-lint
-keyring==23.0.1 \
-    --hash=sha256:045703609dd3fccfcdb27da201684278823b72af515aedec1a8515719a038cb8 \
-    --hash=sha256:8f607d7d1cc502c43a932a275a56fe47db50271904513a379d39df1af277ac48
+keyring==23.1.0 \
+    --hash=sha256:b32397fd7e7063f8dd74a26db910c9862fc2109285fa16e3b5208bcb42a3e579 \
+    --hash=sha256:b7e0156667f5dcc73c1f63a518005cd18a4eb23fe77321194fefcc03748b21a4
     # via twine
 matplotlib-inline==0.1.2 \
     --hash=sha256:5cf1176f554abb4fa98cb362aa2b55c500147e4bdbb07e3fda359143e1da0811 \
@@ -324,9 +324,9 @@ pyflakes==2.3.1 \
     --hash=sha256:7893783d01b8a89811dd72d7dfd4d84ff098e5eed95cfa8905b22bbffe52efc3 \
     --hash=sha256:f5bc8ecabc05bb9d291eb5203d6810b49040f6ff446a756326104746cc00c1db
     # via pylama
-pygments==2.9.0 \
-    --hash=sha256:a18f47b506a429f6f4b9df81bb02beab9ca21d0a5fee38ed15aef65f0545519f \
-    --hash=sha256:d66e804411278594d764fc69ec36ec13d9ae9147193a1740cd34d272ca383b8e
+pygments==2.10.0 \
+    --hash=sha256:b8e67fe6af78f492b3c4b3e2970c0624cbf08beb1e493b2c99b9fa1b67a20380 \
+    --hash=sha256:f398865f7eb6874156579fdf36bc840a03cab64d1cde9e93d68f46a425ec52c6
     # via
     #   ipython
     #   readme-renderer
@@ -507,9 +507,9 @@ tomli==1.2.1 \
     #   black
     #   build
     #   pep517
-tqdm==4.62.0 \
-    --hash=sha256:3642d483b558eec80d3c831e23953582c34d7e4540db86d9e5ed9dad238dabc6 \
-    --hash=sha256:706dea48ee05ba16e936ee91cb3791cd2ea6da348a0e50b46863ff4363ff4340
+tqdm==4.62.1 \
+    --hash=sha256:07856e19a1fe4d2d9621b539d3f072fa88c9c1ef1f3b7dd4d4953383134c3164 \
+    --hash=sha256:35540feeaca9ac40c304e916729e6b78045cbbeccd3e941b2868f09306798ac9
     # via twine
 traitlets==5.0.5 \
     --hash=sha256:178f4ce988f69189f7e523337a3e11d91c786ded9360174a3d9ca83e79bc5396 \
