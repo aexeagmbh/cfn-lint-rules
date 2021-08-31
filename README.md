@@ -10,7 +10,7 @@ Installation
 ------------
 
 ```bash
-pip install cfn-lint cfn-lint-ax
+python -m pip install cfn-lint cfn-lint-ax
 ```
 
 
@@ -18,7 +18,7 @@ Usage
 -----
 
 ```bash
-cfn-lint template.yaml -a cfn_lint_ax.rules
+python -m cfnlint template.yaml -a cfn_lint_ax.rules
 ```
 
 
