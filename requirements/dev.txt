@@ -22,23 +22,23 @@ backcall==0.2.0 \
     --hash=sha256:5cbdbf27be5e7cfadb448baf0aa95508f91f2bbc6c6437cd9cd06e2a4c215e1e \
     --hash=sha256:fbbce6a29f263178a1f7915c1940bde0ec2b2a967566fe1c65c1dfb7422bd255
     # via ipython
-black==21.9b0 \
-    --hash=sha256:380f1b5da05e5a1429225676655dddb96f5ae8c75bdf91e53d798871b902a115 \
-    --hash=sha256:7de4cfc7eb6b710de325712d40125689101d21d25283eed7e9998722cf10eb91
+black==21.10b0 \
+    --hash=sha256:6eb7448da9143ee65b856a5f3676b7dda98ad9abe0f87fce8c59291f15e82a5b \
+    --hash=sha256:a9952229092e325fe5f3dae56d81f639b23f7131eb840781947e4b2886030f33
     # via -r dev.in
 bleach==4.1.0 \
     --hash=sha256:0900d8b37eba61a802ee40ac0061f8c2b5dee29c1927dd1d233e075ebf5a71da \
     --hash=sha256:4d2651ab93271d1129ac9cbc679f524565cc8a1b791909c4a51eac4446a15994
     # via readme-renderer
-boto3==1.19.2 \
-    --hash=sha256:11a6035060230e92327d4f10fef6bc44188b2cd68504012bc25ed62ac31d670b \
-    --hash=sha256:1b8fac5f11ee1d185770d7619f2212e67e636ce190512770d0d36fd162739628
+boto3==1.19.7 \
+    --hash=sha256:45e0e2669bc61562f92056ed02bb9318b8aeb9d51cfca9ab7834af1cc2b90acb \
+    --hash=sha256:9417d5dd88904cfded28e28ea174641b712659cc849bced9a46f796f5e85442f
     # via
     #   -r base.txt
     #   aws-sam-translator
-botocore==1.22.2 \
-    --hash=sha256:011360e79a4b843aa6591573cfa61e8eddc99b91adab1dfdb9a2b7f2c8511193 \
-    --hash=sha256:681d0d854d08beb9a5727152e95a884439b76cf19fb38d69ca2f17f1404d48ae
+botocore==1.22.7 \
+    --hash=sha256:3818c7bf7ae801f81ae2f7d332efd4e42e00c8ef11b695895fb0fd499be09b3c \
+    --hash=sha256:d7c190ed4e1ddb24f9872a0641b28da4afc04b6b993f0ec3dd5224a847df5519
     # via
     #   -r base.txt
     #   boto3
@@ -103,9 +103,9 @@ cffi==1.15.0 \
     --hash=sha256:fd8a250edc26254fe5b33be00402e6d287f562b6a5b2152dec302fa15bb3e997 \
     --hash=sha256:ffaa5c925128e29efbde7301d8ecaf35c8c60ffbcd6a1ffd3a552177c8e5e796
     # via cryptography
-cfn-lint==0.54.3 \
-    --hash=sha256:9155b0eb876f746095708d5eda80264efa4872a0586e4d613197a54eeca95e40 \
-    --hash=sha256:f1d9c70443b91a2e950f795a10b0c8ce7607925be52114bf1079c5928a5fd6bd
+cfn-lint==0.54.4 \
+    --hash=sha256:6f73ac048b456127ea6c201f5e9d2c1770ae97011bcd5191d4ed02b25aae513c \
+    --hash=sha256:ed6ef60296e4a613b74a851645d71083ff579e6de69c4351ff562c4a843380e5
     # via -r base.txt
 charset-normalizer==2.0.7 \
     --hash=sha256:e019de665e2bcf9c2b64e2e5aa025fa991da8720daa3c1138cadd2fd1856aed0 \
@@ -145,9 +145,9 @@ decorator==5.1.0 \
     --hash=sha256:7b12e7c3c6ab203a29e157335e9122cb03de9ab7264b137594103fd4a683b374 \
     --hash=sha256:e59913af105b9860aa2c8d3272d9de5a56a4e608db9a2f167a8480b323d529a7
     # via ipython
-docutils==0.17.1 \
-    --hash=sha256:686577d2e4c32380bb50cbb22f575ed742d58168cee37e99117a854bcd88f125 \
-    --hash=sha256:cf316c8370a737a022b72b56874f6602acf974a37a9fba42ec2876387549fc61
+docutils==0.18 \
+    --hash=sha256:a31688b2ea858517fa54293e5d5df06fbb875fb1f7e4c64529271b77781ca8fc \
+    --hash=sha256:c1d5dab2b11d16397406a282e53953fe495a46d69ae329f55aa98a5c4e3c5fbb
     # via readme-renderer
 idna==3.3 \
     --hash=sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff \
@@ -163,9 +163,9 @@ iniconfig==1.1.1 \
     --hash=sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3 \
     --hash=sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32
     # via pytest
-ipython==7.28.0 \
-    --hash=sha256:2097be5c814d1b974aea57673176a924c4c8c9583890e7a5f082f547b9975b11 \
-    --hash=sha256:f16148f9163e1e526f1008d7c8d966d9c15600ca20d1a754287cf96d00ba6f1d
+ipython==7.29.0 \
+    --hash=sha256:4f69d7423a5a1972f6347ff233e38bbf4df6a150ef20fbb00c635442ac3060aa \
+    --hash=sha256:a658beaf856ce46bc453366d5dc6b2ddc6c481efd3540cb28aa3943819caac9f
     # via -r dev.in
 isort==5.9.3 \
     --hash=sha256:9c2ea1e62d871267b78307fe511c0838ba0da28698c5732d54e2790bf3ba9899 \
@@ -261,9 +261,9 @@ networkx==2.6.3 \
     # via
     #   -r base.txt
     #   cfn-lint
-packaging==21.0 \
-    --hash=sha256:7dc96269f53a4ccec5c0670940a4281106dd0bb343f47b7471f779df49c2fbe7 \
-    --hash=sha256:c86254f9220d55e31cc94d69bade760f0847da8000def4dfe1c6b872fd14ff14
+packaging==21.2 \
+    --hash=sha256:096d689d78ca690e4cd8a89568ba06d07ca097e3306a4381635073ca91479966 \
+    --hash=sha256:14317396d1e8cdb122989b916fa2c7e9ca8e2be9e8060a6eff75b6b7b4d8a7e0
     # via
     #   bleach
     #   build
@@ -341,9 +341,9 @@ pylama==7.7.1 \
     --hash=sha256:9bae53ef9c1a431371d6a8dca406816a60d547147b60a4934721898f553b7d8f \
     --hash=sha256:fd61c11872d6256b019ef1235be37b77c922ef37ac9797df6bd489996dddeb15
     # via -r dev.in
-pyparsing==3.0.1 \
-    --hash=sha256:84196357aa3566d64ad123d7a3c67b0e597a115c4934b097580e5ce220b91531 \
-    --hash=sha256:fd93fc45c47893c300bd98f5dd1b41c0e783eaeb727e7cea210dcc09d64ce7c3
+pyparsing==2.4.7 \
+    --hash=sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1 \
+    --hash=sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b
     # via packaging
 pyrsistent==0.18.0 \
     --hash=sha256:097b96f129dd36a8c9e33594e7ebb151b1515eb52cceb08474c10a5479e799f2 \
@@ -513,9 +513,9 @@ toml==0.10.2 \
     # via
     #   mypy
     #   pytest
-tomli==1.2.1 \
-    --hash=sha256:8dd0e9524d6f386271a36b41dbf6c57d8e32fd96fd22b6584679dc569d20899f \
-    --hash=sha256:a5b75cb6f3968abb47af1b40c1819dc519ea82bcc065776a866e8d74c5ca9442
+tomli==1.2.2 \
+    --hash=sha256:c6ce0015eb38820eaf32b5db832dbc26deb3dd427bd5f6556cf0acac2c214fee \
+    --hash=sha256:f04066f68f5554911363063a30b108d2b5a5b1a010aa8b6132af78489fe3aade
     # via
     #   black
     #   build
@@ -524,9 +524,9 @@ tqdm==4.62.3 \
     --hash=sha256:8dd278a422499cd6b727e6ae4061c40b48fce8b76d1ccbf5d34fca9b7f925b0c \
     --hash=sha256:d359de7217506c9851b7869f3708d8ee53ed70a1b8edbba4dbcb47442592920d
     # via twine
-traitlets==5.1.0 \
-    --hash=sha256:03f172516916220b58c9f19d7f854734136dd9528103d04e9bf139a92c9f54c4 \
-    --hash=sha256:bd382d7ea181fbbcce157c133db9a829ce06edffe097bcf3ab945b435452b46d
+traitlets==5.1.1 \
+    --hash=sha256:059f456c5a7c1c82b98c2e8c799f39c9b8128f6d0d46941ee118daace9eb70c7 \
+    --hash=sha256:2d313cc50a42cd6c277e7d7dc8d4d7fedd06a2c215f78766ae7b1a66277e0033
     # via
     #   ipython
     #   matplotlib-inline
