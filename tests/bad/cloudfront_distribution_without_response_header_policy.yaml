@@ -10,14 +10,20 @@ Resources:
             QueryString: false
           TargetOriginId: default
           ViewerProtocolPolicy: redirect-to-https
-          ResponseHeadersPolicyId: !Ref ResponseHeadersPolicy
         Enabled: true
         Logging:
           Bucket: myawslogbucket.s3.amazonaws.com
           IncludeCookies: true
           Prefix: !Ref AWS::StackName
         CacheBehaviors:
-          - PathPattern: /my-path
+          - PathPattern: /foo
+            TargetOriginId: other-origin
+            ViewerProtocolPolicy: redirect-to-https
+            ResponseHeadersPolicyId: !Ref ResponseHeadersPolicy
+          - PathPattern: /bar
+            TargetOriginId: other-origin
+            ViewerProtocolPolicy: redirect-to-https
+          - PathPattern: /baz
             TargetOriginId: other-origin
             ViewerProtocolPolicy: redirect-to-https
             ResponseHeadersPolicyId: !Ref ResponseHeadersPolicy

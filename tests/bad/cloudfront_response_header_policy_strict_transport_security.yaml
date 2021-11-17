@@ -1,0 +1,47 @@
+---
+Resources:
+  ResponseHeadersPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: my-response-headers-policy
+
+  ResponseHeadersPolicyHsts:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: my-response-headers-policy
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            Override: true
+            AccessControlMaxAgeSec: 63072000
+
+  ResponseHeadersPolicyHstsOverrideDisabled:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: my-response-headers-policy
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            Override: false
+            AccessControlMaxAgeSec: 63072000
+
+  ResponseHeadersPolicyHstsMaxAgeToSmall:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: my-response-headers-policy
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            Override: true
+            AccessControlMaxAgeSec: 31536000
+
+  ResponseHeadersPolicyHstsAllBad:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: my-response-headers-policy
+        SecurityHeadersConfig:
+          StrictTransportSecurity:
+            Override: false
+            AccessControlMaxAgeSec: 31536000

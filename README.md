@@ -48,6 +48,8 @@ User Rules (E9XXX)
 * W9304 CloudfrontDistributionComment
 * W9305 CertificateManagerCertificateNameTag
 * W9306 CodeBuildProjectCloudWatchLogs
+* W9307 CloudfrontDistributionResponseHeadersPolicy
+* W9308 CloudfrontResponseHeaderConfigLongHstsMaxAge
 
 ### Metadata (E94XX)
 * E9401 MetadataAxChangesetAutoApprove

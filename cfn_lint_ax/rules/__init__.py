@@ -1,5 +1,10 @@
 from .certificate_manager import CertificateManagerCertificateNameTag
-from .cloud_front import CloudfrontDistributionComment, CloudfrontDistributionLogging
+from .cloud_front import (
+    CloudfrontDistributionComment,
+    CloudfrontDistributionLogging,
+    CloudfrontDistributionResponseHeadersPolicy,
+    CloudfrontResponseHeaderConfigLongHstsMaxAge,
+)
 from .code_build import CodeBuildProjectCloudWatchLogs
 from .ecs import EcsServiceFargatePlatformVersionNotOutdated
 from .intrinsic_function import IntrinsicFunctionSubUnresolvedObject
@@ -10,6 +15,8 @@ __all__ = [
     "CertificateManagerCertificateNameTag",
     "CloudfrontDistributionComment",
     "CloudfrontDistributionLogging",
+    "CloudfrontDistributionResponseHeadersPolicy",
+    "CloudfrontResponseHeaderConfigLongHstsMaxAge",
     "CodeBuildProjectCloudWatchLogs",
     "EcsServiceFargatePlatformVersionNotOutdated",
     "IntrinsicFunctionSubUnresolvedObject",
