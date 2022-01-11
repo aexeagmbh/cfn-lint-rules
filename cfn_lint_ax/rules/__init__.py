@@ -6,7 +6,10 @@ from .cloud_front import (
     CloudfrontResponseHeaderConfigLongHstsMaxAge,
 )
 from .code_build import CodeBuildProjectCloudWatchLogs
-from .ecs import EcsServiceFargatePlatformVersionNotOutdated
+from .ecs import (
+    EcsServiceDeploymentConfiguration,
+    EcsServiceFargatePlatformVersionNotOutdated,
+)
 from .intrinsic_function import IntrinsicFunctionSubUnresolvedObject
 from .metadata import MetadataAxChangesetAutoApprove
 from .s3 import S3BucketEncryption, S3BucketPublicAccess
@@ -18,6 +21,7 @@ __all__ = [
     "CloudfrontDistributionResponseHeadersPolicy",
     "CloudfrontResponseHeaderConfigLongHstsMaxAge",
     "CodeBuildProjectCloudWatchLogs",
+    "EcsServiceDeploymentConfiguration",
     "EcsServiceFargatePlatformVersionNotOutdated",
     "IntrinsicFunctionSubUnresolvedObject",
     "MetadataAxChangesetAutoApprove",

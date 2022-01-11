@@ -33,3 +33,74 @@ class EcsServiceFargatePlatformVersionNotOutdated(CloudFormationLintRule):  # ty
                 matches.append(RuleMatch(path, message))
 
         return matches
+
+
+class EcsServiceDeploymentConfiguration(CloudFormationLintRule):  # type: ignore[misc]
+    """Rule description"""
+
+    id = "W9309"
+    shortdesc = "ECS Services should have a deployment configuration with DeploymentCircuitBreaker."
+    description = "ECS Services should have a deployment configuration with DeploymentCircuitBreaker."
+    source_url = "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-circuit-breaker"
+    tags = ["ecs", "service", "circuit-breaker"]
+
+    def match(self, cfn: Template) -> List[RuleMatch]:
+        matches = []
+
+        resources = cfn.get_resources(["AWS::ECS::Service"])
+        for resource_name, resource in resources.items():
+            properties = resource.get("Properties", {})
+
+            deployment_configuration = properties.get("DeploymentConfiguration", {})
+            if not deployment_configuration:
+                path = [
+                    "Resources",
+                    resource_name,
+                    "Properties",
+                    "DeploymentConfiguration",
+                ]
+                message = (
+                    f"{'/'.join(path)} Property DeploymentConfiguration is missing."
+                )
+                matches.append(RuleMatch(path, message))
+
+            deployment_circuit_breaker = deployment_configuration.get(
+                "DeploymentCircuitBreaker", {}
+            )
+
+            if not deployment_circuit_breaker:
+                path = [
+                    "Resources",
+                    resource_name,
+                    "Properties",
+                    "DeploymentConfiguration",
+                    "DeploymentCircuitBreaker",
+                ]
+                message = f"{'/'.join(path)} Property DeploymentConfiguration/DeploymentCircuitBreaker is missing."
+                matches.append(RuleMatch(path, message))
+
+            if not deployment_circuit_breaker.get("Enable") is True:
+                path = [
+                    "Resources",
+                    resource_name,
+                    "Properties",
+                    "DeploymentConfiguration",
+                    "DeploymentCircuitBreaker",
+                    "Enable",
+                ]
+                message = f"{'/'.join(path)} Property DeploymentConfiguration/DeploymentCircuitBreaker/Enable should be true."
+                matches.append(RuleMatch(path, message))
+
+            if not deployment_circuit_breaker.get("Rollback") is False:
+                path = [
+                    "Resources",
+                    resource_name,
+                    "Properties",
+                    "DeploymentConfiguration",
+                    "DeploymentCircuitBreaker",
+                    "Rollback",
+                ]
+                message = f"{'/'.join(path)} Property DeploymentConfiguration/DeploymentCircuitBreaker/Rollback should be false."
+                matches.append(RuleMatch(path, message))
+
+        return matches

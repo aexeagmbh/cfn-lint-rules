@@ -6,6 +6,10 @@ Resources:
       Cluster: my-cluster
       DesiredCount: 1
       TaskDefinition: my-task-defintion
+      DeploymentConfiguration:
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: false
 
   FargateService:
     Type: AWS::ECS::Service
@@ -14,6 +18,10 @@ Resources:
       DesiredCount: 1
       TaskDefinition: my-task-defintion
       LaunchType: FARGATE
+      DeploymentConfiguration:
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: false
 
   FargateServiceWithPlatformVersion:
     Type: AWS::ECS::Service
@@ -23,6 +31,10 @@ Resources:
       TaskDefinition: my-task-defintion
       LaunchType: FARGATE
       PlatformVersion: 1.4.0
+      DeploymentConfiguration:
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: false
 
   FargateServiceWithPlatformVersion2:
     Type: AWS::ECS::Service
@@ -32,3 +44,7 @@ Resources:
       TaskDefinition: my-task-defintion
       LaunchType: FARGATE
       PlatformVersion: LATEST
+      DeploymentConfiguration:
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: false

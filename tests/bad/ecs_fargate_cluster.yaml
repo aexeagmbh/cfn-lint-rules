@@ -8,3 +8,16 @@ Resources:
       TaskDefinition: my-task-defintion
       LaunchType: FARGATE
       PlatformVersion: 1.3.0
+
+  ECSServiceDeploymentCircuitBreakerWithBadValues:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: my-cluster
+      DesiredCount: 1
+      TaskDefinition: my-task-defintion
+      LaunchType: FARGATE
+      PlatformVersion: LATEST
+      DeploymentConfiguration:
+        DeploymentCircuitBreaker:
+          Enable: false
+          Rollback: true

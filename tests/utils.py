@@ -1,3 +1,4 @@
+from logging import getLogger
 from pathlib import Path
 from typing import List, Tuple, Type
 
@@ -5,6 +6,8 @@ import cfnlint.decode.cfn_yaml
 from cfnlint.core import get_rules
 from cfnlint.rules import CloudFormationLintRule
 from cfnlint.runner import Runner
+
+logger = getLogger(__name__)
 
 ExpectedError = Tuple[int, Type[CloudFormationLintRule], str]
 
@@ -52,4 +55,7 @@ def assert_all_matches(
                 break
         else:
             assert False, f"{line_number} - {lint_rule_class} - {message} not in errs"
+
+    for err in errs:
+        logger.warning(err)
     assert len(errs) == 0, errs
