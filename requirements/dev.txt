@@ -38,15 +38,15 @@ bleach==4.1.0 \
     --hash=sha256:0900d8b37eba61a802ee40ac0061f8c2b5dee29c1927dd1d233e075ebf5a71da \
     --hash=sha256:4d2651ab93271d1129ac9cbc679f524565cc8a1b791909c4a51eac4446a15994
     # via readme-renderer
-boto3==1.20.37 \
-    --hash=sha256:0e2f8aa8ee71f144d8afbe9ff7d0bb40525b94535e0695bdb200687970c9f452 \
-    --hash=sha256:55c7004af4296648ee497417dfc454d9c39770c265f67e28e1c5f10e11f3b644
+boto3==1.20.41 \
+    --hash=sha256:aaddf6cf93568b734ad62fd96991775bccc7f016e93ff4e98dc1aa4f7586440c \
+    --hash=sha256:fb02467a6e8109c7db994ba77fa2e8381ed129ce312988d8ef23edf6e3a3c7f1
     # via
     #   -r base.txt
     #   aws-sam-translator
-botocore==1.23.37 \
-    --hash=sha256:9ea3eb6e507684900418ad100e5accd1d98979d41c49bacf15f970f0d72f75d4 \
-    --hash=sha256:f3077f1ca19e6ab6b7a84c61e01e136a97c7732078a8d806908aee44f1042f5f
+botocore==1.23.41 \
+    --hash=sha256:41104e1c976c9c410387b3c7d265466b314f287a1c13fd4b543768135301058a \
+    --hash=sha256:9137c59c4eb1dee60ae3c710e94f56119a1b33b0b17ff3ad878fc2f4ce77843a
     # via
     #   -r base.txt
     #   boto3
@@ -111,9 +111,9 @@ cffi==1.15.0 \
     --hash=sha256:fd8a250edc26254fe5b33be00402e6d287f562b6a5b2152dec302fa15bb3e997 \
     --hash=sha256:ffaa5c925128e29efbde7301d8ecaf35c8c60ffbcd6a1ffd3a552177c8e5e796
     # via cryptography
-cfn-lint==0.56.4 \
-    --hash=sha256:0ba396f0f4d4e57046f616f08e78abf962146b7c7f0beba45567ad7fa1251ff9 \
-    --hash=sha256:a1d47c15e9ba1bb288d93acd05cabea4825a52a4076a148f3aaa23c241a53aa8
+cfn-lint==0.57.0 \
+    --hash=sha256:17c2e3ba693ae259c868e221d159dc4aa9c7e60a970cdc1d1309150c9250faf4 \
+    --hash=sha256:71b5e23b6a5101416c13275baa0f172c935f679fac6956ae768c467a117913c2
     # via -r base.txt
 charset-normalizer==2.0.10 \
     --hash=sha256:876d180e9d7432c5d1dfd4c5d26b72f099d503e8fcc0feb7532c9289be60fcbd \
@@ -175,9 +175,9 @@ iniconfig==1.1.1 \
     --hash=sha256:011e24c64b7f47f6ebd835bb12a743f2fbe9a26d4cecaa7f53bc4f35ee9da8b3 \
     --hash=sha256:bc3af051d7d14b2ee5ef9969666def0cd1a000e121eaea580d4a313df4b37f32
     # via pytest
-ipython==8.0.0 \
-    --hash=sha256:004a0d05aeecd32adec4841b6e2586d5ca35785b1477db4d8333a39333e0ce98 \
-    --hash=sha256:5b58cf977635abad74d76be49dbb2e97fddd825fb8503083d55496aa1160b854
+ipython==8.0.1 \
+    --hash=sha256:ab564d4521ea8ceaac26c3a2c6e5ddbca15c8848fd5a5cc325f960da88d42974 \
+    --hash=sha256:c503a0dd6ccac9c8c260b211f2dd4479c042b49636b097cc9a0d55fe62dff64c
     # via -r dev.in
 isort==5.10.1 \
     --hash=sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7 \
@@ -244,9 +244,9 @@ matplotlib-inline==0.1.3 \
     --hash=sha256:a04bfba22e0d1395479f866853ec1ee28eea1485c1d69a6faf00dc3e24ff34ee \
     --hash=sha256:aed605ba3b72462d64d475a21a9296f400a19c4f74a31b59103d2a99ffd5aa5c
     # via ipython
-mccabe==0.6.1 \
-    --hash=sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42 \
-    --hash=sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f
+mccabe==0.7.0 \
+    --hash=sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325 \
+    --hash=sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e
     # via pylama
 mypy==0.931 \
     --hash=sha256:0038b21890867793581e4cb0d810829f5fd4441aa75796b53033af3aa30430ce \
@@ -339,9 +339,9 @@ ptyprocess==0.7.0 \
     --hash=sha256:4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35 \
     --hash=sha256:5c5d0a3b48ceee0b48485e0c26037c0acd7d29765ca3fbb5cb3831d347423220
     # via pexpect
-pure-eval==0.2.1 \
-    --hash=sha256:0f04483b16c9429532d2c0ddc96e2b3bb6b2dc37a2bfb0e986248dbfd0b78873 \
-    --hash=sha256:94eeb505a88721bec7bb21a4ac49758b8b1a01530da1a70d4ffc1d9937689d71
+pure-eval==0.2.2 \
+    --hash=sha256:01eaab343580944bc56080ebe0a674b39ec44a945e6d09ba7db3cb8cec289350 \
+    --hash=sha256:2b45320af6dfaa1750f543d714b6d1c520a1688dec6fd24d339063ce0aaa9ac3
     # via stack-data
 py==1.11.0 \
     --hash=sha256:51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719 \
@@ -373,9 +373,9 @@ pylama==8.3.7 \
     --hash=sha256:ca47a1d341ede3aafbe117dc69f9e573cd1b749b2bacf5ac99d8daf6657001ec \
     --hash=sha256:d6b48087c810db3be5267d44ac0e1998a8c015c5d3eee0524fec90fbfaf8ad26
     # via -r dev.in
-pyparsing==3.0.6 \
-    --hash=sha256:04ff808a5b90911829c55c4e26f75fa5ca8a2f5f36aa3a51f68e27033341d3e4 \
-    --hash=sha256:d9bdec0013ef1eb5a84ab39a3b3868911598afa494f5faa038647101504e2b81
+pyparsing==3.0.7 \
+    --hash=sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea \
+    --hash=sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484
     # via packaging
 pyrsistent==0.18.1 \
     --hash=sha256:0e3e1fcc45199df76053026a51cc59ab2ea3fc7c094c6627e93b7b44cdae2c8c \
