@@ -21,8 +21,6 @@ class EcsServiceFargatePlatformVersionNotOutdated(CloudFormationLintRule):  # ty
         resources = cfn.get_resources(["AWS::ECS::Service"])
         for resource_name, resource in resources.items():
             properties = resource.get("Properties", {})
-            if not properties.get("LaunchType") == "FARGATE":
-                continue
             platform_version = properties.get("PlatformVersion")
             if platform_version is None:
                 continue
