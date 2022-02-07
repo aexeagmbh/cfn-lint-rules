@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="cfn_lint_ax",
-    version="0.0.7",
+    version="0.0.8",
     author="AX Semantics",
     author_email="infrastructure@ax-semantics.com",
     description="Rules for cfn lint.",
@@ -21,6 +21,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3 :: Only",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
