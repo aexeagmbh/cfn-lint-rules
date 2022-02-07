@@ -4,7 +4,7 @@ from typing import List, Tuple, Type
 
 import cfnlint.decode.cfn_yaml
 from cfnlint.core import get_rules
-from cfnlint.rules import CloudFormationLintRule
+from cfnlint.rules import CloudFormationLintRule, Match
 from cfnlint.runner import Runner
 
 logger = getLogger(__name__)
@@ -15,47 +15,18 @@ BAD_TEMPLATE_FIXTURES_PATH = Path("tests/bad").resolve()
 GOOD_TEMPLATE_FIXTURES_PATH = Path("tests/good").resolve()
 
 
-def assert_all_matches(
-    filename: str, expected_errors: List[ExpectedError], region: str = "us-east-1"
-) -> None:
+def get_cnflint_errors(template_path: str, region: str = "us-east-1") -> List[Match]:
     regions = [region]
-    template = cfnlint.decode.cfn_yaml.load(filename)
+    template = cfnlint.decode.cfn_yaml.load(template_path)
     rules = get_rules(
         ["cfn_lint_ax.rules"],
         ignore_rules=[],
         include_rules=["I"],
         include_experimental=True,
     )
-    runner = Runner(rules=rules, filename=filename, template=template, regions=regions)
+    runner = Runner(
+        rules=rules, filename=template_path, template=template, regions=regions
+    )
     runner.transform()
-    errs = runner.run()
-
-    for expected_error in expected_errors:
-        line_number = expected_error[0]
-        lint_rule_class = expected_error[1]
-        message = expected_error[2]
-
-        lint_rule_class_name = (
-            f"{lint_rule_class.__module__}.{lint_rule_class.__name__}"
-        )
-        if lint_rule_class_name.startswith("rules."):
-            lint_rule_class_name = lint_rule_class_name[len("rules.") :]
-
-        for errs_idx, match in enumerate(errs):
-            match_rule_class = match.rule.__class__
-            match_rule_class_name = (
-                f"{match_rule_class.__module__}.{match_rule_class.__name__}"
-            )
-            if (
-                match.linenumber == line_number
-                and match_rule_class_name == lint_rule_class_name
-                and match.message == message
-            ):
-                del errs[errs_idx]
-                break
-        else:
-            assert False, f"{line_number} - {lint_rule_class} - {message} not in errs"
-
-    for err in errs:
-        logger.warning(err)
-    assert len(errs) == 0, errs
+    errors = runner.run()
+    return errors

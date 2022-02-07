@@ -1,0 +1,14 @@
+---
+Resources:
+  ECSService:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: my-cluster
+      DesiredCount: 1
+      TaskDefinition: my-task-defintion
+      LaunchType: FARGATE
+      PlatformVersion: 1.3.0
+      DeploymentConfiguration:
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: false
