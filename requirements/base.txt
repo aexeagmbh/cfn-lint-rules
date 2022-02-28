@@ -16,19 +16,19 @@ aws-sam-translator==1.42.0 \
     --hash=sha256:4f5d3d5d0567fe728e75c5c8dff599f7c88313b3b8e85b9b17a2c00cb046b2e4 \
     --hash=sha256:8a7976c0ee2fca004a590e17d3551a49c8d8ba14ed0cb3674ea270d41d0dcd5b
     # via cfn-lint
-boto3==1.20.54 \
-    --hash=sha256:1a272a1dd36414b1626a47bb580425203be0b5a34caa117f38a5e18adf21f918 \
-    --hash=sha256:8129ad42cc0120d1c63daa18512d6f0b1439e385b2b6e0fe987f116bdf795546
+boto3==1.21.8 \
+    --hash=sha256:9b6903fe9cc92d2f6111db28675263f1ab45adbcf1483025c82a304ce7790b71 \
+    --hash=sha256:f2ce641957c1782e382548ced4a447189e45851bbe58c1f6752ff2b661527de7
     # via aws-sam-translator
-botocore==1.23.54 \
-    --hash=sha256:06ae8076c4dcf3d72bec4d37e5f2dce4a92a18a8cdaa3bfaa6e3b7b5e30a8d7e \
-    --hash=sha256:4bb9ba16cccee5f5a2602049bc3e2db6865346b2550667f3013bdf33b0a01ceb
+botocore==1.24.8 \
+    --hash=sha256:9fbc5c57b31850c51c87abc3e166ed4e0f343665bec4e1a0ff814fbc9704642c \
+    --hash=sha256:a5431d806dc75fb1844463d921759fcd8d387674443af8d7fd0867f296b02759
     # via
     #   boto3
     #   s3transfer
-cfn-lint==0.58.0 \
-    --hash=sha256:404b95a89c598c46c553b9ba3640e20695cb910735f44c4397be408568001914 \
-    --hash=sha256:d5e2ec75b61befb0c1abddb4baee2de69ecfe55056f6a03bfe03260654c28828
+cfn-lint==0.58.2 \
+    --hash=sha256:484484e0a849b4f5d621bc55b1af7b46104370a2c1629b49376ab8281787e9eb \
+    --hash=sha256:b77d8379dd339cce625f44990bfff2349920f1872261be7a1802e2a84ad77199
     # via -r base.in
 jmespath==0.10.0 \
     --hash=sha256:b85d0567b8666149a93172712e68920734333c0ce7e89b78b3e987f71e5ed4f9 \
@@ -133,9 +133,9 @@ pyyaml==6.0 \
     --hash=sha256:e61ceaab6f49fb8bdfaa0f92c4b57bcfbea54c09277b1b4f7ac376bfb7a7c174 \
     --hash=sha256:f84fbc98b019fef2ee9a1cb3ce93e3187a6df0b2538a651bfb890254ba9f90b5
     # via cfn-lint
-s3transfer==0.5.1 \
-    --hash=sha256:25c140f5c66aa79e1ac60be50dcd45ddc59e83895f062a3aab263b870102911f \
-    --hash=sha256:69d264d3e760e569b78aaa0f22c97e955891cd22e32b10c51f784eeda4d9d10a
+s3transfer==0.5.2 \
+    --hash=sha256:7a6f4c4d1fdb9a2b640244008e142cbc2cd3ae34b386584ef044dd0f27101971 \
+    --hash=sha256:95c58c194ce657a5f4fb0b9e60a84968c808888aed628cd98ab8771fe1db98ed
     # via boto3
 sarif-om==1.0.4 \
     --hash=sha256:539ef47a662329b1c8502388ad92457425e95dc0aaaf995fe46f4984c4771911 \
