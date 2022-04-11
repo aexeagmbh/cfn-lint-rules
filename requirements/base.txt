@@ -11,18 +11,18 @@ attrs==21.4.0 \
     #   jschema-to-python
     #   jsonschema
     #   sarif-om
-aws-sam-translator==1.43.0 \
-    --hash=sha256:07820609c0de16ec9824aa8b482c48a217bd431f437bcd980a65e7e841626d5d \
-    --hash=sha256:146e559a6aadd9d88a50c4e38216632d577ebed69909516a9b1404366e4e401c \
-    --hash=sha256:aba6931c717c472d666a0759a4130b57ba20c8dc31718bbb430951e21452c24e
+aws-sam-translator==1.45.0 \
+    --hash=sha256:40a6dd5a0aba32c7b38b0f5c54470396acdcd75e4b64251b015abdf922a18b5f \
+    --hash=sha256:bf321ab62aa1731d3e471fd55de6f5d1ab07dfc169cd254aa523dd9ad30246f9 \
+    --hash=sha256:cd4761c01902e5103e60202373275886e59edcc778edf18ca22d380059ed44e7
     # via cfn-lint
-boto3==1.21.27 \
-    --hash=sha256:ef41b9c7b6311d5152bdc78f7de56912c1ed265debf7da14133e1ad00246ad50 \
-    --hash=sha256:f165790439117e3fd40f8c06826845068852a70ca5ac62adb192405c97f117e1
+boto3==1.21.37 \
+    --hash=sha256:013ba57295f05da141e364191dd46f4086e8fe3eb83a3cd09730eeb684ffbab3 \
+    --hash=sha256:1e845aa92b3ad70b954329b98835135c28b3000e322ff8d3fc46a956bdb6e94b
     # via aws-sam-translator
-botocore==1.24.27 \
-    --hash=sha256:2c11db4b94b4b9504d2782acb758d29a7e5cbdfaa826601f222ac9ddcf004dde \
-    --hash=sha256:88e19efcaead99426434d9898d211093b8a8d0cc90af3b84a4ccb9f196894e87
+botocore==1.24.37 \
+    --hash=sha256:21e164a213beca36033c46026bffa62f2ee2cd2600777271f9a551fb34dba006 \
+    --hash=sha256:70c48c4ae3c2b9ec0ca025385979d01f4c7dae4d9a61c82758d4cf7caa7082cd
     # via
     #   boto3
     #   s3transfer
@@ -48,9 +48,9 @@ jsonpickle==2.1.0 \
     --hash=sha256:1dee77ddc5d652dfdabc33d33cff9d7e131d428007007da4fd6f7071ae774b0f \
     --hash=sha256:84684cfc5338a534173c8dd69809e40f2865d0be1f8a2b7af8465e5b968dcfa9
     # via jschema-to-python
-jsonpointer==2.2 \
-    --hash=sha256:26d9a47a72d4dc3e3ae72c4c6cd432afd73c680164cd2540772eab53cb3823b6 \
-    --hash=sha256:f09f8deecaaa5aea65b5eb4f67ca4e54e1a61f7a11c75085e360fe6feb6a48bf
+jsonpointer==2.3 \
+    --hash=sha256:51801e558539b4e9cd268638c078c6c5746c9ac96bc38152d443400e4f3793e9 \
+    --hash=sha256:97cba51526c829282218feb99dab1b1e6bdf8efd1c43dc9d57be093c0d69c99a
     # via jsonpatch
 jsonschema==3.2.0 \
     --hash=sha256:4e5b3cf8216f577bee9ce139cbe72eca3ea4f292ec60928ff24758ce626cd163 \
@@ -61,9 +61,9 @@ jsonschema==3.2.0 \
 junit-xml==1.9 \
     --hash=sha256:ec5ca1a55aefdd76d28fcc0b135251d156c7106fa979686a4b48d62b761b4732
     # via cfn-lint
-networkx==2.7.1 \
-    --hash=sha256:011e85d277c89681e8fa661cf5ff0743443445049b0b68789ad55ef09340c6e0 \
-    --hash=sha256:d1194ba753e5eed07cdecd1d23c5cd7a3c772099bd8dbd2fea366788cf4de7ba
+networkx==2.8 \
+    --hash=sha256:1a1e8fe052cc1b4e0339b998f6795099562a264a13a5af7a32cad45ab9d4e126 \
+    --hash=sha256:4a52cf66aed221955420e11b3e2e05ca44196b4829aab9576d4d439212b0a14f
     # via cfn-lint
 pbr==5.8.1 \
     --hash=sha256:27108648368782d07bbf1cb468ad2e2eeef29086affd14087a6d04b7de8af4ec \
