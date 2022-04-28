@@ -5,7 +5,7 @@ from .cloud_front import (
     CloudfrontDistributionResponseHeadersPolicy,
     CloudfrontResponseHeaderConfigLongHstsMaxAge,
 )
-from .code_build import CodeBuildProjectCloudWatchLogs
+from .code_build import CodeBuildProjectCloudWatchLogs, CodeBuildProjectImage
 from .ecs import (
     EcsServiceDeploymentConfiguration,
     EcsServiceFargatePlatformVersionNotOutdated,
@@ -21,6 +21,7 @@ __all__ = [
     "CloudfrontDistributionResponseHeadersPolicy",
     "CloudfrontResponseHeaderConfigLongHstsMaxAge",
     "CodeBuildProjectCloudWatchLogs",
+    "CodeBuildProjectImage",
     "EcsServiceDeploymentConfiguration",
     "EcsServiceFargatePlatformVersionNotOutdated",
     "IntrinsicFunctionSubUnresolvedObject",

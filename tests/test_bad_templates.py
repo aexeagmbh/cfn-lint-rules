@@ -11,6 +11,7 @@ from cfn_lint_ax.rules import (
     CloudfrontDistributionResponseHeadersPolicy,
     CloudfrontResponseHeaderConfigLongHstsMaxAge,
     CodeBuildProjectCloudWatchLogs,
+    CodeBuildProjectImage,
     EcsServiceDeploymentConfiguration,
     EcsServiceFargatePlatformVersionNotOutdated,
     IntrinsicFunctionSubUnresolvedObject,
@@ -207,6 +208,20 @@ test_parameters = (
             (
                 23,
                 "Resources/ECSServiceDeploymentCircuitBreakerWithBadValues/Properties/DeploymentConfiguration/DeploymentCircuitBreaker/Rollback Property DeploymentConfiguration/DeploymentCircuitBreaker/Rollback should be false.",
+            ),
+        ],
+    ),
+    (
+        "W9310_codebuild_project_image.yaml",
+        CodeBuildProjectImage,
+        [
+            (
+                17,
+                "Property Resources/Project1/Properties/Environment/Image uses an AWS image other than standard.",
+            ),
+            (
+                35,
+                "Property Resources/Project2/Properties/Environment/Image uses an outdated version of the standard image.",
             ),
         ],
     ),

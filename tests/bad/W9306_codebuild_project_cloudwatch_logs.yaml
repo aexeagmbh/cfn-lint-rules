@@ -9,7 +9,7 @@ Resources:
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/java:openjdk-8
+        Image: aws/codebuild/standard:5.0
       Source:
         Location: codebuild-demo-test/0123ab9a371ebf0187b0fe5614fbb72c
         Type: S3
@@ -23,7 +23,7 @@ Resources:
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/java:openjdk-8
+        Image: aws/codebuild/standard:5.0
       Source:
         Location: codebuild-demo-test/0123ab9a371ebf0187b0fe5614fbb72c
         Type: S3
@@ -40,7 +40,7 @@ Resources:
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/java:openjdk-8
+        Image: aws/codebuild/standard:5.0
       Source:
         Location: codebuild-demo-test/0123ab9a371ebf0187b0fe5614fbb72c
         Type: S3
@@ -63,7 +63,7 @@ Resources:
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/java:openjdk-8
+        Image: aws/codebuild/standard:5.0
       Source:
         Location: codebuild-demo-test/0123ab9a371ebf0187b0fe5614fbb72c
         Type: S3
