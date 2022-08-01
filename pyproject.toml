@@ -4,7 +4,7 @@
 [tool.black]
 # See https://github.com/ambv/black/blob/master/pyproject.toml
 line-length = 88
-target_version = ['py37', 'py38']
+target_version = ['py39', 'py310']
 
 
 [tool.isort]
@@ -34,9 +34,9 @@ target_branch = "winky"
 [[tool.winky.pip_compile]]
 file = "./requirements/base.in"
 hashes = true
-python = "3.8"
+python = "3.9"
 
 [[tool.winky.pip_compile]]
 file = "./requirements/dev.in"
 hashes = true
-python = "3.8"
+python = "3.9"

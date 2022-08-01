@@ -19,7 +19,6 @@ setup(
     },
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3 :: Only",
@@ -30,6 +29,6 @@ setup(
         "cfn_lint_ax",
         "cfn_lint_ax.rules",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.9",
     install_requires=["cfn-lint >= 0.56.1"],
 )
