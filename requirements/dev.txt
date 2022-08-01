@@ -16,18 +16,8 @@ attrs==22.1.0 \
     --hash=sha256:29adc2665447e5191d0e7c568fde78b21f9672d344281d0c6e1ab085429b22b6 \
     --hash=sha256:86efa402f67bf2df34f51a335487cf46b1ec130d02b8d39fd248abfd30da551c
     # via
-    #   -r base.txt
-    #   jschema-to-python
-    #   jsonschema
+    #   -c base.txt
     #   pytest
-    #   sarif-om
-aws-sam-translator==1.48.0 \
-    --hash=sha256:7171037323dfa30f8f73e9bccb9210e4c384a585e087219a9518a5204f0a2c44 \
-    --hash=sha256:be18dfa3dfe7ab291d281667c5f73ac62dbe6bfe86df7d122e4258b906b736f0 \
-    --hash=sha256:ca4f8f9910d7713aeaba59346775bfb3198f6acb47c6704572f9bd3fc0fb5bf0
-    # via
-    #   -r base.txt
-    #   cfn-lint
 backcall==0.2.0 \
     --hash=sha256:5cbdbf27be5e7cfadb448baf0aa95508f91f2bbc6c6437cd9cd06e2a4c215e1e \
     --hash=sha256:fbbce6a29f263178a1f7915c1940bde0ec2b2a967566fe1c65c1dfb7422bd255
@@ -61,19 +51,6 @@ bleach==5.0.1 \
     --hash=sha256:085f7f33c15bd408dd9b17a4ad77c577db66d76203e5984b1bd59baeee948b2a \
     --hash=sha256:0d03255c47eb9bd2f26aa9bb7f2107732e7e8fe195ca2f64709fcf3b0a4a085c
     # via readme-renderer
-boto3==1.24.42 \
-    --hash=sha256:aec404d06690a0ca806592efc6bbe30a9ac88fa2ad73b6d907f7794a8b3b1459 \
-    --hash=sha256:df3d6ef02304bd7c3711090936c092d5db735dda109decac1e236c3ef7fdb7af
-    # via
-    #   -r base.txt
-    #   aws-sam-translator
-botocore==1.27.42 \
-    --hash=sha256:38a180a6666c5a9b069a75ec3cf374ff2a64c3e90c9f24a916858bcdeb04456d \
-    --hash=sha256:f8e6c2f69a9d577fb9c69e4e74f49f4315a48decee0e7dc88b6e470772110884
-    # via
-    #   -r base.txt
-    #   boto3
-    #   s3transfer
 build==0.8.0 \
     --hash=sha256:19b0ed489f92ace6947698c3ca8436cb0556a66e2aa2d34cd70e2a5d27cd0437 \
     --hash=sha256:887a6d471c901b1a6e6574ebaeeebb45e5269a79d095fe9a8f88d6614ed2e5f0
@@ -148,10 +125,6 @@ cffi==1.15.1 \
     --hash=sha256:fa6693661a4c91757f4412306191b6dc88c1703f780c8234035eac011922bc01 \
     --hash=sha256:fcd131dd944808b5bdb38e6f5b53013c5aa4f334c5cad0c72742f6eba4b73db0
     # via cryptography
-cfn-lint==0.61.4 \
-    --hash=sha256:1f4d87bbb1f763598c9b76d3b80f35fd67cf66351fc629d6c56e0e89d8d5356d \
-    --hash=sha256:54e584cb4f17b96ab02a88820c2e9fcd787d5baa5940d50cf12ca44eb4946dc1
-    # via -r base.txt
 charset-normalizer==2.1.0 \
     --hash=sha256:5189b6f22b01957427f35b6a08d9a0bc45b46d3788ef5a92e978433c7a35f8a5 \
     --hash=sha256:575e708016ff3a5e3681541cb9d79312c416835686d054a23accb873b254f413
@@ -258,49 +231,6 @@ jeepney==0.8.0 \
     # via
     #   keyring
     #   secretstorage
-jmespath==1.0.1 \
-    --hash=sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980 \
-    --hash=sha256:90261b206d6defd58fdd5e85f478bf633a2901798906be2ad389150c5c60edbe
-    # via
-    #   -r base.txt
-    #   boto3
-    #   botocore
-jschema-to-python==1.2.3 \
-    --hash=sha256:76ff14fe5d304708ccad1284e4b11f96a658949a31ee7faed9e0995279549b91 \
-    --hash=sha256:8a703ca7604d42d74b2815eecf99a33359a8dccbb80806cce386d5e2dd992b05
-    # via
-    #   -r base.txt
-    #   cfn-lint
-jsonpatch==1.32 \
-    --hash=sha256:26ac385719ac9f54df8a2f0827bb8253aa3ea8ab7b3368457bcdb8c14595a397 \
-    --hash=sha256:b6ddfe6c3db30d81a96aaeceb6baf916094ffa23d7dd5fa2c13e13f8b6e600c2
-    # via
-    #   -r base.txt
-    #   cfn-lint
-jsonpickle==2.2.0 \
-    --hash=sha256:7b272918b0554182e53dc340ddd62d9b7f902fec7e7b05620c04f3ccef479a0e \
-    --hash=sha256:de7f2613818aa4f234138ca11243d6359ff83ae528b2185efdd474f62bcf9ae1
-    # via
-    #   -r base.txt
-    #   jschema-to-python
-jsonpointer==2.3 \
-    --hash=sha256:51801e558539b4e9cd268638c078c6c5746c9ac96bc38152d443400e4f3793e9 \
-    --hash=sha256:97cba51526c829282218feb99dab1b1e6bdf8efd1c43dc9d57be093c0d69c99a
-    # via
-    #   -r base.txt
-    #   jsonpatch
-jsonschema==3.2.0 \
-    --hash=sha256:4e5b3cf8216f577bee9ce139cbe72eca3ea4f292ec60928ff24758ce626cd163 \
-    --hash=sha256:c8a85b28d377cc7737e46e2d9f2b4f44ee3c0e1deac6bf46ddefc7187d30797a
-    # via
-    #   -r base.txt
-    #   aws-sam-translator
-    #   cfn-lint
-junit-xml==1.9 \
-    --hash=sha256:ec5ca1a55aefdd76d28fcc0b135251d156c7106fa979686a4b48d62b761b4732
-    # via
-    #   -r base.txt
-    #   cfn-lint
 keyring==23.7.0 \
     --hash=sha256:782e1cd1132e91bf459fcd243bcf25b326015c1ac0b198e4408f91fa6791062b \
     --hash=sha256:e67fc91a7955785fd2efcbccdd72d7dacf136dbc381d27de305b2b660b3de886
@@ -385,12 +315,6 @@ mypy-extensions==0.4.3 \
     # via
     #   black
     #   mypy
-networkx==2.8.5 \
-    --hash=sha256:15a7b81a360791c458c55a417418ea136c13378cfdc06a2dcdc12bd2f9cf09c1 \
-    --hash=sha256:a762f4b385692d9c3a6f2912d058d76d29a827deaedf9e63ed14d397b8030687
-    # via
-    #   -r base.txt
-    #   cfn-lint
 packaging==21.3 \
     --hash=sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb \
     --hash=sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522
@@ -408,13 +332,6 @@ pathspec==0.9.0 \
     # via
     #   black
     #   yamllint
-pbr==5.9.0 \
-    --hash=sha256:e547125940bcc052856ded43be8e101f63828c2d94239ffbe2b327ba3d5ccf0a \
-    --hash=sha256:e8dca2f4b43560edef58813969f52a56cef023146cbb8931626db80e6c1c4308
-    # via
-    #   -r base.txt
-    #   jschema-to-python
-    #   sarif-om
 pep517==0.13.0 \
     --hash=sha256:4ba4446d80aed5b5eac6509ade100bff3e7943a8489de249654a5ae9b33ee35b \
     --hash=sha256:ae69927c5c172be1add9203726d4b84cf3ebad1edcd5f71fcdc746e66e829f59
@@ -486,31 +403,6 @@ pyparsing==3.0.9 \
     --hash=sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb \
     --hash=sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc
     # via packaging
-pyrsistent==0.18.1 \
-    --hash=sha256:0e3e1fcc45199df76053026a51cc59ab2ea3fc7c094c6627e93b7b44cdae2c8c \
-    --hash=sha256:1b34eedd6812bf4d33814fca1b66005805d3640ce53140ab8bbb1e2651b0d9bc \
-    --hash=sha256:4ed6784ceac462a7d6fcb7e9b663e93b9a6fb373b7f43594f9ff68875788e01e \
-    --hash=sha256:5d45866ececf4a5fff8742c25722da6d4c9e180daa7b405dc0a2a2790d668c26 \
-    --hash=sha256:636ce2dc235046ccd3d8c56a7ad54e99d5c1cd0ef07d9ae847306c91d11b5fec \
-    --hash=sha256:6455fc599df93d1f60e1c5c4fe471499f08d190d57eca040c0ea182301321286 \
-    --hash=sha256:6bc66318fb7ee012071b2792024564973ecc80e9522842eb4e17743604b5e045 \
-    --hash=sha256:7bfe2388663fd18bd8ce7db2c91c7400bf3e1a9e8bd7d63bf7e77d39051b85ec \
-    --hash=sha256:7ec335fc998faa4febe75cc5268a9eac0478b3f681602c1f27befaf2a1abe1d8 \
-    --hash=sha256:914474c9f1d93080338ace89cb2acee74f4f666fb0424896fcfb8d86058bf17c \
-    --hash=sha256:b568f35ad53a7b07ed9b1b2bae09eb15cdd671a5ba5d2c66caee40dbf91c68ca \
-    --hash=sha256:cdfd2c361b8a8e5d9499b9082b501c452ade8bbf42aef97ea04854f4a3f43b22 \
-    --hash=sha256:d1b96547410f76078eaf66d282ddca2e4baae8964364abb4f4dcdde855cd123a \
-    --hash=sha256:d4d61f8b993a7255ba714df3aca52700f8125289f84f704cf80916517c46eb96 \
-    --hash=sha256:d7a096646eab884bf8bed965bad63ea327e0d0c38989fc83c5ea7b8a87037bfc \
-    --hash=sha256:df46c854f490f81210870e509818b729db4488e1f30f2a1ce1698b2295a878d1 \
-    --hash=sha256:e24a828f57e0c337c8d8bb9f6b12f09dfdf0273da25fda9e314f0b684b415a07 \
-    --hash=sha256:e4f3149fd5eb9b285d6bfb54d2e5173f6a116fe19172686797c056672689daf6 \
-    --hash=sha256:e92a52c166426efbe0d1ec1332ee9119b6d32fc1f0bbfd55d5c1088070e7fc1b \
-    --hash=sha256:f87cc2863ef33c709e237d4b5f4502a62a00fab450c9e020892e8e2ede5847f5 \
-    --hash=sha256:fd8da6d0124efa2f67d86fa70c851022f87c98e205f0594e1fae044e7119a5a6
-    # via
-    #   -r base.txt
-    #   jsonschema
 pytest==7.1.2 \
     --hash=sha256:13d0e3ccfc2b6e26be000cb6568c832ba67ba32e719443bfe725814d3c42433c \
     --hash=sha256:a06a0425453864a270bc45e71f783330a7428defb4230fb5e6a731fde06ecd45
@@ -526,12 +418,6 @@ pytest-sugar==0.9.5 \
     --hash=sha256:3da42de32ce4e1e95b448d61c92804433f5d4058c0a765096991c2e93d5a289f \
     --hash=sha256:eea78b6f15b635277d3d90280cd386d8feea1cab0f9be75947a626e8b02b477d
     # via -r dev.in
-python-dateutil==2.8.2 \
-    --hash=sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86 \
-    --hash=sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9
-    # via
-    #   -r base.txt
-    #   botocore
 pyyaml==6.0 \
     --hash=sha256:0283c35a6a9fbf047493e3a0ce8d79ef5030852c51e9d911a27badfde0605293 \
     --hash=sha256:055d937d65826939cb044fc8c9b08889e8c743fdc6a32b33e2390f66013e449b \
@@ -567,8 +453,7 @@ pyyaml==6.0 \
     --hash=sha256:e61ceaab6f49fb8bdfaa0f92c4b57bcfbea54c09277b1b4f7ac376bfb7a7c174 \
     --hash=sha256:f84fbc98b019fef2ee9a1cb3ce93e3187a6df0b2538a651bfb890254ba9f90b5
     # via
-    #   -r base.txt
-    #   cfn-lint
+    #   -c base.txt
     #   yamllint
 readme-renderer==35.0 \
     --hash=sha256:73b84905d091c31f36e50b4ae05ae2acead661f6a09a9abb4df7d2ddcdb6a698 \
@@ -592,18 +477,6 @@ rich==12.5.1 \
     --hash=sha256:2eb4e6894cde1e017976d2975ac210ef515d7548bc595ba20e195fb9628acdeb \
     --hash=sha256:63a5c5ce3673d3d5fbbf23cd87e11ab84b6b451436f1b7f19ec54b6bc36ed7ca
     # via twine
-s3transfer==0.6.0 \
-    --hash=sha256:06176b74f3a15f61f1b4f25a1fc29a4429040b7647133a463da8fa5bd28d5ecd \
-    --hash=sha256:2ed07d3866f523cc561bf4a00fc5535827981b117dd7876f036b0c1aca42c947
-    # via
-    #   -r base.txt
-    #   boto3
-sarif-om==1.0.4 \
-    --hash=sha256:539ef47a662329b1c8502388ad92457425e95dc0aaaf995fe46f4984c4771911 \
-    --hash=sha256:cd5f416b3083e00d402a92e449a7ff67af46f11241073eea0461802a3b5aef98
-    # via
-    #   -r base.txt
-    #   cfn-lint
 secretstorage==3.3.2 \
     --hash=sha256:0a8eb9645b320881c222e827c26f4cfcf55363e8b374a021981ef886657a912f \
     --hash=sha256:755dc845b6ad76dcbcbc07ea3da75ae54bb1ea529eb72d15f83d26499a5df319
@@ -612,12 +485,9 @@ six==1.16.0 \
     --hash=sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926 \
     --hash=sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254
     # via
-    #   -r base.txt
+    #   -c base.txt
     #   asttokens
     #   bleach
-    #   jsonschema
-    #   junit-xml
-    #   python-dateutil
 stack-data==0.3.0 \
     --hash=sha256:77bec1402dcd0987e9022326473fdbcc767304892a533ed8c29888dacb7dddbc \
     --hash=sha256:aa1d52d14d09c7a9a12bb740e6bdfffe0f5e8f4f9218d85e7c73a8c37f7ae38d
@@ -666,8 +536,7 @@ urllib3==1.26.11 \
     --hash=sha256:c33ccba33c819596124764c23a97d25f32b28433ba0dedeb77d873a38722c9bc \
     --hash=sha256:ea6e8fb210b19d950fab93b60c9009226c63a28808bc8386e05301e25883ac0a
     # via
-    #   -r base.txt
-    #   botocore
+    #   -c base.txt
     #   requests
     #   twine
 wcwidth==0.2.5 \

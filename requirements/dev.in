@@ -1,4 +1,4 @@
--r base.txt
+-c base.txt
 black>=22.6.0
 build>=0.8.0
 flake8>=5.0.1
