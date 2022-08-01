@@ -31,9 +31,14 @@ jobs:
         run: |
           python -m black --check --verbose .
         if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
-      - name: Run pylama
+      - name: Run flake8
         run: |
-          python -m pylama
+          python -m flake8 .
+        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+      - name: Run pylint
+        run: |
+          python -m pytest --pylint -m pylint cfn_lint_ax \
+              --pylint-rcfile=$(pwd)/pyproject.toml --pylint-jobs=0
         if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
       - name: Run isort
         run: |

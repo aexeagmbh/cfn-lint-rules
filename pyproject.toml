@@ -20,6 +20,14 @@ line_length = 88
 multi_line_output = 3
 
 
+[tool.pylint."messages control"]
+disable = [
+    "attribute-defined-outside-init",
+    "line-too-long",
+    "missing-docstring",
+]
+
+
 [tool.winky]
 target_branch = "winky"
 

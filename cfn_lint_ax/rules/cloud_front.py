@@ -165,9 +165,8 @@ class CloudfrontResponseHeaderConfigLongHstsMaxAge(CloudFormationLintRule):  # t
                 "StrictTransportSecurity",
                 "Override",
             ]
-            if not strict_transpost_security.get("Override") == True:
+            if strict_transpost_security.get("Override") is not True:
                 message = f"Property {'/'.join(path)} should be true."
                 matches.append(RuleMatch(path, message))
-            strict_transpost_security.get("Override") == True
 
         return matches

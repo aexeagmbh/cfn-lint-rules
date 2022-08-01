@@ -21,7 +21,7 @@ class S3BucketEncryption(CloudFormationLintRule):  # type: ignore[misc]
         resources = cfn.get_resources(["AWS::S3::Bucket"])
         for resource_name, resource in resources.items():
             properties = resource.get("Properties", {})
-            if not "BucketEncryption" in properties:
+            if "BucketEncryption" not in properties:
                 path = ["Resources", resource_name, "Properties", "BucketEncryption"]
                 message = f"Property {'/'.join(path)} is missing"
                 matches.append(RuleMatch(path, message))
