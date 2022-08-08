@@ -177,9 +177,9 @@ executing==0.9.1 \
     --hash=sha256:4ce4d6082d99361c0231fc31ac1a0f56979363cc6819de0b1410784f99e49105 \
     --hash=sha256:ea278e2cf90cbbacd24f1080dd1f0ac25b71b2e21f50ab439b7ba45dd3195587
     # via stack-data
-flake8==5.0.1 \
-    --hash=sha256:44e3ecd719bba1cb2ae65d1b54212cc9df4f5db15ac271f8856e5e6c2eebefed \
-    --hash=sha256:9c51d3d1426379fd444d3b79eabbeb887849368bd053039066439523d8486961
+flake8==5.0.4 \
+    --hash=sha256:6fbe320aad8d6b95cec8b8e47bc933004678dc63095be98528b7bdd2a9f510db \
+    --hash=sha256:7a1cf6b73744f5806ab95e526f6f0d8c01c66d7bbe349562d22dfca20610b248
     # via
     #   -r dev.in
     #   flake8-annotations-complexity
@@ -231,9 +231,9 @@ jeepney==0.8.0 \
     # via
     #   keyring
     #   secretstorage
-keyring==23.7.0 \
-    --hash=sha256:782e1cd1132e91bf459fcd243bcf25b326015c1ac0b198e4408f91fa6791062b \
-    --hash=sha256:e67fc91a7955785fd2efcbccdd72d7dacf136dbc381d27de305b2b660b3de886
+keyring==23.8.1 \
+    --hash=sha256:73dec1c13b15a69979fc9952e01c5c69e38c8ba340cc664d0461a947fc90b93c \
+    --hash=sha256:9715c8461f6d9e61066a5883b1fc8aec68f950e81db4ce9f8635cbaa4b9625bb
     # via twine
 lazy-object-proxy==1.7.1 \
     --hash=sha256:043651b6cb706eee4f91854da4a089816a6606c1428fd391573ef8cb642ae4f7 \
@@ -374,9 +374,9 @@ py==1.11.0 \
     --hash=sha256:51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719 \
     --hash=sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378
     # via pytest
-pycodestyle==2.9.0 \
-    --hash=sha256:289cdc0969d589d90752582bef6dff57c5fbc6949ee8b013ad6d6449a8ae9437 \
-    --hash=sha256:beaba44501f89d785be791c9462553f06958a221d166c64e1f107320f839acc2
+pycodestyle==2.9.1 \
+    --hash=sha256:2c9607871d58c76354b697b42f5d57e1ada7d261c261efac224b664affdc5785 \
+    --hash=sha256:d1735fc58b418fd7c5f658d28d943854f8a849b01a5d0a1e6f3f3fdd0166804b
     # via flake8
 pycparser==2.21 \
     --hash=sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9 \
@@ -455,9 +455,9 @@ pyyaml==6.0 \
     # via
     #   -c base.txt
     #   yamllint
-readme-renderer==35.0 \
-    --hash=sha256:73b84905d091c31f36e50b4ae05ae2acead661f6a09a9abb4df7d2ddcdb6a698 \
-    --hash=sha256:a727999acfc222fc21d82a12ed48c957c4989785e5865807c65a487d21677497
+readme-renderer==36.0 \
+    --hash=sha256:2c37e472ca96755caba6cc58bcbf673a5574bc033385a2ac91d85dfef2799876 \
+    --hash=sha256:f71aeef9a588fcbed1f4cc001ba611370e94a0cd27c75b1140537618ec78f0a2
     # via twine
 requests==2.28.1 \
     --hash=sha256:7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983 \
@@ -509,9 +509,9 @@ tomli==2.0.1 \
     #   pep517
     #   pylint
     #   pytest
-tomlkit==0.11.1 \
-    --hash=sha256:1c5bebdf19d5051e2e1de6cf70adfc5948d47221f097fcff7a3ffc91e953eaf5 \
-    --hash=sha256:61901f81ff4017951119cd0d1ed9b7af31c821d6845c8c477587bbdcd5e5854e
+tomlkit==0.11.2 \
+    --hash=sha256:69e0675671a2eed1c08a53f342c955c4ead5d373a10f756219bf39f3d4f0018a \
+    --hash=sha256:d1b49c3e460f5910b22d799b13513504acb4f5fcaee01660ee66f07bd45a271c
     # via pylint
 traitlets==5.3.0 \
     --hash=sha256:0bb9f1f9f017aa8ec187d8b1b2a7a6626a2a1d877116baba52a129bfa124f8e2 \
