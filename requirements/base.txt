@@ -11,24 +11,24 @@ attrs==22.1.0 \
     #   jschema-to-python
     #   jsonschema
     #   sarif-om
-aws-sam-translator==1.48.0 \
-    --hash=sha256:7171037323dfa30f8f73e9bccb9210e4c384a585e087219a9518a5204f0a2c44 \
-    --hash=sha256:be18dfa3dfe7ab291d281667c5f73ac62dbe6bfe86df7d122e4258b906b736f0 \
-    --hash=sha256:ca4f8f9910d7713aeaba59346775bfb3198f6acb47c6704572f9bd3fc0fb5bf0
+aws-sam-translator==1.50.0 \
+    --hash=sha256:09668d12b5d330412421d30d4a8e826da6fe06f5a451f771c3b37f48f1b25889 \
+    --hash=sha256:85bea2739e1b4a61b3e4add8a12f727d7a8e459e3da195dfd0cd2e756be054ec \
+    --hash=sha256:d375e9333c0262ed74b6d7ae90938060713ab17341f4e06c5cdbfd755902d9b4
     # via cfn-lint
-boto3==1.24.42 \
-    --hash=sha256:aec404d06690a0ca806592efc6bbe30a9ac88fa2ad73b6d907f7794a8b3b1459 \
-    --hash=sha256:df3d6ef02304bd7c3711090936c092d5db735dda109decac1e236c3ef7fdb7af
+boto3==1.24.56 \
+    --hash=sha256:09fb94008bd1f2566ef79ec7d8dd7a233b5da67f3b2536e30432eb8e88022d4d \
+    --hash=sha256:9fab8acec76008797be4671d514f39f1163ba044c0a0bce8d5afe8b52cbd5550
     # via aws-sam-translator
-botocore==1.27.42 \
-    --hash=sha256:38a180a6666c5a9b069a75ec3cf374ff2a64c3e90c9f24a916858bcdeb04456d \
-    --hash=sha256:f8e6c2f69a9d577fb9c69e4e74f49f4315a48decee0e7dc88b6e470772110884
+botocore==1.27.56 \
+    --hash=sha256:81101abab2013992a84019739d85a6fa8ec6f1f42fb09ad07e0bf4c8f0efce60 \
+    --hash=sha256:81df81b1a1c5608b3a7aca6a837acb27552c3ecc92584a58b171c60754b1d4eb
     # via
     #   boto3
     #   s3transfer
-cfn-lint==0.61.4 \
-    --hash=sha256:1f4d87bbb1f763598c9b76d3b80f35fd67cf66351fc629d6c56e0e89d8d5356d \
-    --hash=sha256:54e584cb4f17b96ab02a88820c2e9fcd787d5baa5940d50cf12ca44eb4946dc1
+cfn-lint==0.62.0 \
+    --hash=sha256:68c66bf65ca984acd8fa6df2879ec447227b85aa8f28526fde4aabcf171a2dca \
+    --hash=sha256:d95426e8423435c2a6da359a7913d946d3880b38351861b62561754bf0b59268
     # via -r base.in
 jmespath==1.0.1 \
     --hash=sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980 \
@@ -65,9 +65,9 @@ networkx==2.8.5 \
     --hash=sha256:15a7b81a360791c458c55a417418ea136c13378cfdc06a2dcdc12bd2f9cf09c1 \
     --hash=sha256:a762f4b385692d9c3a6f2912d058d76d29a827deaedf9e63ed14d397b8030687
     # via cfn-lint
-pbr==5.9.0 \
-    --hash=sha256:e547125940bcc052856ded43be8e101f63828c2d94239ffbe2b327ba3d5ccf0a \
-    --hash=sha256:e8dca2f4b43560edef58813969f52a56cef023146cbb8931626db80e6c1c4308
+pbr==5.10.0 \
+    --hash=sha256:cfcc4ff8e698256fc17ea3ff796478b050852585aa5bae79ecd05b2ab7b39b9a \
+    --hash=sha256:da3e18aac0a3c003e9eea1a81bd23e5a3a75d745670dcf736317b7d966887fdf
     # via
     #   jschema-to-python
     #   sarif-om
