@@ -3,7 +3,9 @@ name: Build and upload Python Package
 
 "on":
   release:
-    types: [created]
+    types:
+      - created
+      - published
 
 jobs:
   deploy:
