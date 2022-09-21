@@ -12,6 +12,7 @@ from cfn_lint_ax.rules import (
     CloudfrontResponseHeaderConfigLongHstsMaxAge,
     CodeBuildProjectCloudWatchLogs,
     CodeBuildProjectImage,
+    EcrRepositoryAutocleanupTag,
     EcsServiceDeploymentConfiguration,
     EcsServiceFargatePlatformVersionNotOutdated,
     IntrinsicFunctionSubUnresolvedObject,
@@ -288,6 +289,46 @@ test_parameters = (
             (
                 31,
                 "Sub contains an unresolved object",
+            ),
+        ],
+    ),
+    (
+        "I9302_ecr_autocleanup_tag_missing.yaml",
+        EcrRepositoryAutocleanupTag,
+        [
+            (
+                3,
+                "Resources/MyRepository/Properties/Tags is missing the 'autocleanup' tag.",
+            ),
+            (
+                9,
+                "Resources/MyRepository2/Properties/Tags is missing the 'autocleanup' tag.",
+            ),
+        ],
+    ),
+    (
+        "I9302_ecr_autocleanup_tag_bad_value.yaml",
+        EcrRepositoryAutocleanupTag,
+        [
+            (
+                8,
+                "Resources/MyRepository/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+            ),
+            (
+                15,
+                "Resources/MyRepository2/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+            ),
+            (
+                22,
+                "Resources/MyRepository3/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+            ),
+            (
+                29,
+                "Resources/MyRepository4/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+            ),
+            (
+                36,
+                "Resources/MyRepository5/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
             ),
         ],
     ),

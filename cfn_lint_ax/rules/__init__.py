@@ -6,6 +6,7 @@ from .cloud_front import (
     CloudfrontResponseHeaderConfigLongHstsMaxAge,
 )
 from .code_build import CodeBuildProjectCloudWatchLogs, CodeBuildProjectImage
+from .ecr import EcrRepositoryAutocleanupTag
 from .ecs import (
     EcsServiceDeploymentConfiguration,
     EcsServiceFargatePlatformVersionNotOutdated,
@@ -22,6 +23,7 @@ __all__ = [
     "CloudfrontResponseHeaderConfigLongHstsMaxAge",
     "CodeBuildProjectCloudWatchLogs",
     "CodeBuildProjectImage",
+    "EcrRepositoryAutocleanupTag",
     "EcsServiceDeploymentConfiguration",
     "EcsServiceFargatePlatformVersionNotOutdated",
     "IntrinsicFunctionSubUnresolvedObject",

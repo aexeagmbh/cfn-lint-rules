@@ -1,0 +1,11 @@
+---
+Resources:
+  MyRepository:
+    Type: AWS::ECR::Repository
+
+  MyRepository2:
+    Type: AWS::ECR::Repository
+    Properties:
+      Tags:
+        - Key: Foo
+          Value: bar

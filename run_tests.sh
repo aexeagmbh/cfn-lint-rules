@@ -5,7 +5,7 @@ set -ex
 
 black .
 isort .
-pylama
+python -m flake8 .
 mypy .
 yamllint --strict tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .cfnlintrc .github/workflows/*.yml
 pytest

@@ -1,0 +1,36 @@
+---
+Resources:
+  MyRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      Tags:
+        - Key: autocleanup
+          Value: foo
+
+  MyRepository2:
+    Type: AWS::ECR::Repository
+    Properties:
+      Tags:
+        - Key: autocleanup
+          Value: true
+
+  MyRepository3:
+    Type: AWS::ECR::Repository
+    Properties:
+      Tags:
+        - Key: autocleanup
+          Value: false
+
+  MyRepository4:
+    Type: AWS::ECR::Repository
+    Properties:
+      Tags:
+        - Key: autocleanup
+          Value: "True"
+
+  MyRepository5:
+    Type: AWS::ECR::Repository
+    Properties:
+      Tags:
+        - Key: autocleanup
+          Value: "False"
