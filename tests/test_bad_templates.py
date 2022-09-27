@@ -312,23 +312,23 @@ test_parameters = (
         [
             (
                 8,
-                "Resources/MyRepository/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+                "Resources/MyRepository/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
             (
                 15,
-                "Resources/MyRepository2/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+                "Resources/MyRepository2/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
             (
                 22,
-                "Resources/MyRepository3/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+                "Resources/MyRepository3/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
             (
                 29,
-                "Resources/MyRepository4/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+                "Resources/MyRepository4/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
             (
                 36,
-                "Resources/MyRepository5/Properties/Tags/0/Value vlaue of the autocleanup tag mus be either 'true' or 'false'.",
+                "Resources/MyRepository5/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
         ],
     ),

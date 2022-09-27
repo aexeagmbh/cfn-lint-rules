@@ -30,7 +30,7 @@ class EcrRepositoryAutocleanupTag(CloudFormationLintRule):  # type: ignore[misc]
                             ctr,
                             "Value",
                         ]
-                        message = f"{'/'.join(str(p) for p in path)} vlaue of the autocleanup tag mus be either 'true' or 'false'."
+                        message = f"{'/'.join(str(p) for p in path)} value of the autocleanup tag mus be either 'true' or 'false'."
                         matches.append(RuleMatch(path, message))
 
             if not autocleanup_tag_present:
