@@ -42,7 +42,7 @@ class CodeBuildProjectCloudWatchLogs(CloudFormationLintRule):  # type: ignore[mi
             group_name = cloud_watch_logs.get("GroupName")
             if group_name and (
                 not isinstance(group_name, dict)
-                or not group_name.get("Ref") in log_groups.keys()
+                or group_name.get("Ref") not in log_groups.keys()
             ):
                 message = f"Property {'/'.join(path)} should be a Ref to a LogGroup."
                 matches.append(RuleMatch(path, message))

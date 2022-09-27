@@ -21,7 +21,7 @@ class EcrRepositoryAutocleanupTag(CloudFormationLintRule):  # type: ignore[misc]
             for ctr, tag in enumerate(tags):
                 if tag["Key"] == "autocleanup":
                     autocleanup_tag_present = True
-                    if not tag["Value"] in {"true", "false"}:
+                    if tag["Value"] not in {"true", "false"}:
                         path = [
                             "Resources",
                             resource_name,
