@@ -11,18 +11,18 @@ attrs==22.1.0 \
     #   jschema-to-python
     #   jsonschema
     #   sarif-om
-aws-sam-translator==1.51.0 \
-    --hash=sha256:4c39d78dd92a8d4b46b5b02dc74e6f0ef8713109ebc8910aec234c3b18649ffb \
-    --hash=sha256:6f990c6a8f0e0f660aa49b073af9fc82bef2935c1b8c4552d71cff87eb2f8233 \
-    --hash=sha256:f0f09f95fcc0c5e699603b9b1daa86307b94920b0823c423ed2ff1eb1cac497f
+aws-sam-translator==1.52.0 \
+    --hash=sha256:1b5f156695a6772170aefe3f5fe91882c7f2e1cf1ccaa9bb32502c5d96fcc3ea \
+    --hash=sha256:4a0331e8de2a18cae9ced0b4d6f2da5b575f17b2cc5f6e1ba0c86e3878875ef1 \
+    --hash=sha256:bde0c471b1dcefb13246a20977c81bc91786c30277cdd733b8846acf97759a9d
     # via cfn-lint
-boto3==1.24.85 \
-    --hash=sha256:2c9004c1f0a47807c73247abe8cb2b8a7054c34b9cf6e90f448d51560de20ca1 \
-    --hash=sha256:714b06755bd76b2001f7099a8e406604c0a0e76a8ff0425480bf1555bcbecee1
+boto3==1.24.89 \
+    --hash=sha256:346f8f0d101a4261dac146a959df18d024feda6431e1d9d84f94efd24d086cae \
+    --hash=sha256:d0d8ffcdc10821c4562bc7f935cdd840033bbc342ac0e14b6bdd348b3adf4c04
     # via aws-sam-translator
-botocore==1.27.85 \
-    --hash=sha256:06b3ebacbe9a532074db4ad68040235e3c7bd52741e3ff6710cef8ab144ecdfe \
-    --hash=sha256:2b4c86178b5a5a2baa0a065aaf9ef9d33a7ac67bf3f30e39005de151b0408cac
+botocore==1.27.89 \
+    --hash=sha256:238f1dfdb8d8d017c2aea082609a3764f3161d32745900f41bcdcf290d95a048 \
+    --hash=sha256:621f5413be8f97712b7e36c1b075a8791d1d1b9971a7ee060cdcdf5e2debf6c1
     # via
     #   boto3
     #   s3transfer
