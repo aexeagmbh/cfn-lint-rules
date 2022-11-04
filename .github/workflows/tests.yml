@@ -58,7 +58,7 @@ jobs:
         if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
       - name: Build package
         run: |
-          python -m build --sdist --wheel .
+          python -m build .
         if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
         id: build-package
       - name: Check long description
