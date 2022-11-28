@@ -1,7 +1,7 @@
 -c base.txt
 black>=22.10.0
 build>=0.9.0
-flake8>=5.0.4
+flake8>=6.0.0
 flake8-annotations-complexity>=0.0.7
 flake8-builtins>=2.0.1
 flake8-comprehensions>=3.10.1
