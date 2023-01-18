@@ -33,3 +33,7 @@ Resources:
     Type: AWS::SQS::Queue
     DeletionPolicy: Retain
     UpdateReplacePolicy: Retain
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      KmsMasterKeyId: alias/aws/sqs
+      MessageRetentionPeriod: 345600

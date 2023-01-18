@@ -1,0 +1,41 @@
+---
+Resources:
+  QueueWithSssSqsEncryption:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+
+  QueueWithAwsManagedKmsKeyEncryption:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      KmsMasterKeyId: alias/aws/sqs
+      MessageRetentionPeriod: 345600
+
+  MyKey:
+    Type: AWS::KMS::Key
+    Properties:
+      KeyPolicy:
+        Version: 2012-10-17
+        Statement:
+          - Sid: Enable IAM User Permissions
+            Effect: Allow
+            Principal:
+              AWS: !Sub '${AWS::Partition}:aws:iam::${AWS::AccountId}:root'
+            Action: 'kms:*'
+            Resource: '*'
+
+  QueueWithCustomKmsKeyEncryption:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      KmsMasterKeyId: !Ref MyKey
+      MessageRetentionPeriod: 345600

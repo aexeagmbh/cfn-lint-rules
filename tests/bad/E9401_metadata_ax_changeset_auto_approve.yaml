@@ -38,3 +38,7 @@ Resources:
           - AWS::SQS::Queue
           - 34
         BadKey: true
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      KmsMasterKeyId: alias/aws/sqs
+      MessageRetentionPeriod: 345600

@@ -52,6 +52,8 @@ User Rules (E9XXX)
 * W9307 CloudfrontDistributionResponseHeadersPolicy
 * W9308 CloudfrontResponseHeaderConfigLongHstsMaxAge
 * W9309 EcsServiceDeploymentConfiguration
+* W9310 CodeBuildProjectImage
+* W9311 SqsQueueEncryption
 
 ### Metadata (E94XX)
 * E9401 MetadataAxChangesetAutoApprove

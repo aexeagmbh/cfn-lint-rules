@@ -1,0 +1,6 @@
+---
+Resources:
+  QueueWithOutEncryption:
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Type: AWS::SQS::Queue

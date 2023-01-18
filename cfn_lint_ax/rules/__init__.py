@@ -14,6 +14,7 @@ from .ecs import (
 from .intrinsic_function import IntrinsicFunctionSubUnresolvedObject
 from .metadata import MetadataAxChangesetAutoApprove
 from .s3 import S3BucketEncryption, S3BucketPublicAccess
+from .sqs import SqsQueueEncryption
 
 __all__ = [
     "CertificateManagerCertificateNameTag",
@@ -30,4 +31,5 @@ __all__ = [
     "MetadataAxChangesetAutoApprove",
     "S3BucketEncryption",
     "S3BucketPublicAccess",
+    "SqsQueueEncryption",
 ]

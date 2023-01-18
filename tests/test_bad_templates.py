@@ -19,6 +19,7 @@ from cfn_lint_ax.rules import (
     MetadataAxChangesetAutoApprove,
     S3BucketEncryption,
     S3BucketPublicAccess,
+    SqsQueueEncryption,
 )
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, get_cnflint_errors
 
@@ -329,6 +330,16 @@ test_parameters = (
             (
                 36,
                 "Resources/MyRepository5/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
+            ),
+        ],
+    ),
+    (
+        "W9311_sqs_queue_encryption.yaml",
+        SqsQueueEncryption,
+        [
+            (
+                3,
+                "Resource Resources/QueueWithOutEncryption/Properties Queue encryption must be enabled by either defining SqsManagedSseEnabled or KmsMasterKeyId.",
             ),
         ],
     ),
