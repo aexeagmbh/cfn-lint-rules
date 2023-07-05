@@ -20,6 +20,8 @@ Resources:
 
   MyKey:
     Type: AWS::KMS::Key
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
     Properties:
       KeyPolicy:
         Version: 2012-10-17
