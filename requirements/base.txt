@@ -15,19 +15,19 @@ aws-sam-translator==1.74.0 \
     --hash=sha256:6975ddf0798f45952554d6ea2d5e95de8f321ecb7d3299bb127073d4ffb53c90 \
     --hash=sha256:74b386ed3780786a8b08d122c77c462f1872db4049617b63c497953b51008bf0
     # via cfn-lint
-boto3==1.28.44 \
-    --hash=sha256:c53c92dfe22489ba31e918c2e7b59ff43e2e778bd3d3559e62351a739382bb5c \
-    --hash=sha256:eea3b07e0f28c9f92bccab972af24a3b0dd951c69d93da75227b8ecd3e18f6c4
+boto3==1.28.49 \
+    --hash=sha256:519639859a3c829ccf7073a58b3716cb26cb5906e306fe63eb4beab68bf9bfab \
+    --hash=sha256:c9fad1b01a1d7e7bd51150b3175b4c32b79d699ce94708082611f59fde2e097a
     # via aws-sam-translator
-botocore==1.31.44 \
-    --hash=sha256:83d61c1ca781e6ede19fcc4d5dd73004eee3825a2b220f0d7727e32069209d98 \
-    --hash=sha256:84f90919fecb4a4f417fd10145c8a87ff2c4b14d6381cd34d9babf02110b3315
+botocore==1.31.49 \
+    --hash=sha256:7d64cb45154e4f34f3a45f551e118caad7379ae831565639e0afe5b2af126c61 \
+    --hash=sha256:95e9716f27f67d4207f260ab0ea157603ca544d3b82c5f21728b1c732bec1817
     # via
     #   boto3
     #   s3transfer
-cfn-lint==0.79.9 \
-    --hash=sha256:e151194ca5b4994d68593f4b0fd3cda3bb28edea2023528ca34ecf82b914eec1 \
-    --hash=sha256:fb8a5fc674ce39469a66d37de19130f4b31fbe4685a19b65ec51c8c8f35e8990
+cfn-lint==0.79.11 \
+    --hash=sha256:aef38604fce280aacc1bb02f673ebab101503a7660a0d18e08e1df58f3bca885 \
+    --hash=sha256:f97f7a6ba9ed3b4715ea4064b437f522235be087a6661d813dbd089757c3a714
     # via -r base.in
 jmespath==1.0.1 \
     --hash=sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980 \
@@ -293,9 +293,9 @@ sympy==1.12 \
     --hash=sha256:c3588cd4295d0c0f603d0f2ae780587e64e2efeedb3521e46b9bb1d08d184fa5 \
     --hash=sha256:ebf595c8dac3e0fdc4152c51878b498396ec7f30e7a914d6071e674d49420fb8
     # via cfn-lint
-typing-extensions==4.7.1 \
-    --hash=sha256:440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36 \
-    --hash=sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2
+typing-extensions==4.8.0 \
+    --hash=sha256:8f92fc8806f9a6b641eaa5318da32b44d401efaac0f6678c9bc448ba3605faa0 \
+    --hash=sha256:df8e4339e9cb77357558cbdbceca33c303714cf861d1eef15e1070055ae8b7ef
     # via
     #   aws-sam-translator
     #   pydantic
