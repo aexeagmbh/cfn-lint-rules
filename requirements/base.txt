@@ -16,23 +16,23 @@ attrs==23.1.0 \
     #   jsonschema
     #   referencing
     #   sarif-om
-aws-sam-translator==1.78.0 \
-    --hash=sha256:9c4ce6682db770ecd3f7a9dffe228d47e67dc834656f713efb492c3f1b80d9b5 \
-    --hash=sha256:a3c405a9c8716e88515479ba1365cd405390abea3058ec51ddaff6acd9f564bd
+aws-sam-translator==1.79.0 \
+    --hash=sha256:6f0c6bbcebcc98c4f98dc238352a06b0befe7fb72535cca75712fffff4873875 \
+    --hash=sha256:990f3043d00b6fd801b38ad780ecd058c315b7581b2e43fc013c9b6253f876e8
     # via cfn-lint
-boto3==1.28.68 \
-    --hash=sha256:0da96244df4771a8ee70b742c42759a440fdb9c8b7850584db7c5daf10e824e1 \
-    --hash=sha256:cbc76ed54278be8cdc44ce6ee1980296f764fdff72c6bbe668169c07d4ca08f0
+boto3==1.28.73 \
+    --hash=sha256:a61cf96f7e196b1450afdf4856b7ea0e58080752e687b0011157be96934489be \
+    --hash=sha256:bbe377a288b6b12b526fae3b3d743318c6868626cf67e1e97f104345a5194b1e
     # via aws-sam-translator
-botocore==1.31.68 \
-    --hash=sha256:0813f02d00e46051364d9b5d5e697a90e988b336b87e949888c1444a59b8ba59 \
-    --hash=sha256:7b7065c502f5faa6cc2aa4b42b5fa34e5c0cd171e2952d6a9aeb26bfd44a54c3
+botocore==1.31.73 \
+    --hash=sha256:5334c22d5a3f4643931896137c57b2496fef005b039d87d8740e7a28eb31519d \
+    --hash=sha256:6e9caaa7205e0c0505f4868a4053e96eaf3f4b6bce0368a46970a8efeeacb492
     # via
     #   boto3
     #   s3transfer
-cfn-lint==0.82.2 \
-    --hash=sha256:23177bd883d342c21f90030d27358c58e8fc5a05428cb2eb4d2287bc105d15e9 \
-    --hash=sha256:da15a401ecf930fbba3abc7d143c98b68383c99981c730177908a24c240eb143
+cfn-lint==0.83.0 \
+    --hash=sha256:212251e17322c630506ff02117ff53586037bec3a7161f7cb081c7afde9fd2ca \
+    --hash=sha256:e2f8d763d1cec9f9cbed58b0461b04c8c294199844d65a35e42ed3400314f181
     # via -r base.in
 jmespath==1.0.1 \
     --hash=sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980 \
@@ -71,9 +71,9 @@ mpmath==1.3.0 \
     --hash=sha256:7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f \
     --hash=sha256:a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c
     # via sympy
-networkx==3.2 \
-    --hash=sha256:8b25f564bd28f94ac821c58b04ae1a3109e73b001a7d476e4bb0d00d63706bf8 \
-    --hash=sha256:bda29edf392d9bfa5602034c767d28549214ec45f620081f0b74dc036a1fbbc1
+networkx==3.2.1 \
+    --hash=sha256:9f1bb5cf3409bf324e0a722c20bdb4c20ee39bf1c30ce8ae499c8502b0b5e0c6 \
+    --hash=sha256:f18c69adc97877c42332c170849c96cefa91881c99a7cb3e95b7c659ebdc1ec2
     # via cfn-lint
 pbr==5.11.1 \
     --hash=sha256:567f09558bae2b3ab53cb3c1e2e33e726ff3338e7bae3db5dc954b3a44eef12b \
