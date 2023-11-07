@@ -59,7 +59,11 @@ class CodeBuildProjectImage(CloudFormationLintRule):  # type: ignore[misc]
     # source_url = ""
     tags = ["codebuild"]
 
-    standard_image_min_version = 5
+    standard_image_min_version = {
+        "aws/codebuild/standard": 5,
+        "aws/codebuild/amazonlinux2-x86_64-standard": 4,
+        "aws/codebuild/amazonlinux2-aarch64-standard": 2,
+    }
 
     def match(self, cfn: Template) -> List[RuleMatch]:
         matches = []
@@ -86,8 +90,8 @@ class CodeBuildProjectImage(CloudFormationLintRule):  # type: ignore[misc]
                 matches.append(RuleMatch(path, message))
                 continue
             if ":" in image:
-                _, image_version = image.split(":", maxsplit=1)
-                if Decimal(image_version) < self.standard_image_min_version:
+                image_name, image_version = image.split(":", maxsplit=1)
+                if Decimal(image_version) < self.standard_image_min_version[image_name]:
                     message = (
                         f"Property {'/'.join(path)} uses an outdated version"
                         " of the standard image."
