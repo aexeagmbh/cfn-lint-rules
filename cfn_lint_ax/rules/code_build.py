@@ -75,7 +75,11 @@ class CodeBuildProjectImage(CloudFormationLintRule):  # type: ignore[misc]
             image = environment.get("Image") or ""
             if not image.startswith("aws/codebuild/"):
                 continue
-            if not image.startswith("aws/codebuild/standard:"):
+            if not (
+                image.startswith("aws/codebuild/standard:")
+                or image.startswith("aws/codebuild/amazonlinux2-x86_64-standard:")
+                or image.startswith("aws/codebuild/amazonlinux2-aarch64-standard:")
+            ):
                 message = (
                     f"Property {'/'.join(path)} uses an AWS image other than standard."
                 )
