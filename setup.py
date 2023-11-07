@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="cfn_lint_ax",
-    version="0.0.9",
+    version="0.0.10",
     author="AX Semantics",
     author_email="infrastructure@ax-semantics.com",
     description="Rules for cfn lint.",
