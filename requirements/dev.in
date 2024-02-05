@@ -11,6 +11,6 @@ mypy>=1.8.0
 pylint>=3.0.3
 pytest>=8.0.0
 pytest-pylint>=0.21.0
-pytest-sugar>=0.9.7
+pytest-sugar>=1.0.0
 twine>=4.0.2
 yamllint>=1.33.0
