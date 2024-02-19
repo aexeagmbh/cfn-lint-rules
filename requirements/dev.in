@@ -1,5 +1,5 @@
 -c base.txt
-black>=24.1.1
+black>=24.2.0
 build>=1.0.3
 flake8>=7.0.0
 flake8-annotations-complexity>=0.0.8
@@ -9,8 +9,8 @@ ipython>=8.18.1
 isort>=5.13.2
 mypy>=1.8.0
 pylint>=3.0.3
-pytest>=8.0.0
+pytest>=8.0.1
 pytest-pylint>=0.21.0
 pytest-sugar>=1.0.0
 twine>=5.0.0
-yamllint>=1.34.0
+yamllint>=1.35.1
