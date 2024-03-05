@@ -40,8 +40,7 @@ jobs:
         if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
       - name: Run pylint
         run: |
-          python -m pytest --pylint -m pylint cfn_lint_ax \
-              --pylint-rcfile=$(pwd)/pyproject.toml --pylint-jobs=0
+          python -m pylint --recursive=y --reports=y --verbose ./
         if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
       - name: Run isort
         run: |
