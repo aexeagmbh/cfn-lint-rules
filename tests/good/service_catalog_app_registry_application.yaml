@@ -1,0 +1,28 @@
+---
+Resources:
+  Application:
+    Type: AWS::ServiceCatalogAppRegistry::Application
+    Properties:
+      Description: axlexicon
+      Name: Lexicon
+      Tags:
+        Project: Lexicon
+        ProjectPart: !Ref 'AWS::StackName'
+        ProjectPartDetail: Application
+  Queue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub '${AWS::StackName}-queue'
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: !GetAtt 'Application.ApplicationTagKey'
+          Value: !GetAtt 'Application.ApplicationTagValue'
+        - Key: Project
+          Value: Lexicon
+        - Key: ProjectPart
+          Value: !Ref 'AWS::StackName'
+        - Key: ProjectPartDetail
+          Value: Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete

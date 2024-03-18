@@ -4,12 +4,18 @@ SPDX-License-Identifier: MIT-0
 """
 
 from logging import getLogger
+from typing import Any, TypedDict, Union
 
 import cfnlint.helpers
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
 
 LOGGER = getLogger(__name__)
+
+
+class TagObject(TypedDict):
+    Key: Union[str, dict[str, Any]]
+    Value: Union[str, dict[str, Any]]
 
 
 class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
@@ -78,9 +84,9 @@ class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
                 return True
         return False
 
-    def get_tags(self, resource_obj: dict) -> dict[str, str]:  # type: ignore[type-arg]
+    def get_tags(self, resource_obj: dict) -> list[TagObject]:  # type: ignore[type-arg]
         if not self.has_tags(resource_obj):
-            return {}
+            return []
         resource_properties = resource_obj.get("Properties", {})
         if resource_obj.get("Type") == "AWS::ApiGatewayV2::Api":
             tags = resource_properties.get("Tags")
@@ -95,18 +101,19 @@ class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
             tags = resource_properties["Tags"]
 
         if not tags:
-            return {}
+            return []
 
         if isinstance(tags, dict):
-            tags_as_dict = tags
-        elif isinstance(tags, list):
-            tags_as_dict = {d["Key"]: d["Value"] for d in tags}
-        else:
-            raise ValueError(f"Tags should be a list or a dict, but it is {tags}")
+            # tags_as_dict = tags
+            return [{"Key": k, "Value": v} for k, v in tags.items()]
+        if isinstance(tags, list):
+            # tags_as_dict = {d["Key"]: d["Value"] for d in tags}
+            return tags
+        raise ValueError(f"Tags should be a list or a dict, but it is {tags}")
 
-        return tags_as_dict
-
-    def match(self, cfn: Template) -> list[RuleMatch]:
+    def match(  # pylint: disable=too-many-locals
+        self, cfn: Template
+    ) -> list[RuleMatch]:
         """Check Tags for required keys"""
 
         matches = []
@@ -121,31 +128,44 @@ class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
 
             path = ["Resources", resource_name, "Properties", "Tags"]
 
-            tags_as_dict = self.get_tags(resource_obj)
+            tags_as_list = self.get_tags(resource_obj)
+
+            def _get_tag_value(key: str) -> Union[str, dict[str, Any]]:  # type: ignore[misc]
+                for tag in tags_as_list:  # pylint: disable=cell-var-from-loop
+                    if tag["Key"] == key:
+                        return tag["Value"]
+                raise ValueError(f"Tag {key} not found")
+
+            def _is_tag_present(key: str) -> bool:
+                for tag in tags_as_list:  # pylint: disable=cell-var-from-loop
+                    if tag["Key"] == key:
+                        return True
+                return False
 
             missing_tags = []
             for required_tag in ["Project", "ProjectPart", "ProjectPartDetail"]:
-                if required_tag not in tags_as_dict:
+                if not _is_tag_present(required_tag):
                     missing_tags.append(required_tag)
             if missing_tags:
                 message = f"Missing CostAllocationTag(s) {', '.join(missing_tags)} at {'/'.join(path)}"
                 matches.append(RuleMatch(path, message))
 
-            if "ProjectPart" in tags_as_dict:
-                if not tags_as_dict["ProjectPart"] == {"Ref": "AWS::StackName"}:
+            if _is_tag_present("ProjectPart"):
+                if not _get_tag_value("ProjectPart") == {"Ref": "AWS::StackName"}:
                     matches.append(
                         RuleMatch(
                             path,
                             f"Value of Tag ProjectPart should be Ref to AWS::StackName ('ProjectPart: !Ref AWS::StackName') at {'/'.join(path)}",
                         )
                     )
-            if "ProjectPartDetail" in tags_as_dict:
+            if _is_tag_present("ProjectPartDetail"):
                 expected_values = self.expeted_detail_tag_values(
                     resource_name, resource_obj, cfn
                 )
+                project_part_detail_value = _get_tag_value("ProjectPartDetail")
                 if (
-                    not isinstance(tags_as_dict["ProjectPartDetail"], str)
-                    or tags_as_dict["ProjectPartDetail"] not in expected_values
+                    not isinstance(project_part_detail_value, str)
+                    or project_part_detail_value not in expected_values
                 ):
                     matches.append(
                         RuleMatch(
@@ -153,14 +173,14 @@ class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
                             f"Value of Tag ProjectPartDetail should be the resource id ({', '.join(sorted(expected_values))}) at {'/'.join(path)}",
                         )
                     )
+            if _is_tag_present("Project"):
+                seen_values_of_project_tag.add(_get_tag_value("Project"))
 
-            if "Project" in tags_as_dict:
-                seen_values_of_project_tag.add(tags_as_dict["Project"])
         if len(seen_values_of_project_tag) > 1:
             matches.append(
                 RuleMatch(
                     ["Resources"],
-                    f"Multiple values of Project tag found: {', '.join(sorted(seen_values_of_project_tag))}. All resources in a stack should have the same value for the Project tag.",
+                    f"Multiple values of Project tag found: {', '.join(sorted(str(v) for v in seen_values_of_project_tag))}. All resources in a stack should have the same value for the Project tag.",
                 )
             )
         return matches
