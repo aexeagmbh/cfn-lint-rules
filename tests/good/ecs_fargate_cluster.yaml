@@ -1,6 +1,6 @@
 ---
 Resources:
-  ECSService:
+  EcsService:
     Type: AWS::ECS::Service
     Properties:
       Cluster: my-cluster
@@ -10,6 +10,13 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      Tags:
+        - Key: Project
+          Value: EcsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: EcsService
 
   FargateService:
     Type: AWS::ECS::Service
@@ -22,6 +29,13 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      Tags:
+        - Key: Project
+          Value: EcsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: FargateService
 
   FargateServiceWithPlatformVersion:
     Type: AWS::ECS::Service
@@ -35,6 +49,13 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      Tags:
+        - Key: Project
+          Value: EcsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: FargateServiceWithPlatformVersion
 
   FargateServiceWithPlatformVersion2:
     Type: AWS::ECS::Service
@@ -48,3 +69,10 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      Tags:
+        - Key: Project
+          Value: EcsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: FargateServiceWithPlatformVersion2

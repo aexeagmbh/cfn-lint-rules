@@ -23,6 +23,13 @@ Resources:
                     object at 0x7f9e52755bb0>'
             Version: '2012-10-17'
           PolicyName: StartCodePipeline
+      Tags:
+        - Key: Project
+          Value: BadUnresolvedObjectExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: CodePipelineEventsRole
   CodePipelineEventsRule:
     Properties:
       ScheduleExpression: cron(0 1 * * ? *)

@@ -13,6 +13,13 @@ Resources:
       Source:
         Location: codebuild-demo-test/0123ab9a371ebf0187b0fe5614fbb72c
         Type: S3
+      Tags:
+        - Key: Project
+          Value: BadCodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Project1
 
   Project2:
     Type: AWS::CodeBuild::Project
@@ -30,6 +37,13 @@ Resources:
       LogsConfig:
         CloudWatchLogs:
           Status: ENABLED
+      Tags:
+        - Key: Project
+          Value: BadCodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Project2
 
   Project3:
     Type: AWS::CodeBuild::Project
@@ -48,11 +62,26 @@ Resources:
         CloudWatchLogs:
           GroupName: log_group_name
           Status: ENABLED
+      Tags:
+        - Key: Project
+          Value: BadCodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Project3
 
   Project4LogGroup:
     Type: AWS::Logs::LogGroup
     UpdateReplacePolicy: Delete
     DeletionPolicy: Delete
+    Properties:
+      Tags:
+        - Key: Project
+          Value: BadCodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Project4LogGroup
 
   Project4:
     Type: AWS::CodeBuild::Project
@@ -71,3 +100,10 @@ Resources:
         CloudWatchLogs:
           GroupName: !Sub "${Project4LogGroup}"
           Status: ENABLED
+      Tags:
+        - Key: Project
+          Value: BadCodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Project4

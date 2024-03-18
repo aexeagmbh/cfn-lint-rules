@@ -15,6 +15,7 @@ from .intrinsic_function import IntrinsicFunctionSubUnresolvedObject
 from .metadata import MetadataAxChangesetAutoApprove
 from .s3 import S3BucketEncryption, S3BucketPublicAccess
 from .sqs import SqsQueueEncryption
+from .tags import CostAllocationTags
 
 __all__ = [
     "CertificateManagerCertificateNameTag",
@@ -24,6 +25,7 @@ __all__ = [
     "CloudfrontResponseHeaderConfigLongHstsMaxAge",
     "CodeBuildProjectCloudWatchLogs",
     "CodeBuildProjectImage",
+    "CostAllocationTags",
     "EcrRepositoryAutocleanupTag",
     "EcsServiceDeploymentConfiguration",
     "EcsServiceFargatePlatformVersionNotOutdated",

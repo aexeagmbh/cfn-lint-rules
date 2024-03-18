@@ -4,3 +4,12 @@ Resources:
     DeletionPolicy: Delete
     UpdateReplacePolicy: Delete
     Type: AWS::SQS::Queue
+    Properties:
+      MessageRetentionPeriod: 345600
+      Tags:
+        - Key: Project
+          Value: BadSqsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: QueueWithOutEncryption

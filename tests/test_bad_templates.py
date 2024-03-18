@@ -12,6 +12,7 @@ from cfn_lint_ax.rules import (
     CloudfrontResponseHeaderConfigLongHstsMaxAge,
     CodeBuildProjectCloudWatchLogs,
     CodeBuildProjectImage,
+    CostAllocationTags,
     EcrRepositoryAutocleanupTag,
     EcsServiceDeploymentConfiguration,
     EcsServiceFargatePlatformVersionNotOutdated,
@@ -54,11 +55,11 @@ test_parameters = (
                 "Property Resources/TestBucket1/Properties/PublicAccessBlockConfiguration/BlockPublicAcls should be true",
             ),
             (
-                23,
+                30,
                 "Property Resources/TestBucket2/Properties/PublicAccessBlockConfiguration/RestrictPublicBuckets is missing and should be true",
             ),
             (
-                26,
+                33,
                 "Property Resources/TestBucket2/Properties/PublicAccessBlockConfiguration/IgnorePublicAcls should be true",
             ),
         ],
@@ -78,11 +79,11 @@ test_parameters = (
         CertificateManagerCertificateNameTag,
         [
             (
-                5,
+                7,
                 "Property Resources/Certificate1/Properties/Tags is missing 'Name' tag",
             ),
             (
-                11,
+                18,
                 "Property Resources/Certificate2/Properties/Tags is missing 'Name' tag",
             ),
         ],
@@ -160,15 +161,15 @@ test_parameters = (
                 "Property Resources/Project1/Properties/LogsConfig/CloudWatchLogs/GroupName is missing. CodeBuild projects with cloudwatch logs enabled, should have a GroupName defined.",
             ),
             (
-                31,
+                38,
                 "Property Resources/Project2/Properties/LogsConfig/CloudWatchLogs/GroupName is missing. CodeBuild projects with cloudwatch logs enabled, should have a GroupName defined.",
             ),
             (
-                49,
+                63,
                 "Property Resources/Project3/Properties/LogsConfig/CloudWatchLogs/GroupName should be a Ref to a LogGroup.",
             ),
             (
-                72,
+                101,
                 "Property Resources/Project4/Properties/LogsConfig/CloudWatchLogs/GroupName should be a Ref to a LogGroup.",
             ),
         ],
@@ -204,11 +205,11 @@ test_parameters = (
                 "Resources/ECSService/Properties/DeploymentConfiguration/DeploymentCircuitBreaker/Rollback Property DeploymentConfiguration/DeploymentCircuitBreaker/Rollback should be false.",
             ),
             (
-                22,
+                29,
                 "Resources/ECSServiceDeploymentCircuitBreakerWithBadValues/Properties/DeploymentConfiguration/DeploymentCircuitBreaker/Enable Property DeploymentConfiguration/DeploymentCircuitBreaker/Enable should be true.",
             ),
             (
-                23,
+                30,
                 "Resources/ECSServiceDeploymentCircuitBreakerWithBadValues/Properties/DeploymentConfiguration/DeploymentCircuitBreaker/Rollback Property DeploymentConfiguration/DeploymentCircuitBreaker/Rollback should be false.",
             ),
         ],
@@ -218,11 +219,11 @@ test_parameters = (
         CodeBuildProjectImage,
         [
             (
-                17,
+                25,
                 "Property Resources/Project1/Properties/Environment/Image uses an AWS image other than standard.",
             ),
             (
-                35,
+                50,
                 "Property Resources/Project2/Properties/Environment/Image uses an outdated version of the standard image.",
             ),
         ],
@@ -260,11 +261,11 @@ test_parameters = (
                 "Resources/TestBucket/Metadata/AxChangesetAutoApprove/ModifyReplacement must be a boolean.",
             ),
             (
-                37,
+                44,
                 "Resources/TestQueue/Metadata/AxChangesetAutoApprove/ModifyReplacement must be a boolean.",
             ),
             (
-                40,
+                47,
                 "Resources/TestQueue/Metadata/AxChangesetAutoApprove/BadKey key BadKey is not allowed. Allowed keys for AxChangesetAutoApprove: ModifyConditionalReplacement, ModifyReplacement.",
             ),
         ],
@@ -288,7 +289,7 @@ test_parameters = (
                 "Sub contains an unresolved object",
             ),
             (
-                31,
+                38,
                 "Sub contains an unresolved object",
             ),
         ],
@@ -298,11 +299,11 @@ test_parameters = (
         EcrRepositoryAutocleanupTag,
         [
             (
-                3,
+                6,
                 "Resources/MyRepository/Properties/Tags is missing the 'autocleanup' tag.",
             ),
             (
-                9,
+                17,
                 "Resources/MyRepository2/Properties/Tags is missing the 'autocleanup' tag.",
             ),
         ],
@@ -316,19 +317,19 @@ test_parameters = (
                 "Resources/MyRepository/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
             (
-                15,
+                21,
                 "Resources/MyRepository2/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
             (
-                22,
+                34,
                 "Resources/MyRepository3/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
             (
-                29,
+                47,
                 "Resources/MyRepository4/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
             (
-                36,
+                60,
                 "Resources/MyRepository5/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
         ],
@@ -338,8 +339,114 @@ test_parameters = (
         SqsQueueEncryption,
         [
             (
-                3,
+                7,
                 "Resource Resources/QueueWithOutEncryption/Properties Queue encryption must be enabled by either defining SqsManagedSseEnabled or KmsMasterKeyId.",
+            ),
+        ],
+    ),
+    (
+        "W9303_cost_allocation_tags.yaml",
+        CostAllocationTags,
+        [
+            (
+                4,
+                "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/FunctionWithoutAnyTagsRole/Properties/Tags",
+            ),
+            (
+                4,
+                "Missing CostAllocationTag(s) Project at Resources/FunctionWithBadCostAllocationTagsRole/Properties/Tags",
+            ),
+            (
+                4,
+                "Value of Tag ProjectPartDetail should be the resource id (FunctionWithBadCostAllocationTags, FunctionWithBadCostAllocationTagsRole) at Resources/FunctionWithBadCostAllocationTagsRole/Properties/Tags",
+            ),
+            (
+                4,
+                "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/ApiWithoutAnyTagsApiGatewayDefaultStage/Properties/Tags",
+            ),
+            (
+                4,
+                "Missing CostAllocationTag(s) Project at Resources/ApiWithBadCostAllocationTagsApiGatewayDefaultStage/Properties/Tags",
+            ),
+            (
+                4,
+                "Value of Tag ProjectPartDetail should be the resource id (ApiWithBadCostAllocationTags, ApiWithBadCostAllocationTagsApiGatewayDefaultStage) at Resources/ApiWithBadCostAllocationTagsApiGatewayDefaultStage/Properties/Tags",
+            ),
+            (
+                4,
+                "Multiple values of Project tag found: BadCostAllocationTagsExample, BadCostAllocationTagsExampleFoo, Bar BadCostAllocationTagsExample. All resources in a stack should have the same value for the Project tag.",
+            ),
+            (
+                9,
+                "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/QueueWithoutAnyTags/Properties/Tags",
+            ),
+            (
+                22,
+                "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/QueueWithTagsButWithoutCostAllocationTags/Properties/Tags",
+            ),
+            (
+                36,
+                "Missing CostAllocationTag(s) Project at Resources/QueueWithoutProjectTag/Properties/Tags",
+            ),
+            (
+                50,
+                "Missing CostAllocationTag(s) Project at Resources/QueueWithoutProjectTag2/Properties/Tags",
+            ),
+            (
+                66,
+                "Missing CostAllocationTag(s) ProjectPart at Resources/QueueWithoutProjectPartTag/Properties/Tags",
+            ),
+            (
+                80,
+                "Missing CostAllocationTag(s) ProjectPart at Resources/QueueWithoutProjectPartTag2/Properties/Tags",
+            ),
+            (
+                96,
+                "Missing CostAllocationTag(s) ProjectPartDetail at Resources/QueueWithoutProjectPartDetailTag/Properties/Tags",
+            ),
+            (
+                110,
+                "Missing CostAllocationTag(s) ProjectPartDetail at Resources/QueueWithoutProjectPartDetailTag2/Properties/Tags",
+            ),
+            (
+                126,
+                "Value of Tag ProjectPart should be Ref to AWS::StackName ('ProjectPart: !Ref AWS::StackName') at Resources/QueueWithBadCostAllocationTagValues/Properties/Tags",
+            ),
+            (
+                126,
+                "Value of Tag ProjectPartDetail should be the resource id (QueueWithBadCostAllocationTagValues) at Resources/QueueWithBadCostAllocationTagValues/Properties/Tags",
+            ),
+            (
+                142,
+                "Value of Tag ProjectPart should be Ref to AWS::StackName ('ProjectPart: !Ref AWS::StackName') at Resources/QueueWithBadCostAllocationTagValues2/Properties/Tags",
+            ),
+            (
+                142,
+                "Value of Tag ProjectPartDetail should be the resource id (QueueWithBadCostAllocationTagValues2) at Resources/QueueWithBadCostAllocationTagValues2/Properties/Tags",
+            ),
+            (
+                150,
+                "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/ApiWithoutAnyTags/Properties/Tags",
+            ),
+            (
+                153,
+                "Missing CostAllocationTag(s) Project at Resources/ApiWithBadCostAllocationTags/Properties/Tags",
+            ),
+            (
+                153,
+                "Value of Tag ProjectPartDetail should be the resource id (ApiWithBadCostAllocationTags) at Resources/ApiWithBadCostAllocationTags/Properties/Tags",
+            ),
+            (
+                161,
+                "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/FunctionWithoutAnyTags/Properties/Tags",
+            ),
+            (
+                167,
+                "Missing CostAllocationTag(s) Project at Resources/FunctionWithBadCostAllocationTags/Properties/Tags",
+            ),
+            (
+                167,
+                "Value of Tag ProjectPartDetail should be the resource id (FunctionWithBadCostAllocationTags) at Resources/FunctionWithBadCostAllocationTags/Properties/Tags",
             ),
         ],
     ),

@@ -43,6 +43,7 @@ User Rules (E9XXX)
 ### Resources (E93XX)
 * I9301 EcsServiceFargatePlatformVersionNotOutdated
 * I9302 EcrRepositoryAutocleanupTag
+* I9303 CostAllocationTags (experimental)
 * W9301 S3BucketPublicAccess
 * W9302 S3BucketEncryption
 * W9303 CloudfrontDistributionLogging

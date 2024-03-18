@@ -30,6 +30,13 @@ Resources:
               OriginProtocolPolicy: "https-only"
             DomainName: example.com
             Id: other-origin
+      Tags:
+        - Key: Project
+          Value: CloudfrontExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Distribution
 
   ResponseHeadersPolicy:
     Type: AWS::CloudFront::ResponseHeadersPolicy

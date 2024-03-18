@@ -4,6 +4,14 @@ Resources:
     UpdateReplacePolicy: Delete
     DeletionPolicy: Delete
     Type: AWS::Logs::LogGroup
+    Properties:
+      Tags:
+        - Key: Project
+          Value: BadCodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Project1LogGroup
 
   Project1:
     Type: AWS::CodeBuild::Project
@@ -22,6 +30,13 @@ Resources:
         CloudWatchLogs:
           GroupName: !Ref Project1LogGroup
           Status: ENABLED
+      Tags:
+        - Key: Project
+          Value: BadCodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Project1
 
   Project2:
     Type: AWS::CodeBuild::Project
@@ -39,3 +54,10 @@ Resources:
       LogsConfig:
         CloudWatchLogs:
           Status: DISABLED
+      Tags:
+        - Key: Project
+          Value: BadCodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Project2

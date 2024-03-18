@@ -6,6 +6,12 @@ Resources:
       Tags:
         - Key: autocleanup
           Value: "true"
+        - Key: Project
+          Value: EcrExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: MyRepository
 
   MyRepository2:
     Type: AWS::ECR::Repository
@@ -13,3 +19,9 @@ Resources:
       Tags:
         - Key: autocleanup
           Value: "false"
+        - Key: Project
+          Value: EcrExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: MyRepository2

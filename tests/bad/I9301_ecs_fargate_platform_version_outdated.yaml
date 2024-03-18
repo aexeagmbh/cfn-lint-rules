@@ -12,3 +12,10 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      Tags:
+        - Key: Project
+          Value: BadEcsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: ECSService

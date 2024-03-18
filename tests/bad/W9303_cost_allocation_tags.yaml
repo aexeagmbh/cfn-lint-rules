@@ -1,0 +1,175 @@
+---
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  QueueWithoutAnyTags:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+
+  QueueWithTagsButWithoutCostAllocationTags:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: Foo
+          Value: Bar
+        - Key: Name
+          Value: MyBucket
+
+  QueueWithoutProjectTag:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: QueueWithoutProjectTag
+
+  QueueWithoutProjectTag2:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: QueueWithoutProjectTag2
+        - Key: Foo
+          Value: Bar
+
+  QueueWithoutProjectPartTag:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: Project
+          Value: BadCostAllocationTagsExample
+        - Key: ProjectPartDetail
+          Value: QueueWithoutProjectPartTag
+
+  QueueWithoutProjectPartTag2:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: Project
+          Value: BadCostAllocationTagsExample
+        - Key: Foo
+          Value: Bar
+        - Key: ProjectPartDetail
+          Value: QueueWithoutProjectPartTag2
+
+  QueueWithoutProjectPartDetailTag:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: Project
+          Value: BadCostAllocationTagsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+
+  QueueWithoutProjectPartDetailTag2:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: Foo
+          Value: Bar
+        - Key: Project
+          Value: BadCostAllocationTagsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+
+  QueueWithBadCostAllocationTagValues:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: Project
+          Value: BadCostAllocationTagsExampleFoo
+        - Key: ProjectPart
+          Value: !Ref AWS::StackId
+        - Key: ProjectPartDetail
+          Value: QueueWithBadCostAllocationValuesXXXXXX
+
+  QueueWithBadCostAllocationTagValues2:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      MessageRetentionPeriod: 345600
+      SqsManagedSseEnabled: true
+      Tags:
+        - Key: Project
+          Value: Bar BadCostAllocationTagsExample
+        - Key: ProjectPart
+          Value: FooBar
+        - Key: ProjectPartDetail
+          Value: !Ref QueueWithBadCostAllocationTagValues
+
+  ApiWithoutAnyTags:
+    Type: AWS::Serverless::HttpApi
+
+  ApiWithBadCostAllocationTags:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      Tags:
+        Foo: Bar
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: ApiWithoutAnyTags
+
+  FunctionWithoutAnyTags:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs14.x
+      Handler: index.handler
+
+  FunctionWithBadCostAllocationTags:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs14.x
+      Handler: index.handler
+      Tags:
+        Foo: Bar
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: ApiWithoutAnyTags

@@ -12,6 +12,13 @@ Resources:
         # BlockPublicPolicy: true  # this key should be present and the value true (W9301)
         # IgnorePublicAcls: true  # this key should be present and the value true (W9301)
         RestrictPublicBuckets: true
+      Tags:
+        - Key: Project
+          Value: BadS3BucketExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: TestBucket1
   TestBucket2:
     Type: AWS::S3::Bucket
     Properties:
@@ -25,3 +32,10 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: false  # this value should be true (W9301)
         # RestrictPublicBuckets: true  # this key should be present and the value true (W9301)
+      Tags:
+        - Key: Project
+          Value: BadS3BucketExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: TestBucket2

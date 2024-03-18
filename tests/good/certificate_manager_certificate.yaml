@@ -7,6 +7,12 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub example.com (${AWS::StackName})
+        - Key: Project
+          Value: CertificateExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Certificate1
   Certificate2:
     Type: AWS::CertificateManager::Certificate
     Properties:
@@ -16,3 +22,9 @@ Resources:
           Value: !Sub subdomain.example.com (${AWS::StackName})
         - Key: foo
           Value: bar
+        - Key: Project
+          Value: CertificateExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Certificate2

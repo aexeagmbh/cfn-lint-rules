@@ -8,6 +8,13 @@ Resources:
       KmsDataKeyReusePeriodSeconds: 86400
       MessageRetentionPeriod: 345600
       SqsManagedSseEnabled: true
+      Tags:
+        - Key: Project
+          Value: SqsQueueExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: QueueWithSssSqsEncryption
 
   QueueWithAwsManagedKmsKeyEncryption:
     Type: AWS::SQS::Queue
@@ -17,6 +24,13 @@ Resources:
       KmsDataKeyReusePeriodSeconds: 86400
       KmsMasterKeyId: alias/aws/sqs
       MessageRetentionPeriod: 345600
+      Tags:
+        - Key: Project
+          Value: SqsQueueExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: QueueWithAwsManagedKmsKeyEncryption
 
   MyKey:
     Type: AWS::KMS::Key
@@ -32,6 +46,13 @@ Resources:
               AWS: !Sub '${AWS::Partition}:aws:iam::${AWS::AccountId}:root'
             Action: 'kms:*'
             Resource: '*'
+      Tags:
+        - Key: Project
+          Value: SqsQueueExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: MyKey
 
   QueueWithCustomKmsKeyEncryption:
     Type: AWS::SQS::Queue
@@ -41,3 +62,10 @@ Resources:
       KmsDataKeyReusePeriodSeconds: 86400
       KmsMasterKeyId: !Ref MyKey
       MessageRetentionPeriod: 345600
+      Tags:
+        - Key: Project
+          Value: SqsQueueExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: QueueWithCustomKmsKeyEncryption

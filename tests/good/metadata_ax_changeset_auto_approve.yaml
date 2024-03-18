@@ -28,6 +28,13 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
+      Tags:
+        - Key: Project
+          Value: MetadataAxExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: TestBucket
 
   TestQueue:
     Type: AWS::SQS::Queue
@@ -37,3 +44,10 @@ Resources:
       KmsDataKeyReusePeriodSeconds: 86400
       KmsMasterKeyId: alias/aws/sqs
       MessageRetentionPeriod: 345600
+      Tags:
+        - Key: Project
+          Value: MetadataAxExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: TestQueue

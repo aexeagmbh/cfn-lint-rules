@@ -2,6 +2,14 @@
 Resources:
   MyRepository:
     Type: AWS::ECR::Repository
+    Properties:
+      Tags:
+        - Key: Project
+          Value: BadEcrExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: MyRepository
 
   MyRepository2:
     Type: AWS::ECR::Repository
@@ -9,3 +17,9 @@ Resources:
       Tags:
         - Key: Foo
           Value: bar
+        - Key: Project
+          Value: BadEcrExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: MyRepository2

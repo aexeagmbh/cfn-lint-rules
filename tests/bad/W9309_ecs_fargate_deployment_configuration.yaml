@@ -8,6 +8,13 @@ Resources:
       TaskDefinition: my-task-defintion
       LaunchType: FARGATE
       PlatformVersion: LATEST
+      Tags:
+        - Key: Project
+          Value: BadEcsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: ECSService
 
   ECSServiceDeploymentCircuitBreakerWithBadValues:
     Type: AWS::ECS::Service
@@ -21,3 +28,10 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: false
           Rollback: true
+      Tags:
+        - Key: Project
+          Value: BadEcsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: ECSServiceDeploymentCircuitBreakerWithBadValues

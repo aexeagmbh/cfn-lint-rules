@@ -4,6 +4,13 @@ Resources:
     Type: AWS::CertificateManager::Certificate
     Properties:
       DomainName: example.com
+      Tags:
+        - Key: Project
+          Value: BadCertificateExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Certificate1
   Certificate2:
     Type: AWS::CertificateManager::Certificate
     Properties:
@@ -11,3 +18,9 @@ Resources:
       Tags:
         - Key: foo
           Value: bar
+        - Key: Project
+          Value: BadCertificateExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Certificate2
