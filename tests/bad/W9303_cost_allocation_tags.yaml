@@ -161,13 +161,13 @@ Resources:
   FunctionWithoutAnyTags:
     Type: AWS::Serverless::Function
     Properties:
-      Runtime: nodejs14.x
+      Runtime: nodejs20.x
       Handler: index.handler
 
   FunctionWithBadCostAllocationTags:
     Type: AWS::Serverless::Function
     Properties:
-      Runtime: nodejs14.x
+      Runtime: nodejs20.x
       Handler: index.handler
       Tags:
         Foo: Bar
