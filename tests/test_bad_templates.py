@@ -12,6 +12,7 @@ from cfn_lint_ax.rules import (
     CloudfrontResponseHeaderConfigLongHstsMaxAge,
     CodeBuildProjectCloudWatchLogs,
     CodeBuildProjectImage,
+    CostAllocationTagProject,
     CostAllocationTags,
     EcrRepositoryAutocleanupTag,
     EcsServiceDeploymentConfiguration,
@@ -345,7 +346,7 @@ test_parameters = (
         ],
     ),
     (
-        "W9303_cost_allocation_tags.yaml",
+        "I9303_cost_allocation_tags.yaml",
         CostAllocationTags,
         [
             (
@@ -371,10 +372,6 @@ test_parameters = (
             (
                 4,
                 "Value of Tag ProjectPartDetail should be the resource id (ApiWithBadCostAllocationTags, ApiWithBadCostAllocationTagsApiGatewayDefaultStage) at Resources/ApiWithBadCostAllocationTagsApiGatewayDefaultStage/Properties/Tags",
-            ),
-            (
-                4,
-                "Multiple values of Project tag found: BadCostAllocationTagsExample, BadCostAllocationTagsExampleFoo, Bar BadCostAllocationTagsExample. All resources in a stack should have the same value for the Project tag.",
             ),
             (
                 9,
@@ -450,6 +447,17 @@ test_parameters = (
             ),
         ],
     ),
+    (
+        "I9304_cost_allocation_tags_project.yaml",
+        CostAllocationTagProject,
+        [
+            (
+                2,
+                # "Multiple values of Project tag found: Bar ProjectCostAllocationTagExample, ProjectCostAllocationTagExample, ProjectCostAllocationTagExampleFoo, SomethingElse. All resources in a stack should have the same value for the Project tag.",
+                "Multiple values of Project tag found: Bar ProjectCostAllocationTagExample, ProjectCostAllocationTagExample, ProjectCostAllocationTagExampleFoo, SomethingElse. All resources in a stack should have the same value for the Project tag.",
+            ),
+        ],
+    ),
 )
 
 
@@ -476,6 +484,9 @@ def test_bad(
             match_rule_class_name = (
                 f"{match_rule_class.__module__}.{match_rule_class.__name__}"
             )
+            print(match.linenumber)
+            print(match_rule_class_name)
+            print(match.message)
             if (
                 match.linenumber == line_number
                 and match_rule_class_name == lint_rule_class_name

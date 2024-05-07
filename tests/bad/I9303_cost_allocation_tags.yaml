@@ -125,7 +125,7 @@ Resources:
       SqsManagedSseEnabled: true
       Tags:
         - Key: Project
-          Value: BadCostAllocationTagsExampleFoo
+          Value: BadCostAllocationTagsExample
         - Key: ProjectPart
           Value: !Ref AWS::StackId
         - Key: ProjectPartDetail
@@ -141,7 +141,7 @@ Resources:
       SqsManagedSseEnabled: true
       Tags:
         - Key: Project
-          Value: Bar BadCostAllocationTagsExample
+          Value: BadCostAllocationTagsExample
         - Key: ProjectPart
           Value: FooBar
         - Key: ProjectPartDetail

@@ -18,14 +18,52 @@ class TagObject(TypedDict):
     Value: Union[str, dict[str, Any]]
 
 
-class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
+class _CostAllocationTagBase(CloudFormationLintRule):  # type: ignore[misc]
+    def has_tags(self, resource_obj: dict) -> bool:  # type: ignore[type-arg]
+        if "Tags" in resource_obj.get("Properties", {}):
+            return True
+        if resource_obj.get("Type") == "AWS::ApiGatewayV2::Api":
+            if "tags" in resource_obj.get("Properties", {}).get("Body"):
+                return True
+        return False
+
+    def get_tags(self, resource_obj: dict) -> list[TagObject]:  # type: ignore[type-arg]
+        if not self.has_tags(resource_obj):
+            return []
+        resource_properties = resource_obj.get("Properties", {})
+        if resource_obj.get("Type") == "AWS::ApiGatewayV2::Api":
+            tags = resource_properties.get("Tags")
+            if not tags:
+                tags = resource_properties.get("Body", {}).get("tags")
+                tags = {
+                    d["name"]: d["x-amazon-apigateway-tag-value"]
+                    for d in tags
+                    if "name" in d and "x-amazon-apigateway-tag-value" in d
+                }
+        else:
+            tags = resource_properties["Tags"]
+
+        if not tags:
+            return []
+
+        if isinstance(tags, dict):
+            # tags_as_dict = tags
+            return [{"Key": k, "Value": v} for k, v in tags.items()]
+        if isinstance(tags, list):
+            # tags_as_dict = {d["Key"]: d["Value"] for d in tags}
+            return tags
+        raise ValueError(f"Tags should be a list or a dict, but it is {tags}")
+
+
+class CostAllocationTags(_CostAllocationTagBase):
     """Check if Tags are included on supported resources"""
 
     id = "I9303"
-    shortdesc = "Tags are included on resources that support it"
-    description = "Check Tags for resources"
+    shortdesc = "Cost Allocation Tags"
+    description = (
+        "Check Cost Allocation Tags are included on resources that support it."
+    )
     tags = ["resources", "tags"]
-    experimental = True
 
     def get_resources_with_tags(self, region: str) -> list[str]:
         """Get resource types that support tags"""
@@ -76,41 +114,6 @@ class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
 
         return {resource_name}
 
-    def has_tags(self, resource_obj: dict) -> bool:  # type: ignore[type-arg]
-        if "Tags" in resource_obj.get("Properties", {}):
-            return True
-        if resource_obj.get("Type") == "AWS::ApiGatewayV2::Api":
-            if "tags" in resource_obj.get("Properties", {}).get("Body"):
-                return True
-        return False
-
-    def get_tags(self, resource_obj: dict) -> list[TagObject]:  # type: ignore[type-arg]
-        if not self.has_tags(resource_obj):
-            return []
-        resource_properties = resource_obj.get("Properties", {})
-        if resource_obj.get("Type") == "AWS::ApiGatewayV2::Api":
-            tags = resource_properties.get("Tags")
-            if not tags:
-                tags = resource_properties.get("Body", {}).get("tags")
-                tags = {
-                    d["name"]: d["x-amazon-apigateway-tag-value"]
-                    for d in tags
-                    if "name" in d and "x-amazon-apigateway-tag-value" in d
-                }
-        else:
-            tags = resource_properties["Tags"]
-
-        if not tags:
-            return []
-
-        if isinstance(tags, dict):
-            # tags_as_dict = tags
-            return [{"Key": k, "Value": v} for k, v in tags.items()]
-        if isinstance(tags, list):
-            # tags_as_dict = {d["Key"]: d["Value"] for d in tags}
-            return tags
-        raise ValueError(f"Tags should be a list or a dict, but it is {tags}")
-
     def match(  # pylint: disable=too-many-locals
         self, cfn: Template
     ) -> list[RuleMatch]:
@@ -120,7 +123,6 @@ class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
 
         resources_tags = self.get_resources_with_tags(cfn.regions[0])
         resources = cfn.get_resources()
-        seen_values_of_project_tag = set()
         for resource_name, resource_obj in resources.items():
             resource_type = resource_obj.get("Type", "")
             if resource_type not in resources_tags:
@@ -173,6 +175,63 @@ class CostAllocationTags(CloudFormationLintRule):  # type: ignore[misc]
                             f"Value of Tag ProjectPartDetail should be the resource id ({', '.join(sorted(expected_values))}) at {'/'.join(path)}",
                         )
                     )
+
+        return matches
+
+
+class CostAllocationTagProject(_CostAllocationTagBase):
+    """Check if Tags are included on supported resources"""
+
+    id = "I9304"
+    shortdesc = "Project Cost Allocation Tag"
+    description = (
+        "Check that all resources have the same Cost Allocation Tag Project value."
+    )
+    tags = ["resources", "tags"]
+
+    def get_resources_with_tags(self, region: str) -> list[str]:
+        """Get resource types that support tags"""
+        resourcespecs = cfnlint.helpers.RESOURCE_SPECS[region]
+        resourcetypes = resourcespecs["ResourceTypes"]
+
+        matches = []
+        for resourcetype, resourceobj in resourcetypes.items():
+            propertiesobj = resourceobj.get("Properties")
+            if propertiesobj:
+                if "Tags" in propertiesobj:
+                    matches.append(resourcetype)
+
+        return matches
+
+    def match(  # pylint: disable=too-many-locals
+        self, cfn: Template
+    ) -> list[RuleMatch]:
+        """Check Tags for required keys"""
+
+        matches = []
+
+        resources_tags = self.get_resources_with_tags(cfn.regions[0])
+        resources = cfn.get_resources()
+        seen_values_of_project_tag = set()
+        for resource_obj in resources.values():
+            resource_type = resource_obj.get("Type", "")
+            if resource_type not in resources_tags:
+                continue
+
+            tags_as_list = self.get_tags(resource_obj)
+
+            def _get_tag_value(key: str) -> Union[str, dict[str, Any]]:  # type: ignore[misc]
+                for tag in tags_as_list:  # pylint: disable=cell-var-from-loop
+                    if tag["Key"] == key:
+                        return tag["Value"]
+                raise ValueError(f"Tag {key} not found")
+
+            def _is_tag_present(key: str) -> bool:
+                for tag in tags_as_list:  # pylint: disable=cell-var-from-loop
+                    if tag["Key"] == key:
+                        return True
+                return False
+
             if _is_tag_present("Project"):
                 seen_values_of_project_tag.add(_get_tag_value("Project"))
 

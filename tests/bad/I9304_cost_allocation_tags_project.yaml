@@ -1,0 +1,65 @@
+---
+Resources:
+  Queue1:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      KmsMasterKeyId: alias/aws/sqs
+      MessageRetentionPeriod: 345600
+      Tags:
+        - Key: Project
+          Value: ProjectCostAllocationTagExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Queue1
+
+  Queue2:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      KmsMasterKeyId: alias/aws/sqs
+      MessageRetentionPeriod: 345600
+      Tags:
+        - Key: Project
+          Value: ProjectCostAllocationTagExampleFoo
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Queue2
+
+  Queue3:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      KmsMasterKeyId: alias/aws/sqs
+      MessageRetentionPeriod: 345600
+      Tags:
+        - Key: Project
+          Value: Bar ProjectCostAllocationTagExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Queue3
+
+  Queue4:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      KmsDataKeyReusePeriodSeconds: 86400
+      KmsMasterKeyId: alias/aws/sqs
+      MessageRetentionPeriod: 345600
+      Tags:
+        - Key: Project
+          Value: SomethingElse
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: Queue4
