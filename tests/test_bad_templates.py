@@ -17,6 +17,7 @@ from cfn_lint_ax.rules import (
     EcrRepositoryAutocleanupTag,
     EcsServiceDeploymentConfiguration,
     EcsServiceFargatePlatformVersionNotOutdated,
+    EcsServicePropagateTags,
     IntrinsicFunctionSubUnresolvedObject,
     MetadataAxChangesetAutoApprove,
     S3BucketEncryption,
@@ -206,11 +207,11 @@ test_parameters = (
                 "Resources/ECSService/Properties/DeploymentConfiguration/DeploymentCircuitBreaker/Rollback Property DeploymentConfiguration/DeploymentCircuitBreaker/Rollback should be false.",
             ),
             (
-                29,
+                30,
                 "Resources/ECSServiceDeploymentCircuitBreakerWithBadValues/Properties/DeploymentConfiguration/DeploymentCircuitBreaker/Enable Property DeploymentConfiguration/DeploymentCircuitBreaker/Enable should be true.",
             ),
             (
-                30,
+                31,
                 "Resources/ECSServiceDeploymentCircuitBreakerWithBadValues/Properties/DeploymentConfiguration/DeploymentCircuitBreaker/Rollback Property DeploymentConfiguration/DeploymentCircuitBreaker/Rollback should be false.",
             ),
         ],
@@ -455,6 +456,20 @@ test_parameters = (
                 2,
                 # "Multiple values of Project tag found: Bar ProjectCostAllocationTagExample, ProjectCostAllocationTagExample, ProjectCostAllocationTagExampleFoo, SomethingElse. All resources in a stack should have the same value for the Project tag.",
                 "Multiple values of Project tag found: Bar ProjectCostAllocationTagExample, ProjectCostAllocationTagExample, ProjectCostAllocationTagExampleFoo, SomethingElse. All resources in a stack should have the same value for the Project tag.",
+            ),
+        ],
+    ),
+    (
+        "I9305_ecs_service_propagate_tags.yaml",
+        EcsServicePropagateTags,
+        [
+            (
+                5,
+                'PropagateTags should have the value "SERVICE" at Resources/ECSServiceWithoutPropagateTags/Properties/PropagateTags',
+            ),
+            (
+                36,
+                'PropagateTags should have the value "SERVICE" at Resources/ECSServiceWithWrongPropagateTagsValue/Properties/PropagateTags',
             ),
         ],
     ),

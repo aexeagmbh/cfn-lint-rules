@@ -243,3 +243,31 @@ class CostAllocationTagProject(_CostAllocationTagBase):
                 )
             )
         return matches
+
+
+class EcsServicePropagateTags(CloudFormationLintRule):  # type: ignore[misc]
+    id = "I9305"
+    shortdesc = "ECS Service PropagateTags should be SERVICE"
+    description = "Check that ECS Service PropagateTags is set to SERVICE to propagate tags to tasks."
+    tags = ["resources", "ecs", "tags"]
+
+    def match(self, cfn: Template) -> list[RuleMatch]:
+        matches = []
+
+        resources = cfn.get_resources()
+        for resource_name, resource_obj in resources.items():
+            resource_type = resource_obj.get("Type", "")
+            if resource_type != "AWS::ECS::Service":
+                continue
+
+            path = ["Resources", resource_name, "Properties", "PropagateTags"]
+
+            if resource_obj.get("Properties", {}).get("PropagateTags") != "SERVICE":
+                matches.append(
+                    RuleMatch(
+                        path,
+                        f'PropagateTags should have the value "SERVICE" at {"/".join(path)}',
+                    )
+                )
+
+        return matches

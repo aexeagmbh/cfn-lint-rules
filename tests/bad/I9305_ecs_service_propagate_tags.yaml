@@ -1,23 +1,6 @@
 ---
 Resources:
-  ECSService:
-    Type: AWS::ECS::Service
-    Properties:
-      Cluster: my-cluster
-      DesiredCount: 1
-      TaskDefinition: my-task-defintion
-      LaunchType: FARGATE
-      PlatformVersion: LATEST
-      PropagateTags: SERVICE
-      Tags:
-        - Key: Project
-          Value: BadEcsExample
-        - Key: ProjectPart
-          Value: !Ref AWS::StackName
-        - Key: ProjectPartDetail
-          Value: ECSService
-
-  ECSServiceDeploymentCircuitBreakerWithBadValues:
+  ECSServiceWithoutPropagateTags:
     Type: AWS::ECS::Service
     Properties:
       Cluster: my-cluster
@@ -27,13 +10,34 @@ Resources:
       PlatformVersion: LATEST
       DeploymentConfiguration:
         DeploymentCircuitBreaker:
-          Enable: false
-          Rollback: true
-      PropagateTags: SERVICE
+          Enable: true
+          Rollback: false
+      # PropagateTags: SERVICE
       Tags:
         - Key: Project
-          Value: BadEcsExample
+          Value: BadEcsPropagateTagsExample
         - Key: ProjectPart
           Value: !Ref AWS::StackName
         - Key: ProjectPartDetail
-          Value: ECSServiceDeploymentCircuitBreakerWithBadValues
+          Value: ECSServiceWithoutPropagateTags
+
+  ECSServiceWithWrongPropagateTagsValue:
+    Type: AWS::ECS::Service
+    Properties:
+      Cluster: my-cluster
+      DesiredCount: 1
+      TaskDefinition: my-task-defintion
+      LaunchType: FARGATE
+      PlatformVersion: LATEST
+      DeploymentConfiguration:
+        DeploymentCircuitBreaker:
+          Enable: true
+          Rollback: false
+      PropagateTags: TASK_DEFINITION
+      Tags:
+        - Key: Project
+          Value: BadEcsPropagateTagsExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: ECSServiceWithWrongPropagateTagsValue

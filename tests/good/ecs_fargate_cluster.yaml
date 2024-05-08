@@ -10,6 +10,7 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      PropagateTags: SERVICE
       Tags:
         - Key: Project
           Value: EcsExample
@@ -29,6 +30,7 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      PropagateTags: SERVICE
       Tags:
         - Key: Project
           Value: EcsExample
@@ -49,6 +51,7 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      PropagateTags: SERVICE
       Tags:
         - Key: Project
           Value: EcsExample
@@ -69,6 +72,7 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      PropagateTags: SERVICE
       Tags:
         - Key: Project
           Value: EcsExample

@@ -45,6 +45,7 @@ User Rules (E9XXX)
 * I9302 EcrRepositoryAutocleanupTag
 * I9303 CostAllocationTags
 * I9304 CostAllocationTagProject
+* I9305 EcsServicePropagateTags
 * W9301 S3BucketPublicAccess
 * W9302 S3BucketEncryption
 * W9303 CloudfrontDistributionLogging

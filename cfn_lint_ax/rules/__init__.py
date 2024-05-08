@@ -15,7 +15,7 @@ from .intrinsic_function import IntrinsicFunctionSubUnresolvedObject
 from .metadata import MetadataAxChangesetAutoApprove
 from .s3 import S3BucketEncryption, S3BucketPublicAccess
 from .sqs import SqsQueueEncryption
-from .tags import CostAllocationTagProject, CostAllocationTags
+from .tags import CostAllocationTagProject, CostAllocationTags, EcsServicePropagateTags
 
 __all__ = [
     "CertificateManagerCertificateNameTag",
@@ -30,6 +30,7 @@ __all__ = [
     "EcrRepositoryAutocleanupTag",
     "EcsServiceDeploymentConfiguration",
     "EcsServiceFargatePlatformVersionNotOutdated",
+    "EcsServicePropagateTags",
     "IntrinsicFunctionSubUnresolvedObject",
     "MetadataAxChangesetAutoApprove",
     "S3BucketEncryption",

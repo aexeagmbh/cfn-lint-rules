@@ -12,6 +12,7 @@ Resources:
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: false
+      PropagateTags: SERVICE
       Tags:
         - Key: Project
           Value: BadEcsExample
