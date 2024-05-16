@@ -87,23 +87,27 @@ class CostAllocationTags(_CostAllocationTagBase):
                 "Role"
             ):
                 possible_serverless_function_id = resource_name.removesuffix("Role")
-                # function_resources = cfn.get_resources("AWS::Serverless::Function")
                 function_resources = cfn.get_resources("AWS::Lambda::Function")
                 if possible_serverless_function_id in function_resources:
                     return {possible_serverless_function_id, resource_name}
-            if resource_obj.get(
-                "Type"
-            ) == "AWS::ApiGatewayV2::Stage" and resource_name.endswith(
-                "ApiGatewayDefaultStage"
-            ):
-                possible_serverless_httpapi_id = resource_name.removesuffix(
-                    "ApiGatewayDefaultStage"
-                )
-                if possible_serverless_httpapi_id == "":
-                    possible_serverless_httpapi_id = "Api"
-                httpapi_resources = cfn.get_resources("AWS::ApiGatewayV2::Api")
-                if possible_serverless_httpapi_id in httpapi_resources:
-                    return {possible_serverless_httpapi_id, resource_name}
+            if resource_obj.get("Type") == "AWS::ApiGatewayV2::Stage":
+                if resource_name.endswith("ApiGatewayDefaultStage"):
+                    possible_serverless_httpapi_id = resource_name.removesuffix(
+                        "ApiGatewayDefaultStage"
+                    )
+                    if possible_serverless_httpapi_id == "":
+                        possible_serverless_httpapi_id = "Api"
+                    httpapi_resources = cfn.get_resources("AWS::ApiGatewayV2::Api")
+                    if possible_serverless_httpapi_id in httpapi_resources:
+                        return {possible_serverless_httpapi_id, resource_name}
+                else:
+                    httpapi_resources = cfn.get_resources("AWS::ApiGatewayV2::Api")
+                    possible_httpapi_resources_id = {
+                        k
+                        for k in httpapi_resources.keys()
+                        if resource_name.startswith(k)
+                    }
+                    return {resource_name}.union(possible_httpapi_resources_id)
             if resource_obj.get(
                 "Type"
             ) == "AWS::ApiGatewayV2::DomainName" and resource_name.startswith(
@@ -111,6 +115,12 @@ class CostAllocationTags(_CostAllocationTagBase):
             ):
                 httpapi_resources = cfn.get_resources("AWS::ApiGatewayV2::Api")
                 return {resource_name}.union(httpapi_resources.keys())
+            if resource_obj.get("Type") == "AWS::ApiGateway::Stage":
+                httpapi_resources = cfn.get_resources("AWS::ApiGateway::RestApi")
+                possible_httpapi_resources_id = {
+                    k for k in httpapi_resources.keys() if resource_name.startswith(k)
+                }
+                return {resource_name}.union(possible_httpapi_resources_id)
 
         return {resource_name}
 
@@ -148,7 +158,11 @@ class CostAllocationTags(_CostAllocationTagBase):
             for required_tag in ["Project", "ProjectPart", "ProjectPartDetail"]:
                 if not _is_tag_present(required_tag):
                     missing_tags.append(required_tag)
-            if missing_tags:
+            if missing_tags and not (
+                cfn.has_serverless_transform()
+                and resource_obj.get("Type")
+                in {"AWS::CodeDeploy::Application", "AWS::CodeDeploy::DeploymentGroup"}
+            ):
                 message = f"Missing CostAllocationTag(s) {', '.join(missing_tags)} at {'/'.join(path)}"
                 matches.append(RuleMatch(path, message))
 

@@ -1,0 +1,49 @@
+---
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: MyStage
+      PropagateTags: true
+      Tags:
+        Project: ServerlessApiExample
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: MyApi
+
+  MyHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: MyStage
+      PropagateTags: true
+      Tags:
+        Project: ServerlessApiExample
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: MyHttpApi
+
+  MyHttpApi2:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      PropagateTags: true
+      Tags:
+        Project: ServerlessApiExample
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: MyHttpApi2
+
+  MyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs20.x
+      CodeUri: .
+      AutoPublishAlias: live
+      Tags:
+        Project: ServerlessApiExample
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: MyFunction
+      PropagateTags: true
+      DeploymentPreference:
+        Enabled: true
+        Type: Canary10Percent5Minutes
+        Role: DeploymentRoleArn
