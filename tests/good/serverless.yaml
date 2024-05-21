@@ -11,6 +11,10 @@ Resources:
         Project: ServerlessApiExample
         ProjectPart: !Ref AWS::StackName
         ProjectPartDetail: MyApi
+      Domain:
+        BasePath: v1
+        CertificateArn: ApiCertificateArn
+        DomainName: example.com
 
   MyHttpApi:
     Type: AWS::Serverless::HttpApi

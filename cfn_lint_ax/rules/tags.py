@@ -121,6 +121,13 @@ class CostAllocationTags(_CostAllocationTagBase):
                     k for k in httpapi_resources.keys() if resource_name.startswith(k)
                 }
                 return {resource_name}.union(possible_httpapi_resources_id)
+            if resource_obj.get(
+                "Type"
+            ) == "AWS::ApiGateway::DomainName" and resource_name.startswith(
+                "ApiGatewayDomainName"
+            ):
+                restapi_resources = cfn.get_resources("AWS::ApiGateway::RestApi")
+                return {resource_name}.union(restapi_resources.keys())
 
         return {resource_name}
 
