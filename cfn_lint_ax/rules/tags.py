@@ -79,7 +79,7 @@ class CostAllocationTags(_CostAllocationTagBase):
 
         return matches
 
-    def expeted_detail_tag_values(
+    def expeted_detail_tag_values(  # pylint: disable=too-many-return-statements
         self, resource_name: str, resource_obj: dict[str, object], cfn: Template
     ) -> set[str]:
         if cfn.has_serverless_transform():
