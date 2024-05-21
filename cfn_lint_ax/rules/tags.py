@@ -23,7 +23,7 @@ class _CostAllocationTagBase(CloudFormationLintRule):  # type: ignore[misc]
         if "Tags" in resource_obj.get("Properties", {}):
             return True
         if resource_obj.get("Type") == "AWS::ApiGatewayV2::Api":
-            if "tags" in resource_obj.get("Properties", {}).get("Body"):
+            if "tags" in resource_obj.get("Properties", {}).get("Body", {}):
                 return True
         return False
 
