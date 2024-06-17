@@ -20,19 +20,19 @@ aws-sam-translator==1.89.0 \
     --hash=sha256:843be1b5ca7634f700ad0c844a7e0dc42858f35da502e91691473eadd1731ded \
     --hash=sha256:fff1005d0b1f3cb511d0ac7e85f54af06afc9d9e433df013a2338d7a0168d174
     # via cfn-lint
-boto3==1.34.122 \
-    --hash=sha256:56840d8ce91654d182f1c113f0791fa2113c3aa43230c50b4481f235348a6037 \
-    --hash=sha256:b2d7400ff84fa547e53b3d9acfa3c95d65d45b5886ba1ede1f7df4768d1cc0b1
+boto3==1.34.127 \
+    --hash=sha256:58ccdeae3a96811ecc9d5d866d8226faadbd0ee1891756e4a04d5186e9a57a64 \
+    --hash=sha256:d370befe4fb7aea5bc383057d7dad18dda5d0cf3cd3295915bcc8c8c4191905c
     # via aws-sam-translator
-botocore==1.34.122 \
-    --hash=sha256:6d75df3af831b62f0c7baa109728d987e0a8d34bfadf0476eb32e2f29a079a36 \
-    --hash=sha256:9374e16a36f1062c3e27816e8599b53eba99315dfac71cc84fc3aee3f5d3cbe3
+botocore==1.34.127 \
+    --hash=sha256:a377871742c40603d559103f19acb7bc93cfaf285e68f21b81637ec396099877 \
+    --hash=sha256:e14fa28c8bb141de965e700f88b196d17c67a703c7f0f5c7e14f7dd1cf636011
     # via
     #   boto3
     #   s3transfer
-cfn-lint==0.87.5 \
-    --hash=sha256:41e1195712c84d4de70c2ede1113fef0d62b9f2fb237d77e18da4328463c5660 \
-    --hash=sha256:46edd0ed2c46991a0b88df47ea668a602838bafec8993bb23ff5be8a42388b6e
+cfn-lint==0.87.7 \
+    --hash=sha256:85f6b7f32cf155a74d670d53f86b39f99cfc282b02158d98fdab9fc1dba0809e \
+    --hash=sha256:ac6ac86dde1ba3d0fb0e217a4d329239a98f00af7862e4fa5ace6c416c4e056c
     # via -r base.in
 jmespath==1.0.1 \
     --hash=sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980 \
@@ -52,9 +52,9 @@ jsonpickle==3.2.1 \
     --hash=sha256:4b6d7640974199f7acf9035295365b5a1a71a91109effa15ba170fbb48cf871c \
     --hash=sha256:ec291e4719674dd35d390fbdb521ac6517fbe9f541d361c8bffc8131133b1661
     # via jschema-to-python
-jsonpointer==2.4 \
-    --hash=sha256:15d51bba20eea3165644553647711d150376234112651b4f1811022aecad7d7a \
-    --hash=sha256:585cee82b70211fa9e6043b7bb89db6e1aa49524340dde8ad6b63206ea689d88
+jsonpointer==3.0.0 \
+    --hash=sha256:13e088adc14fca8b6aa8177c044e12701e6ad4b28ff10e65f2267a90109c9942 \
+    --hash=sha256:2b2d729f2091522d61c3b31f82e11870f60b68f43fbc705cb76bf4b832af59ef
     # via jsonpatch
 jsonschema==4.22.0 \
     --hash=sha256:5b22d434a45935119af990552c862e5d6d564e8f6601206b305a61fdf661a2b7 \
@@ -84,9 +84,9 @@ pbr==6.0.0 \
     # via
     #   jschema-to-python
     #   sarif-om
-pydantic==2.7.3 \
-    --hash=sha256:c46c76a40bb1296728d7a8b99aa73dd70a48c3510111ff290034f860c99c419e \
-    --hash=sha256:ea91b002777bf643bb20dd717c028ec43216b24a6001a280f83877fd2655d0b4
+pydantic==2.7.4 \
+    --hash=sha256:0c84efd9548d545f63ac0060c1e4d39bb9b14db8b3c0652338aecc07b5adec52 \
+    --hash=sha256:ee8538d41ccb9c0a9ad3e0e5f07bf15ed8015b481ced539a1759d8cc89ae90d0
     # via aws-sam-translator
 pydantic-core==2.18.4 \
     --hash=sha256:01dd777215e2aa86dfd664daed5957704b769e726626393438f9c87690ce78c3 \
