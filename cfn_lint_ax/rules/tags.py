@@ -6,8 +6,8 @@ SPDX-License-Identifier: MIT-0
 from logging import getLogger
 from typing import Any, TypedDict, Union
 
-import cfnlint.helpers
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
+from cfnlint.schema import PROVIDER_SCHEMA_MANAGER
 from cfnlint.template import Template
 
 LOGGER = getLogger(__name__)
@@ -64,20 +64,6 @@ class CostAllocationTags(_CostAllocationTagBase):
         "Check Cost Allocation Tags are included on resources that support it."
     )
     tags = ["resources", "tags"]
-
-    def get_resources_with_tags(self, region: str) -> list[str]:
-        """Get resource types that support tags"""
-        resourcespecs = cfnlint.helpers.RESOURCE_SPECS[region]
-        resourcetypes = resourcespecs["ResourceTypes"]
-
-        matches = []
-        for resourcetype, resourceobj in resourcetypes.items():
-            propertiesobj = resourceobj.get("Properties")
-            if propertiesobj:
-                if "Tags" in propertiesobj:
-                    matches.append(resourcetype)
-
-        return matches
 
     def expeted_detail_tag_values(  # pylint: disable=too-many-return-statements
         self, resource_name: str, resource_obj: dict[str, object], cfn: Template
@@ -141,11 +127,17 @@ class CostAllocationTags(_CostAllocationTagBase):
 
         matches = []
 
-        resources_tags = self.get_resources_with_tags(cfn.regions[0])
         resources = cfn.get_resources()
         for resource_name, resource_obj in resources.items():
-            resource_type = resource_obj.get("Type", "")
-            if resource_type not in resources_tags:
+            if not any(
+                "Tags" in schema.schema["properties"]
+                for (
+                    _region,
+                    schema,
+                ) in PROVIDER_SCHEMA_MANAGER.get_resource_schemas_by_regions(
+                    resource_obj.get("Type", ""), cfn.regions
+                )
+            ):
                 continue
 
             path = ["Resources", resource_name, "Properties", "Tags"]
@@ -213,20 +205,6 @@ class CostAllocationTagProject(_CostAllocationTagBase):
     )
     tags = ["resources", "tags"]
 
-    def get_resources_with_tags(self, region: str) -> list[str]:
-        """Get resource types that support tags"""
-        resourcespecs = cfnlint.helpers.RESOURCE_SPECS[region]
-        resourcetypes = resourcespecs["ResourceTypes"]
-
-        matches = []
-        for resourcetype, resourceobj in resourcetypes.items():
-            propertiesobj = resourceobj.get("Properties")
-            if propertiesobj:
-                if "Tags" in propertiesobj:
-                    matches.append(resourcetype)
-
-        return matches
-
     def match(  # pylint: disable=too-many-locals
         self, cfn: Template
     ) -> list[RuleMatch]:
@@ -234,12 +212,18 @@ class CostAllocationTagProject(_CostAllocationTagBase):
 
         matches = []
 
-        resources_tags = self.get_resources_with_tags(cfn.regions[0])
         resources = cfn.get_resources()
         seen_values_of_project_tag = set()
         for resource_obj in resources.values():
-            resource_type = resource_obj.get("Type", "")
-            if resource_type not in resources_tags:
+            if not any(
+                "Tags" in schema.schema["properties"]
+                for (
+                    _region,
+                    schema,
+                ) in PROVIDER_SCHEMA_MANAGER.get_resource_schemas_by_regions(
+                    resource_obj.get("Type", ""), cfn.regions
+                )
+            ):
                 continue
 
             tags_as_list = self.get_tags(resource_obj)
