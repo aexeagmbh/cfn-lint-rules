@@ -85,3 +85,27 @@ Resources:
           Value: !Ref AWS::StackName
         - Key: ProjectPartDetail
           Value: Project3
+
+  LambdaContainerProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      ServiceRole: !ImportValue ServiceRoleArn
+      Artifacts:
+        Type: NO_ARTIFACTS
+      Environment:
+        Type: LINUX_LAMBDA_CONTAINER
+        ComputeType: BUILD_LAMBDA_1GB
+        Image: aws/codebuild/amazonlinux-aarch64-lambda-standard:python3.12
+      Source:
+        Location: codebuild-demo-test/0123ab9a371ebf0187b0fe5614fbb72c
+        Type: S3
+      LogsConfig:
+        CloudWatchLogs:
+          Status: DISABLED
+      Tags:
+        - Key: Project
+          Value: CodeBuildExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: LambdaContainerProject

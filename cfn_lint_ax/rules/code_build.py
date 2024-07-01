@@ -79,6 +79,10 @@ class CodeBuildProjectImage(CloudFormationLintRule):  # type: ignore[misc]
             image = environment.get("Image") or ""
             if not image.startswith("aws/codebuild/"):
                 continue
+            if image.startswith(
+                "aws/codebuild/amazonlinux-aarch64-lambda-standard:"
+            ) or image.startswith("aws/codebuild/amazonlinux-x86_64-lambda-standard:"):
+                continue
             if not (
                 image.startswith("aws/codebuild/standard:")
                 or image.startswith("aws/codebuild/amazonlinux2-x86_64-standard:")
