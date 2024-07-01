@@ -51,3 +51,13 @@ Resources:
         Enabled: true
         Type: Canary10Percent5Minutes
         Role: DeploymentRoleArn
+
+  MyStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      DefinitionUri: s3://bucket/key
+      Tags:
+        Project: ServerlessApiExample
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: MyStateMachine
+      PropagateTags: true

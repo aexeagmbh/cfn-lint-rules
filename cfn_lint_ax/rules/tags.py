@@ -86,9 +86,12 @@ class CostAllocationTags(_CostAllocationTagBase):
             if resource_obj.get("Type") == "AWS::IAM::Role" and resource_name.endswith(
                 "Role"
             ):
+
                 possible_serverless_function_id = resource_name.removesuffix("Role")
-                function_resources = cfn.get_resources("AWS::Lambda::Function")
-                if possible_serverless_function_id in function_resources:
+                serverless_resources = cfn.get_resources(
+                    ["AWS::Lambda::Function", "AWS::StepFunctions::StateMachine"]
+                )
+                if possible_serverless_function_id in serverless_resources:
                     return {possible_serverless_function_id, resource_name}
             if resource_obj.get("Type") == "AWS::ApiGatewayV2::Stage":
                 if resource_name.endswith("ApiGatewayDefaultStage"):
