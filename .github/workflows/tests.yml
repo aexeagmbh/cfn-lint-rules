@@ -29,7 +29,7 @@ jobs:
         id: req-installed
       - name: Run pytest
         run: |
-         python -m pytest
+          python -m pytest
       - name: Run black
         run: |
           python -m black --check --verbose .
