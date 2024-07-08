@@ -1,5 +1,49 @@
 # See PEP 518 for the spec of this file
 # https://www.python.org/dev/peps/pep-0518/
+[build-system]
+requires = ["setuptools >= 70.2.0", "wheel >= 0.43.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "cfn_lint_ax"
+version = "0.0.20"
+authors = [
+    {name = "AX Semantics", email = "infrastructure@ax-semantics.com"},
+]
+description = "Rules for cfn lint."
+requires-python = ">=3.9"
+keywords = ["cloudformation", "lint", "cfn-lint"]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "cfn-lint >= 1.5",
+]
+dynamic = ["readme"]
+
+[project.urls]
+Source = "https://github.com/aexeagmbh/cfn-lint-rules"
+Tracker = "https://github.com/aexeagmbh/cfn-lint-rules/issues"
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.md"], content-type = "text/markdown"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cfn_lint_ax", "cfn_lint_ax.*"]
+namespaces = true
+
 
 [tool.black]
 # See https://github.com/ambv/black/blob/master/pyproject.toml
