@@ -18,19 +18,19 @@ aws-sam-translator==1.89.0 \
     --hash=sha256:843be1b5ca7634f700ad0c844a7e0dc42858f35da502e91691473eadd1731ded \
     --hash=sha256:fff1005d0b1f3cb511d0ac7e85f54af06afc9d9e433df013a2338d7a0168d174
     # via cfn-lint
-boto3==1.34.144 \
-    --hash=sha256:2f3e88b10b8fcc5f6100a9d74cd28230edc9d4fa226d99dd40a3ab38ac213673 \
-    --hash=sha256:b8433d481d50b68a0162c0379c0dd4aabfc3d1ad901800beb5b87815997511c1
+boto3==1.34.145 \
+    --hash=sha256:69d5afb7a017d07dd6bdfb680d2912d5d369b3fafa0a45161207d9f393b14d7e \
+    --hash=sha256:ac770fb53dde1743aec56bd8e56b7ee2e2f5ad42a37825968ec4ff8428822640
     # via aws-sam-translator
-botocore==1.34.144 \
-    --hash=sha256:4215db28d25309d59c99507f1f77df9089e5bebbad35f6e19c7c44ec5383a3e8 \
-    --hash=sha256:a2cf26e1bf10d5917a2285e50257bc44e94a1d16574f282f3274f7a5d8d1f08b
+botocore==1.34.145 \
+    --hash=sha256:2e72e262de02adcb0264ac2bac159a28f55dbba8d9e52aa0308773a42950dff5 \
+    --hash=sha256:edf0fb4c02186ae29b76263ac5fda18b0a085d334a310551c9984407cf1079e6
     # via
     #   boto3
     #   s3transfer
-cfn-lint==1.6.1 \
-    --hash=sha256:0fb3905251f5d7befcea91934c72551b83bf1687cac398ea7370b41661c61cf6 \
-    --hash=sha256:3698d332b8ea190c3b97e01c658b85ed962a6665b1185784f97774770a950edd
+cfn-lint==1.8.2 \
+    --hash=sha256:5bab320be08d8906f2535cae851e96ac35b046a2da54de1d9e28d8bbac7d34d9 \
+    --hash=sha256:8c3f8a6946d7829c4e4858bb646c15b0b20c8290c2200c69d9e008b5e5bcadaf
     # via -r base.in
 jmespath==1.0.1 \
     --hash=sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980 \
@@ -412,9 +412,9 @@ six==1.16.0 \
     --hash=sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926 \
     --hash=sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254
     # via python-dateutil
-sympy==1.13.0 \
-    --hash=sha256:3b6af8f4d008b9a1a6a4268b335b984b23835f26d1d60b0526ebc71d48a25f57 \
-    --hash=sha256:6b0b32a4673fb91bd3cac3b55406c8e01d53ae22780be467301cc452f6680c92
+sympy==1.13.1 \
+    --hash=sha256:9cebf7e04ff162015ce31c9c6c9144daa34a93bd082f54fd8f12deca4f47515f \
+    --hash=sha256:db36cdc64bf61b9b24578b6f7bab1ecdd2452cf008f34faa33776680c26d66f8
     # via cfn-lint
 typing-extensions==4.12.2 \
     --hash=sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d \
