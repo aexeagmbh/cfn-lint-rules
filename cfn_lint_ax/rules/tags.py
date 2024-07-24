@@ -144,7 +144,7 @@ class CostAllocationTags(_CostAllocationTagBase):
 
             tags_as_list = self.get_tags(resource_obj)
 
-            def _get_tag_value(key: str) -> Union[str, dict[str, Any]]:  # type: ignore[misc]
+            def _get_tag_value(key: str) -> Union[str, dict[str, Any]]:
                 for tag in tags_as_list:  # pylint: disable=cell-var-from-loop
                     if tag["Key"] == key:
                         return tag["Value"]
@@ -228,7 +228,7 @@ class CostAllocationTagProject(_CostAllocationTagBase):
 
             tags_as_list = self.get_tags(resource_obj)
 
-            def _get_tag_value(key: str) -> Union[str, dict[str, Any]]:  # type: ignore[misc]
+            def _get_tag_value(key: str) -> Union[str, dict[str, Any]]:
                 for tag in tags_as_list:  # pylint: disable=cell-var-from-loop
                     if tag["Key"] == key:
                         return tag["Value"]
