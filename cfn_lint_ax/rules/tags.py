@@ -163,7 +163,11 @@ class CostAllocationTags(_CostAllocationTagBase):
             if missing_tags and not (
                 cfn.has_serverless_transform()
                 and resource_obj.get("Type")
-                in {"AWS::CodeDeploy::Application", "AWS::CodeDeploy::DeploymentGroup"}
+                in {
+                    "AWS::CodeDeploy::Application",
+                    "AWS::CodeDeploy::DeploymentGroup",
+                    "AWS::Lambda::EventSourceMapping",
+                }
             ):
                 message = f"Missing CostAllocationTag(s) {', '.join(missing_tags)} at {'/'.join(path)}"
                 matches.append(RuleMatch(path, message))
