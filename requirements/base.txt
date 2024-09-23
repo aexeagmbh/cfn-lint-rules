@@ -28,9 +28,9 @@ botocore==1.35.24 \
     # via
     #   boto3
     #   s3transfer
-cfn-lint==1.14.2 \
-    --hash=sha256:34343ec06fc9a08d8947fa1cd61d1e8ad3430ee745654099752da6f7d72f880d \
-    --hash=sha256:e88c473684fe78a23b6ccdce2fd393cf6a52a3a4b2b6e7160888bd41bd07aa8c
+cfn-lint==1.15.0 \
+    --hash=sha256:a0da5021ca1176bb42fcb35e4633af6d230cde95bd2fc42e63e41ae2ba413d17 \
+    --hash=sha256:d49fc9b2c0880c7b0da15fdbae722051f0dc560106321560e89637cbfec4f3ec
     # via -r base.in
 jmespath==1.0.1 \
     --hash=sha256:02e2e4cc71b5bcab88332eebf907519190dd9e6e82107fa7f83b1003a6252980 \

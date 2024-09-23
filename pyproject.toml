@@ -1,7 +1,7 @@
 # See PEP 518 for the spec of this file
 # https://www.python.org/dev/peps/pep-0518/
 [build-system]
-requires = ["setuptools >= 70.2.0", "wheel >= 0.43.0"]
+requires = ["setuptools >= 75.1.0", "wheel >= 0.44.0"]
 build-backend = "setuptools.build_meta"
 
 
@@ -28,7 +28,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-    "cfn-lint >= 1.5",
+    "cfn-lint >= 1.15",
 ]
 dynamic = ["readme"]
 
