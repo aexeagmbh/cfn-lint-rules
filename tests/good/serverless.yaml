@@ -51,6 +51,12 @@ Resources:
         Enabled: true
         Type: Canary10Percent5Minutes
         Role: DeploymentRoleArn
+      Events:
+        MySQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !ImportValue 'MySQSQueue'
+            BatchSize: 10
 
   MyStateMachine:
     Type: AWS::Serverless::StateMachine
