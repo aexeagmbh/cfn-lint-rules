@@ -77,12 +77,12 @@ disable = [
 [tool.winky]
 target_branch = "winky"
 
-[[tool.winky.pip_compile]]
+[[tool.winky.uv]]
 file = "./requirements/base.in"
 hashes = true
 python = "3.9"
 
-[[tool.winky.pip_compile]]
+[[tool.winky.uv]]
 file = "./requirements/dev.in"
 hashes = true
 python = "3.9"
