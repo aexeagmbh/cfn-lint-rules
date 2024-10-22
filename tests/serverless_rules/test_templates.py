@@ -71,7 +71,7 @@ def test_template(filename, rule, mode, rules):
     match_ids = [match.rule.id for match in matches]
 
     # No non-serverless errors
-    assert len([m for m in match_ids if m[1] != "S"]) == 0
+    assert sum(1 for m in match_ids if m[1] != "S") == 0, matches
 
     if mode == "fail":
         assert rule in match_ids
