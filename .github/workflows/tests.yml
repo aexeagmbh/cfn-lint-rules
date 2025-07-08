@@ -20,62 +20,50 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Get pip cache dir
-        id: pip-cache
-        run: |
-          echo "dir=$(python -m pip cache dir)" >> $GITHUB_OUTPUT
-      - name: Cache dependencies
-        uses: actions/cache@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements/*.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Install requirements
-        run: |
-          python -m pip install --upgrade pip setuptools wheel
-          python -m pip install --no-deps -r ./requirements/base.txt
-          python -m pip install --no-deps -r ./requirements/dev.txt
-        id: req-installed
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+          version: ">=0.7.19"
+        id: install-uv
       - name: Run pytest
         run: |
-          python -m pytest
-        env:
-          PYTHONPATH: ./src
+          uv run pytest
       - name: Run black
         run: |
-          python -m black --check --verbose .
-        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+          uv run black --check --verbose .
+        if: ${{ !cancelled() && steps.install-uv.outcome == 'success' }}
       - name: Run flake8
         run: |
-          python -m flake8 .
-        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+          uv run flake8 .
+        if: ${{ !cancelled() && steps.install-uv.outcome == 'success' }}
       - name: Run pylint
         run: |
-          python -m pylint --recursive=y --reports=y --verbose ./
-        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+          uv run pylint --recursive=y --reports=y --verbose ./
+        if: ${{ !cancelled() && steps.install-uv.outcome == 'success' }}
       - name: Run isort
         run: |
-          python -m isort --check-only --diff .
-        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+          uv run isort --check-only --diff .
+        if: ${{ !cancelled() && steps.install-uv.outcome == 'success' }}
       - name: Run yamllint
         run: |
           find ./ -type f \( -regex ".*\.ya?ml" -o -iname ".yamllint" -o -iname ".cfnlintrc" \) \
             -print0 | xargs -0 \
-            python -m yamllint --strict
-        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+            uv run yamllint --strict
+        if: ${{ !cancelled() && steps.install-uv.outcome == 'success' }}
       - name: Run mypy
         run: |
-          python -m mypy .
-        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+          uv run mypy .
+        if: ${{ !cancelled() && steps.install-uv.outcome == 'success' }}
       - name: Build package
         run: |
-          python -m build .
-        if: ${{ !cancelled() && steps.req-installed.outcome == 'success' }}
+          uv build .
+        if: ${{ !cancelled() && steps.install-uv.outcome == 'success' }}
         id: build-package
-      - name: Check long description
+      - name: Check distribution files
         run: |
-          python -m twine check dist/*
+          uv run --only-group publish twine check dist/*
         if: ${{ !cancelled() && steps.build-package.outcome == 'success' }}
       - uses: aexeagmbh/gh-actions-ntfy-slack@main
         with:

@@ -25,8 +25,7 @@ python -m cfnlint template.yaml -a cfn_lint_ax.rules
 Run Tests
 ---------
 ```bash
-docker compose build --pull
-docker compose run --rm rules
+uv run pytest
 ```
 
 

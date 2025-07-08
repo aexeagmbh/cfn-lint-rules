@@ -3,12 +3,12 @@
 set -ex
 
 
-black .
-isort .
-python -m flake8 .
-python -m pylint --recursive=y --reports=y --verbose ./
-mypy .
-yamllint --strict tests/good/*.yaml tests/bad/*.yaml docker-compose.yml .yamllint .cfnlintrc .github/workflows/*.yml
-pytest
-python3 -m build .
-python3 -m twine check dist/*
+uv run black .
+uv run isort .
+uv run flake8 .
+uv run pylint --recursive=y --reports=y --verbose ./
+uv run mypy .
+uv run yamllint --strict tests/good/*.yaml tests/bad/*.yaml .yamllint .cfnlintrc .github/workflows/*.yml
+uv run pytest
+uv build .
+uv run --only-group publish twine check dist/*

@@ -36,6 +36,25 @@ dynamic = ["readme"]
 Source = "https://github.com/aexeagmbh/cfn-lint-rules"
 Tracker = "https://github.com/aexeagmbh/cfn-lint-rules/issues"
 
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "flake8>=7.3.0",
+    "flake8-annotations-complexity>=0.1.0",
+    "flake8-builtins>=2.5.0",
+    "flake8-comprehensions>=3.16.0",
+    "isort>=6.0.1",
+    "mypy>=1.16.1",
+    "pylint>=3.3.7",
+    "pytest>=8.4.1",
+    "pytest-sugar>=1.0.0",
+    "yamllint>=1.37.1",
+]
+publish = [
+    "twine>=6.1.0",
+]
+
+
 [tool.setuptools.dynamic]
 readme = {file = ["README.md"], content-type = "text/markdown"}
 
@@ -63,6 +82,9 @@ line_length = 88
 multi_line_output = 3
 
 
+[tool.pylint.main]
+ignore = [".venv"]
+
 [tool.pylint."messages control"]
 disable = [
     "attribute-defined-outside-init",
@@ -72,15 +94,16 @@ disable = [
 ]
 
 
+[tool.uv]
+
+[[tool.uv.index]]
+name = "PyPI"
+url = "https://pypi.org/simple"
+default = true
+
+
 [tool.winky]
 target_branch = "winky"
 
-[[tool.winky.uv]]
-file = "./requirements/base.in"
-hashes = true
-python = "3.9"
-
-[[tool.winky.uv]]
-file = "./requirements/dev.in"
-hashes = true
-python = "3.9"
+[[tool.winky.uv_lock]]
+file = "./uv.lock"
