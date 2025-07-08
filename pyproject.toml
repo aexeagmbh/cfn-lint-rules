@@ -82,6 +82,38 @@ line_length = 88
 multi_line_output = 3
 
 
+[tool.mypy]
+# import discovery
+ignore_missing_imports = true
+follow_imports = "silent"
+follow_imports_for_stubs = false
+# dynamic typing
+disallow_any_unimported = false
+disallow_any_expr = false
+disallow_any_decorated = false
+disallow_any_explicit = false
+disallow_any_generics = true
+disallow_subclassing_any = true
+# untyped definitions and calls
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+# None and optional handling
+no_implicit_optional = false
+strict_optional = true
+# warnings
+warn_unused_ignores = true
+warn_no_return = true
+warn_return_any = false
+# miscellaneous
+warn_redundant_casts = true
+# platform
+python_version = "3.9"
+exclude = "build/"
+
+
 [tool.pylint.main]
 ignore = [".venv"]
 
