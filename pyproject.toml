@@ -41,7 +41,7 @@ Tracker = "https://github.com/aexeagmbh/cfn-lint-rules/issues"
 readme = {file = ["README.md"], content-type = "text/markdown"}
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 include = ["cfn_lint_ax", "cfn_lint_ax.*"]
 namespaces = true
 
