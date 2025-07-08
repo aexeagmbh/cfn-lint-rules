@@ -48,7 +48,6 @@ namespaces = true
 [tool.black]
 # See https://github.com/ambv/black/blob/master/pyproject.toml
 line-length = 88
-target_version = ["py39", "py310", "py311", "py312", "py313"]
 
 
 [tool.isort]
