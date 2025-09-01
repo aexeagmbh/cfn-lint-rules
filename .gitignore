@@ -1,5 +1,8 @@
 ### Python ###
 /src/*.egg-info/
+dist/
+.pytest_cache/
+.venv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
