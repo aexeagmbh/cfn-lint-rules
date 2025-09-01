@@ -546,5 +546,5 @@ def test_bad_template_is_in_test_parameter(bad_template: str) -> None:
 def test_all_test_parameters_have_at_least_one_expected_error() -> None:
     for n, parameters in enumerate(test_parameters):
         assert (
-            len(parameters.values[2]) > 0
+            isinstance(parameters.values[2], list) and len(parameters.values[2]) > 0
         ), f"test_parameter[{n}] ({parameters.values[0]}) has no expected errors"
