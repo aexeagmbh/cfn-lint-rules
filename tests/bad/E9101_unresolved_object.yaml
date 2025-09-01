@@ -38,4 +38,11 @@ Resources:
         - Arn: !Sub 'arn:${AWS::Partition}:codepipeline:${AWS::Region}:${AWS::AccountId}:<troposphere.Ref object at 0x7f9e52755bb0>'
           Id: Target0
           RoleArn: !GetAtt 'CodePipelineEventsRole.Arn'
+      Tags:
+        - Key: Project
+          Value: BadUnresolvedObjectExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: CodePipelineEventsRule
     Type: AWS::Events::Rule

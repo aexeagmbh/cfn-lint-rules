@@ -41,13 +41,13 @@ dev = [
     "black>=25.1.0",
     "flake8>=7.3.0",
     "flake8-annotations-complexity>=0.1.0",
-    "flake8-builtins>=2.5.0",
+    "flake8-builtins>=3.0.0",
     "flake8-comprehensions>=3.16.0",
     "isort>=6.0.1",
-    "mypy>=1.16.1",
-    "pylint>=3.3.7",
+    "mypy>=1.17.1",
+    "pylint>=3.3.8",
     "pytest>=8.4.1",
-    "pytest-sugar>=1.0.0",
+    "pytest-sugar>=1.1.1",
     "yamllint>=1.37.1",
 ]
 publish = [
