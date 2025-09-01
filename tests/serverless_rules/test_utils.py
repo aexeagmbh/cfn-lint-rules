@@ -11,41 +11,72 @@ from cfn_lint_ax import _utils as utils
 
 value_test_cases = [
     # str
-    {"input": "MyString", "id": "MyString", "references": []},
+    pytest.param(
+        {"input": "MyString", "id": "MyString", "references": []}, id="str"
+    ),
     # Ref
-    {"input": {"Ref": "MyResource"}, "id": "MyResource", "references": ["MyResource"]},
+    pytest.param(
+        {
+            "input": {"Ref": "MyResource"},
+            "id": "MyResource",
+            "references": ["MyResource"],
+        },
+        id="Ref",
+    ),
     # Fn::GetAtt
-    {
-        "input": {"Fn::GetAtt": ["MyResource", "Arn"]},
-        "id": "MyResource.Arn",
-        "references": ["MyResource"],
-    },
+    pytest.param(
+        {
+            "input": {"Fn::GetAtt": ["MyResource", "Arn"]},
+            "id": "MyResource.Arn",
+            "references": ["MyResource"],
+        },
+        id="Fn::GetAtt",
+    ),
     # Fn::Join
-    {"input": {"Fn::Join": ["/", ["ABC", "DEF"]]}, "id": "ABC/DEF", "references": []},
+    pytest.param(
+        {
+            "input": {"Fn::Join": ["/", ["ABC", "DEF"]]},
+            "id": "ABC/DEF",
+            "references": [],
+        },
+        id="Fn::Join",
+    ),
     # Fn::Join with references
-    {
-        "input": {"Fn::Join": ["/", ["ABC", {"Ref": "MyResource"}]]},
-        "id": "ABC/MyResource",
-        "references": ["MyResource"],
-    },
+    pytest.param(
+        {
+            "input": {"Fn::Join": ["/", ["ABC", {"Ref": "MyResource"}]]},
+            "id": "ABC/MyResource",
+            "references": ["MyResource"],
+        },
+        id="Fn::Join_with_references",
+    ),
     # Fn::Sub
-    {
-        "input": {"Fn::Sub": "abc-${MyResource}"},
-        "id": "abc-${MyResource}",
-        "references": ["MyResource"],
-    },
+    pytest.param(
+        {
+            "input": {"Fn::Sub": "abc-${MyResource}"},
+            "id": "abc-${MyResource}",
+            "references": ["MyResource"],
+        },
+        id="Fn::Sub",
+    ),
     # Fn::Sub with hard-coded variables
-    {
-        "input": {"Fn::Sub": ["abc-${MyVar}", {"MyVar": "MyResource"}]},
-        "id": "abc-MyResource",
-        "references": [],
-    },
+    pytest.param(
+        {
+            "input": {"Fn::Sub": ["abc-${MyVar}", {"MyVar": "MyResource"}]},
+            "id": "abc-MyResource",
+            "references": [],
+        },
+        id="Fn::Sub_with_hard_coded_variables",
+    ),
     # Fn::Sub with variables and references
-    {
-        "input": {"Fn::Sub": ["abc-${MyVar}", {"MyVar": {"Ref": "MyResource"}}]},
-        "id": "abc-${MyVar}",
-        "references": ["MyResource"],
-    },
+    pytest.param(
+        {
+            "input": {"Fn::Sub": ["abc-${MyVar}", {"MyVar": {"Ref": "MyResource"}}]},
+            "id": "abc-${MyVar}",
+            "references": ["MyResource"],
+        },
+        id="Fn::Sub_with_variables_and_references",
+    ),
 ]
 
 

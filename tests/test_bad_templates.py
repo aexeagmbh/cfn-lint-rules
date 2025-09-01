@@ -40,7 +40,7 @@ def test_all_rules_have_a_bad_test_template(
 
 
 test_parameters = (
-    (
+    pytest.param(
         "W9301_s3_bucket_with_bad_public_access_block_configuration.yaml",
         S3BucketPublicAccess,
         [
@@ -65,8 +65,9 @@ test_parameters = (
                 "Property Resources/TestBucket2/Properties/PublicAccessBlockConfiguration/IgnorePublicAcls should be true",
             ),
         ],
+        id="W9301_bad_public_access",
     ),
-    (
+    pytest.param(
         "W9301_s3_bucket_without_public_access_block_configuration.yaml",
         S3BucketPublicAccess,
         [
@@ -75,8 +76,9 @@ test_parameters = (
                 "Property Resources/TestBucket/Properties/PublicAccessBlockConfiguration is missing",
             )
         ],
+        id="W9301_no_public_access",
     ),
-    (
+    pytest.param(
         "W9305_certificate_manager_certificate_without_name.yaml",
         CertificateManagerCertificateNameTag,
         [
@@ -89,8 +91,9 @@ test_parameters = (
                 "Property Resources/Certificate2/Properties/Tags is missing 'Name' tag",
             ),
         ],
+        id="W9305_no_name_tag",
     ),
-    (
+    pytest.param(
         "W9303_cloudfront_distribution_without_logging_configuration.yaml",
         CloudfrontDistributionLogging,
         [
@@ -99,8 +102,9 @@ test_parameters = (
                 "Property Resources/Distribution/Properties/DistributionConfig/Logging is missing",
             ),
         ],
+        id="W9303_no_logging",
     ),
-    (
+    pytest.param(
         "W9304_cloudfront_distribution_without_comment.yaml",
         CloudfrontDistributionComment,
         [
@@ -109,8 +113,9 @@ test_parameters = (
                 "Property Resources/Distribution/Properties/DistributionConfig/Comment is missing",
             ),
         ],
+        id="W9304_no_comment",
     ),
-    (
+    pytest.param(
         "W9307_cloudfront_distribution_without_response_header_policy.yaml",
         CloudfrontDistributionResponseHeadersPolicy,
         [
@@ -123,8 +128,9 @@ test_parameters = (
                 "Property ResponseHeadersPolicyId missing at Resources/Distribution/Properties/DistributionConfig/CacheBehaviors/1",
             ),
         ],
+        id="W9307_no_response_headers_policy",
     ),
-    (
+    pytest.param(
         "W9308_cloudfront_response_header_policy_strict_transport_security.yaml",
         CloudfrontResponseHeaderConfigLongHstsMaxAge,
         [
@@ -153,8 +159,9 @@ test_parameters = (
                 "Property Resources/ResponseHeadersPolicyHstsAllBad/ResponseHeadersPolicyConfig/SecurityHeadersConfig/StrictTransportSecurity/Override should be true.",
             ),
         ],
+        id="W9308_bad_hsts",
     ),
-    (
+    pytest.param(
         "W9306_codebuild_project_cloudwatch_logs.yaml",
         CodeBuildProjectCloudWatchLogs,
         [
@@ -175,8 +182,9 @@ test_parameters = (
                 "Property Resources/Project4/Properties/LogsConfig/CloudWatchLogs/GroupName should be a Ref to a LogGroup.",
             ),
         ],
+        id="W9306_bad_cloudwatch_logs",
     ),
-    (
+    pytest.param(
         "I9301_ecs_fargate_platform_version_outdated.yaml",
         EcsServiceFargatePlatformVersionNotOutdated,
         [
@@ -185,8 +193,9 @@ test_parameters = (
                 "Resources/ECSService/Properties/PlatformVersion 1.3.0 is outdated. Set it to one of:  LATEST, 1.4.0",
             ),
         ],
+        id="I9301_outdated_platform_version",
     ),
-    (
+    pytest.param(
         "W9309_ecs_fargate_deployment_configuration.yaml",
         EcsServiceDeploymentConfiguration,
         [
@@ -215,8 +224,9 @@ test_parameters = (
                 "Resources/ECSServiceDeploymentCircuitBreakerWithBadValues/Properties/DeploymentConfiguration/DeploymentCircuitBreaker/Rollback Property DeploymentConfiguration/DeploymentCircuitBreaker/Rollback should be false.",
             ),
         ],
+        id="W9309_bad_deployment_configuration",
     ),
-    (
+    pytest.param(
         "W9310_codebuild_project_image.yaml",
         CodeBuildProjectImage,
         [
@@ -229,8 +239,9 @@ test_parameters = (
                 "Property Resources/Project2/Properties/Environment/Image uses an outdated version of the standard image.",
             ),
         ],
+        id="W9310_bad_codebuild_image",
     ),
-    (
+    pytest.param(
         "E9401_metadata_ax_changeset_auto_approve.yaml",
         MetadataAxChangesetAutoApprove,
         [
@@ -271,8 +282,9 @@ test_parameters = (
                 "Resources/TestQueue/Metadata/AxChangesetAutoApprove/BadKey key BadKey is not allowed. Allowed keys for AxChangesetAutoApprove: ModifyConditionalReplacement, ModifyReplacement.",
             ),
         ],
+        id="E9401_bad_metadata_ax_changeset_auto_approve",
     ),
-    (
+    pytest.param(
         "W9302_s3_bucket_without_bucket_encryption.yaml",
         S3BucketEncryption,
         [
@@ -281,8 +293,9 @@ test_parameters = (
                 "Property Resources/TestBucket/Properties/BucketEncryption is missing",
             )
         ],
+        id="W9302_no_bucket_encryption",
     ),
-    (
+    pytest.param(
         "E9101_unresolved_object.yaml",
         IntrinsicFunctionSubUnresolvedObject,
         [
@@ -295,8 +308,9 @@ test_parameters = (
                 "Sub contains an unresolved object",
             ),
         ],
+        id="E9101_unresolved_object",
     ),
-    (
+    pytest.param(
         "I9302_ecr_autocleanup_tag_missing.yaml",
         EcrRepositoryAutocleanupTag,
         [
@@ -309,8 +323,9 @@ test_parameters = (
                 "Resources/MyRepository2/Properties/Tags is missing the 'autocleanup' tag.",
             ),
         ],
+        id="I9302_missing_autocleanup_tag",
     ),
-    (
+    pytest.param(
         "I9302_ecr_autocleanup_tag_bad_value.yaml",
         EcrRepositoryAutocleanupTag,
         [
@@ -335,8 +350,9 @@ test_parameters = (
                 "Resources/MyRepository5/Properties/Tags/0/Value value of the autocleanup tag mus be either 'true' or 'false'.",
             ),
         ],
+        id="I9302_bad_autocleanup_tag_value",
     ),
-    (
+    pytest.param(
         "W9311_sqs_queue_encryption.yaml",
         SqsQueueEncryption,
         [
@@ -345,8 +361,9 @@ test_parameters = (
                 "Resource Resources/QueueWithOutEncryption/Properties Queue encryption must be enabled by either defining SqsManagedSseEnabled or KmsMasterKeyId.",
             ),
         ],
+        id="W9311_no_queue_encryption",
     ),
-    (
+    pytest.param(
         "I9303_cost_allocation_tags.yaml",
         CostAllocationTags,
         [
@@ -447,8 +464,9 @@ test_parameters = (
                 "Value of Tag ProjectPartDetail should be the resource id (FunctionWithBadCostAllocationTags) at Resources/FunctionWithBadCostAllocationTags/Properties/Tags",
             ),
         ],
+        id="I9303_bad_cost_allocation_tags",
     ),
-    (
+    pytest.param(
         "I9304_cost_allocation_tags_project.yaml",
         CostAllocationTagProject,
         [
@@ -458,8 +476,9 @@ test_parameters = (
                 "Multiple values of Project tag found: Bar ProjectCostAllocationTagExample, ProjectCostAllocationTagExample, ProjectCostAllocationTagExampleFoo, SomethingElse. All resources in a stack should have the same value for the Project tag.",
             ),
         ],
+        id="I9304_bad_cost_allocation_tags_project",
     ),
-    (
+    pytest.param(
         "I9305_ecs_service_propagate_tags.yaml",
         EcsServicePropagateTags,
         [
@@ -472,6 +491,7 @@ test_parameters = (
                 'PropagateTags should have the value "SERVICE" at Resources/ECSServiceWithWrongPropagateTagsValue/Properties/PropagateTags',
             ),
         ],
+        id="I9305_bad_ecs_service_propagate_tags",
     ),
 )
 
@@ -519,12 +539,12 @@ def test_bad(
 
 def test_bad_template_is_in_test_parameter(bad_template: str) -> None:
     assert any(
-        paramters[0] == bad_template for paramters in test_parameters
+        parameters.values[0] == bad_template for parameters in test_parameters
     ), f"{bad_template} is missing in the list 'test_parameters'"
 
 
-def test_all_test_paramters_have_at_least_one_expected_error() -> None:
+def test_all_test_parameters_have_at_least_one_expected_error() -> None:
     for n, parameters in enumerate(test_parameters):
         assert (
-            len(parameters[2]) > 0
-        ), f"test_paramter[{n}] ({parameters[0]}) has no expected errors"
+            len(parameters.values[2]) > 0
+        ), f"test_parameter[{n}] ({parameters.values[0]}) has no expected errors"
