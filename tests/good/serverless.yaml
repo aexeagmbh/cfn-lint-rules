@@ -57,6 +57,10 @@ Resources:
           Properties:
             Queue: !ImportValue 'MySQSQueue'
             BatchSize: 10
+        WarmUp:
+          Type: Schedule
+          Properties:
+            Schedule: rate(5 minutes)
 
   MyStateMachine:
     Type: AWS::Serverless::StateMachine
