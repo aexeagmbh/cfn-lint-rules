@@ -11,9 +11,7 @@ from cfn_lint_ax import _utils as utils
 
 value_test_cases = [
     # str
-    pytest.param(
-        {"input": "MyString", "id": "MyString", "references": []}, id="str"
-    ),
+    pytest.param({"input": "MyString", "id": "MyString", "references": []}, id="str"),
     # Ref
     pytest.param(
         {
