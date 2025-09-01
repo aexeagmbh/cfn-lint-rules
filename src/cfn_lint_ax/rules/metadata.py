@@ -1,4 +1,4 @@
-from typing import Dict, Iterator, List
+from collections.abc import Iterator
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
@@ -29,8 +29,8 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[mi
             resource.get("Type") for resource in cfn.get_resources().values()
         }
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
-        matches: List[RuleMatch] = []
+    def match(self, cfn: Template) -> list[RuleMatch]:
+        matches: list[RuleMatch] = []
 
         template_metadata = cfn.template.get("Metadata", {})
 
@@ -60,7 +60,7 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[mi
         return matches
 
     def check_template_ax_changeset_auto_approve(
-        self, template_ax_changeset_auto_approve: Dict[str, List[str]]
+        self, template_ax_changeset_auto_approve: dict[str, list[str]]
     ) -> Iterator[RuleMatch]:
         if not isinstance(template_ax_changeset_auto_approve, dict):
             yield RuleMatch(
@@ -109,7 +109,7 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[mi
                         )
 
     def check_resource_ax_changeset_auto_approve(
-        self, resource_name: str, resource_ax_changeset_auto_approve: Dict[str, bool]
+        self, resource_name: str, resource_ax_changeset_auto_approve: dict[str, bool]
     ) -> Iterator[RuleMatch]:
         base_path = ["Resources", resource_name, "Metadata", "AxChangesetAutoApprove"]
 
@@ -133,7 +133,7 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[mi
                 f"{path_str} key {excess_key} is not allowed. Allowed keys for AxChangesetAutoApprove: {allowed_keys}.",
             )
 
-        available_items: Dict[str, bool] = {
+        available_items: dict[str, bool] = {
             k: v
             for k, v in resource_ax_changeset_auto_approve.items()
             if k in self.allowed_resource_ax_changeset_auto_approve_keys

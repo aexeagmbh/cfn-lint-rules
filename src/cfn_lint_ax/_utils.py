@@ -6,7 +6,7 @@ Utilities
 
 
 import re
-from typing import List, Tuple, TypeVar, Union
+from typing import TypeVar
 
 SUB_PATTERN = re.compile(r"\${(?P<ref>[^}]+)}")
 
@@ -19,7 +19,7 @@ class Value:  # pylint: disable=too-few-public-methods
     id = ""  # noqa: VNE003
     references = None
 
-    def __new__(cls, value: Union[None, dict, str]) -> Union[None, TValue]:
+    def __new__(cls, value: None | dict | str) -> None | TValue:
         """
         Create a new Value object
 
@@ -29,9 +29,9 @@ class Value:  # pylint: disable=too-few-public-methods
         if value is None:
             return None
 
-        return super(Value, cls).__new__(cls)
+        return super().__new__(cls)
 
-    def __init__(self, value: Union[dict, str]):
+    def __init__(self, value: dict | str):
         """
         Parse a CloudFormation value
 
@@ -68,14 +68,14 @@ class Value:  # pylint: disable=too-few-public-methods
         elif "Fn::Sub" in value:
             self.id, self.references = self._get_from_sub(value["Fn::Sub"])
 
-    def _get_from_ref(self, value: str) -> Tuple[str, List[str]]:
+    def _get_from_ref(self, value: str) -> tuple[str, list[str]]:
         """
         Return the name and references from a 'Ref' intrinsic function
         """
 
         return [value, [value]]
 
-    def _get_from_getatt(self, value: list) -> Tuple[str, List[str]]:
+    def _get_from_getatt(self, value: list) -> tuple[str, list[str]]:
         """
         Return the name and references from a 'Fn::GetAtt' intrinsic function
         """
@@ -85,7 +85,7 @@ class Value:  # pylint: disable=too-few-public-methods
 
         return (id_, references)
 
-    def _get_from_join(self, value: list) -> Tuple[str, List[str]]:
+    def _get_from_join(self, value: list) -> tuple[str, list[str]]:
         """
         Return the name and references from a 'Fn::Join' intrinsic function
         """
@@ -101,7 +101,7 @@ class Value:  # pylint: disable=too-few-public-methods
 
         return (id_, references)
 
-    def _get_from_sub(self, value: Union[str, list]) -> Tuple[str, List[str]]:
+    def _get_from_sub(self, value: str | list) -> tuple[str, list[str]]:
         """
         Return the name and references from a 'Fn::Sub' intrinsic function
         """

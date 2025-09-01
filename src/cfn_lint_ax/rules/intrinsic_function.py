@@ -1,5 +1,3 @@
-from typing import List
-
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
 
@@ -13,7 +11,7 @@ class IntrinsicFunctionSubUnresolvedObject(CloudFormationLintRule):  # type: ign
     source_url = "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html"
     tags = ["sub"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         sub_objs = cfn.search_deep_keys("Fn::Sub")

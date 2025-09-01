@@ -1,5 +1,3 @@
-from typing import List
-
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
 
@@ -13,7 +11,7 @@ class EcsServiceFargatePlatformVersionNotOutdated(CloudFormationLintRule):  # ty
     source_url = "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html"
     tags = ["ecs", "fargate"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         valid_platform_versions = ["LATEST", "1.4.0"]
@@ -42,7 +40,7 @@ class EcsServiceDeploymentConfiguration(CloudFormationLintRule):  # type: ignore
     source_url = "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html#deployment-circuit-breaker"
     tags = ["ecs", "service", "circuit-breaker"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::ECS::Service"])

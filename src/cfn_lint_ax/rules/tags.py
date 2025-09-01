@@ -4,7 +4,7 @@ SPDX-License-Identifier: MIT-0
 """
 
 from logging import getLogger
-from typing import Any, TypedDict, Union
+from typing import Any, TypedDict
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.schema import PROVIDER_SCHEMA_MANAGER
@@ -14,8 +14,8 @@ LOGGER = getLogger(__name__)
 
 
 class TagObject(TypedDict):
-    Key: Union[str, dict[str, Any]]
-    Value: Union[str, dict[str, Any]]
+    Key: str | dict[str, Any]
+    Value: str | dict[str, Any]
 
 
 class _CostAllocationTagBase(CloudFormationLintRule):  # type: ignore[misc]
@@ -144,7 +144,7 @@ class CostAllocationTags(_CostAllocationTagBase):
 
             tags_as_list = self.get_tags(resource_obj)
 
-            def _get_tag_value(key: str) -> Union[str, dict[str, Any]]:
+            def _get_tag_value(key: str) -> str | dict[str, Any]:
                 for tag in tags_as_list:  # pylint: disable=cell-var-from-loop
                     if tag["Key"] == key:
                         return tag["Value"]
@@ -232,7 +232,7 @@ class CostAllocationTagProject(_CostAllocationTagBase):
 
             tags_as_list = self.get_tags(resource_obj)
 
-            def _get_tag_value(key: str) -> Union[str, dict[str, Any]]:
+            def _get_tag_value(key: str) -> str | dict[str, Any]:
                 for tag in tags_as_list:  # pylint: disable=cell-var-from-loop
                     if tag["Key"] == key:
                         return tag["Value"]

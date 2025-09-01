@@ -6,7 +6,6 @@ Rules for Lambda resources
 
 
 from collections import defaultdict
-from typing import Dict, List, Union
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
@@ -137,7 +136,7 @@ class LambdaStarPermissionRule(CloudFormationLintRule):
 
     _message = "IAM Role {} with Lambda as principal has policy actions with stars"
 
-    def _get_principals(self, properties) -> List[str]:
+    def _get_principals(self, properties) -> list[str]:
         """
         Retrieve principals from assume role policy documents
         """
@@ -160,7 +159,7 @@ class LambdaStarPermissionRule(CloudFormationLintRule):
 
         return principals
 
-    def _get_actions(self, properties) -> List[str]:
+    def _get_actions(self, properties) -> list[str]:
         """
         Retrieve actions from policy documents
         """
@@ -364,8 +363,8 @@ class LambdaAsyncNoDestinationRule(CloudFormationLintRule):
     ]
 
     def _get_async_functions(
-        self, permissions: Dict[str, dict]
-    ) -> Dict[str, Union[dict, str]]:
+        self, permissions: dict[str, dict]
+    ) -> dict[str, dict | str]:
         """
         Return a list of FunctionName properties for permissions with principals that invoke Lambda
         functions asynchronously

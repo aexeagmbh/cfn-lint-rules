@@ -7,7 +7,6 @@ Testing templates
 
 import collections
 import os
-from typing import List
 
 import cfnlint.core
 import cfnlint.decode.cfn_yaml
@@ -17,7 +16,7 @@ import pytest
 Template = collections.namedtuple("Template", ["filename", "rule", "mode"])
 
 
-def get_templates() -> List[Template]:
+def get_templates() -> list[Template]:
     def parse_filename(filename: str) -> Template:
         values = filename.split(".")
         rule = values[0].split("-")[0].upper()

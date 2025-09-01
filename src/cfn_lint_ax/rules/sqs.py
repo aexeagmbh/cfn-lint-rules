@@ -1,5 +1,3 @@
-from typing import List
-
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
 
@@ -13,7 +11,7 @@ class SqsQueueEncryption(CloudFormationLintRule):  # type: ignore[misc]
     source_url = "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-data-encryption.html"
     tags = ["sqs", "security"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::SQS::Queue"])

@@ -1,5 +1,4 @@
 from logging import getLogger
-from typing import List, Tuple, Type
 
 import pytest
 from cfnlint.rules import CloudFormationLintRule
@@ -28,11 +27,11 @@ from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, get_cnflint_errors
 
 logger = getLogger(__name__)
 
-ExpectedError = Tuple[int, Type[CloudFormationLintRule], str]
+ExpectedError = tuple[int, type[CloudFormationLintRule], str]
 
 
 def test_all_rules_have_a_bad_test_template(
-    ax_rule: CloudFormationLintRule, bad_templates: List[str]
+    ax_rule: CloudFormationLintRule, bad_templates: list[str]
 ) -> None:
     assert any(
         filename.startswith(f"{ax_rule.id}_") for filename in bad_templates
@@ -500,7 +499,7 @@ test_parameters = (
 def test_bad(
     filename: str,
     rule_class: CloudFormationLintRule,
-    expected_errors: List[Tuple[int, str]],
+    expected_errors: list[tuple[int, str]],
 ) -> None:
     filename = (BAD_TEMPLATE_FIXTURES_PATH / filename).as_posix()
 

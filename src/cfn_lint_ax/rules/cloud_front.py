@@ -1,5 +1,3 @@
-from typing import List
-
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
 
@@ -12,7 +10,7 @@ class CloudfrontDistributionComment(CloudFormationLintRule):  # type: ignore[mis
     description = "Enable Cloudfront Distribution Comment"
     tags = ["cloudfront"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::CloudFront::Distribution"])
@@ -43,7 +41,7 @@ class CloudfrontDistributionLogging(CloudFormationLintRule):  # type: ignore[mis
     source_url = "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html"
     tags = ["cloudfront", "logging"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::CloudFront::Distribution"])
@@ -74,7 +72,7 @@ class CloudfrontDistributionResponseHeadersPolicy(CloudFormationLintRule):  # ty
     source_url = "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html"
     tags = ["cloudfront", "headers"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::CloudFront::Distribution"])
@@ -124,7 +122,7 @@ class CloudfrontResponseHeaderConfigLongHstsMaxAge(CloudFormationLintRule):  # t
     source_url = "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html"
     tags = ["cloudfront", "headers", "hsts", "Strict Transport Security"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::CloudFront::ResponseHeadersPolicy"])

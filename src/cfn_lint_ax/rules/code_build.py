@@ -1,5 +1,4 @@
 from decimal import Decimal
-from typing import List
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
@@ -16,7 +15,7 @@ class CodeBuildProjectCloudWatchLogs(CloudFormationLintRule):  # type: ignore[mi
     # source_url = ""
     tags = ["codebuild", "logging"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         projects = cfn.get_resources(["AWS::CodeBuild::Project"])
@@ -65,7 +64,7 @@ class CodeBuildProjectImage(CloudFormationLintRule):  # type: ignore[misc]
         "aws/codebuild/amazonlinux2-aarch64-standard": 2,
     }
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         projects = cfn.get_resources(["AWS::CodeBuild::Project"])

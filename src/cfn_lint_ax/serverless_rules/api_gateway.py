@@ -7,7 +7,6 @@ Rules for API Gateway resources
 
 import json
 import re
-from typing import List
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
@@ -30,7 +29,7 @@ class ApiGatewayLoggingRule(CloudFormationLintRule):
         "API Gateway stage {} is missing the AccessLogSetting.DestinationArn property."
     )
 
-    def match(self, cfn) -> List[RuleMatch]:
+    def match(self, cfn) -> list[RuleMatch]:
         """
         Match against API Gateway stages without log settings
         """
@@ -148,7 +147,7 @@ class ApiGatewayDefaultThrottlingRule(CloudFormationLintRule):
     _message_method_settings = "API Gateway stage {} does not have a default MethodSettings property with ThrottlingBurstLimit and ThrottlingRateLimit."  # noqa: E501
     _message_default_route_settings = "API Gateway stage {} does not have a default DefaultRouteSettings property with ThrottlingBurstLimit and ThrottlingRateLimit."  # noqa: E501
 
-    def _match_rest_api(self, key: str, value: dict) -> List[RuleMatch]:
+    def _match_rest_api(self, key: str, value: dict) -> list[RuleMatch]:
         """
         Match for REST API
         """
@@ -170,7 +169,7 @@ class ApiGatewayDefaultThrottlingRule(CloudFormationLintRule):
 
         return []
 
-    def _match_http_api(self, key: str, value: dict) -> List[RuleMatch]:
+    def _match_http_api(self, key: str, value: dict) -> list[RuleMatch]:
         """
         Match for HTTP API
         """
@@ -189,7 +188,7 @@ class ApiGatewayDefaultThrottlingRule(CloudFormationLintRule):
 
         return []
 
-    def match(self, cfn) -> List[RuleMatch]:
+    def match(self, cfn) -> list[RuleMatch]:
         """
         Match against API Gateway stages without default throttling
         """

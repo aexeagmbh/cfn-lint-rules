@@ -1,5 +1,3 @@
-from typing import List
-
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
 
@@ -12,7 +10,7 @@ class CertificateManagerCertificateNameTag(CloudFormationLintRule):  # type: ign
     description = "Tag Certificate With Name"
     tags = ["acm", "CertificateManager", "naming", "tag"]
 
-    def match(self, cfn: Template) -> List[RuleMatch]:
+    def match(self, cfn: Template) -> list[RuleMatch]:
         matches = []
 
         resources = cfn.get_resources(["AWS::CertificateManager::Certificate"])

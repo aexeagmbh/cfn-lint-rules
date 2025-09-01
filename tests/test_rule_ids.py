@@ -1,10 +1,9 @@
 import re
-from typing import List
 
 from cfnlint.rules import CloudFormationLintRule
 
 
-def test_rule_ids_are_unique(ax_rules: List[CloudFormationLintRule]) -> None:
+def test_rule_ids_are_unique(ax_rules: list[CloudFormationLintRule]) -> None:
     rule_ids = set()
     for rule in ax_rules:
         assert rule.id not in rule_ids, f"Rule Id {rule.id} is used multiple times"
