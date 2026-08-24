@@ -10,6 +10,12 @@ from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
 from .._utils import Value
 
+# cfn-lint >= 1.54 no longer applies the SAM transform, so these rules see
+# `AWS::Serverless::Function` instead of the `AWS::Lambda::Function` it
+# generates.
+FUNCTION_TYPES = ("AWS::Lambda::Function", "AWS::Serverless::Function")
+SERVERLESS_FUNCTION_TYPE = "AWS::Serverless::Function"
+
 
 class LambdaTracingRule(CloudFormationLintRule):
     """
@@ -22,7 +28,7 @@ class LambdaTracingRule(CloudFormationLintRule):
     source_url = "https://awslabs.github.io/serverless-rules/rules/lambda/tracing/"
     tags = ["lambda"]
 
-    _message = "Lambda function {} should have TracingConfig.Mode set to 'Active'."
+    _message = "Lambda function {} should have tracing set to 'Active'."
 
     def match(self, cfn):
         """
@@ -31,10 +37,14 @@ class LambdaTracingRule(CloudFormationLintRule):
 
         matches = []
 
-        for key, value in cfn.get_resources(["AWS::Lambda::Function"]).items():
-            tracing_mode = (
-                value.get("Properties", {}).get("TracingConfig", {}).get("Mode", None)
-            )
+        for key, value in cfn.get_resources(list(FUNCTION_TYPES)).items():
+            properties = value.get("Properties", {})
+
+            if value["Type"] == SERVERLESS_FUNCTION_TYPE:
+                # SAM spells this `Tracing`, CloudFormation `TracingConfig.Mode`
+                tracing_mode = properties.get("Tracing", None)
+            else:
+                tracing_mode = properties.get("TracingConfig", {}).get("Mode", None)
 
             if tracing_mode != "Active":
                 matches.append(RuleMatch(["Resources", key], self._message.format(key)))
@@ -297,7 +307,7 @@ class LambdaDefaultMemorySizeRule(CloudFormationLintRule):
 
         matches = []
 
-        for key, value in cfn.get_resources(["AWS::Lambda::Function"]).items():
+        for key, value in cfn.get_resources(list(FUNCTION_TYPES)).items():
             memory_size = value.get("Properties", {}).get("MemorySize", None)
 
             if memory_size is None:
@@ -328,7 +338,7 @@ class LambdaDefaultTimeoutRule(CloudFormationLintRule):
 
         matches = []
 
-        for key, value in cfn.get_resources(["AWS::Lambda::Function"]).items():
+        for key, value in cfn.get_resources(list(FUNCTION_TYPES)).items():
             timeout = value.get("Properties", {}).get("Timeout", None)
 
             if timeout is None:
