@@ -4,7 +4,6 @@
 Rules for EventBridge resources
 """
 
-
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
 

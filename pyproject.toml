@@ -1,7 +1,7 @@
 # See PEP 518 for the spec of this file
 # https://www.python.org/dev/peps/pep-0518/
 [build-system]
-requires = ["setuptools >= 80.9.0", "wheel >= 0.45.1"]
+requires = ["setuptools >= 84.0.0", "wheel >= 0.47.0"]
 build-backend = "setuptools.build_meta"
 
 
@@ -27,7 +27,7 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
-    "cfn-lint >= 1.18.1",
+    "cfn-lint >= 1.54.0",
 ]
 dynamic = ["readme"]
 
@@ -37,20 +37,20 @@ Tracker = "https://github.com/aexeagmbh/cfn-lint-rules/issues"
 
 [dependency-groups]
 dev = [
-    "black>=25.1.0",
+    "black>=26.5.1",
     "flake8>=7.3.0",
     "flake8-annotations-complexity>=0.1.0",
-    "flake8-builtins>=3.0.0",
-    "flake8-comprehensions>=3.16.0",
-    "isort>=6.0.1",
-    "mypy>=1.17.1",
-    "pylint>=3.3.8",
-    "pytest>=8.4.1",
+    "flake8-builtins>=3.1.0",
+    "flake8-comprehensions>=3.17.0",
+    "isort>=8.0.1",
+    "mypy>=2.3.0",
+    "pylint>=4.0.7",
+    "pytest>=9.1.1",
     "pytest-sugar>=1.1.1",
-    "yamllint>=1.37.1",
+    "yamllint>=1.38.0",
 ]
 publish = [
-    "twine>=6.1.0",
+    "twine>=7.0.0",
 ]
 
 

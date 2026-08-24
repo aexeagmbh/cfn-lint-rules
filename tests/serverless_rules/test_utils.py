@@ -4,7 +4,6 @@
 Testing utility functions
 """
 
-
 import pytest
 
 from cfn_lint_ax import _utils as utils

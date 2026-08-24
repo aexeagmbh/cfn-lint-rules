@@ -4,7 +4,6 @@
 Utilities
 """
 
-
 import re
 from typing import TypeVar
 

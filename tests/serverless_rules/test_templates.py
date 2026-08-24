@@ -4,7 +4,6 @@
 Testing templates
 """
 
-
 import collections
 import os
 

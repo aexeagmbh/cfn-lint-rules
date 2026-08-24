@@ -4,7 +4,6 @@
 Rules for SQS resources
 """
 
-
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
 from .._utils import Value

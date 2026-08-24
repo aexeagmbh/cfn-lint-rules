@@ -4,7 +4,6 @@
 Rules for API Gateway resources
 """
 
-
 import json
 import re
 

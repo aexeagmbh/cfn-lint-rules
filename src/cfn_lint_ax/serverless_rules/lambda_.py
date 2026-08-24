@@ -4,7 +4,6 @@
 Rules for Lambda resources
 """
 
-
 from collections import defaultdict
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch

@@ -4,7 +4,6 @@
 Rules for AppSync resources
 """
 
-
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
 
