@@ -231,7 +231,6 @@ dependencies = [
 dev = [
     { name = "black" },
     { name = "flake8" },
-    { name = "flake8-annotations-complexity" },
     { name = "flake8-builtins" },
     { name = "flake8-comprehensions" },
     { name = "isort" },
@@ -252,7 +251,6 @@ requires-dist = [{ name = "cfn-lint", specifier = ">=1.54.0" }]
 dev = [
     { name = "black", specifier = ">=26.5.1" },
     { name = "flake8", specifier = ">=7.3.0" },
-    { name = "flake8-annotations-complexity", specifier = ">=0.1.0" },
     { name = "flake8-builtins", specifier = ">=3.1.0" },
     { name = "flake8-comprehensions", specifier = ">=3.17.0" },
     { name = "isort", specifier = ">=8.0.1" },
@@ -457,18 +455,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/9b/af/fbfe3c4b5a657d79e5c47a2827a362f9e1b763336a52f926126aa6dc7123/flake8-7.3.0.tar.gz", hash = "sha256:fe044858146b9fc69b551a4b490d69cf960fcb78ad1edcb84e7fbb1b4a8e3872", size = 48326, upload-time = "2025-06-20T19:31:35.838Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/9f/56/13ab06b4f93ca7cac71078fbe37fcea175d3216f31f85c3168a6bbd0bb9a/flake8-7.3.0-py2.py3-none-any.whl", hash = "sha256:b9696257b9ce8beb888cdbe31cf885c90d31928fe202be0889a7cdafad32f01e", size = 57922, upload-time = "2025-06-20T19:31:34.425Z" },
-]
-
-[[package]]
-name = "flake8-annotations-complexity"
-version = "0.1.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/fa/68/ab6f136df474fbbddad1bff3965b9857a89327d819a385c815549a884cd7/flake8_annotations_complexity-0.1.0.tar.gz", hash = "sha256:98b86ef87de5331d2b61f3cf472dcf6b8ff1a5ddde46f78bc894b464f06e1414", size = 5365, upload-time = "2025-03-04T10:33:02.251Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c2/8c/dcd25a2c5b727851c28e1875a04dadd8e22b31564502eea63d5977cd31a8/flake8_annotations_complexity-0.1.0-py3-none-any.whl", hash = "sha256:102d75f5ba0c667cde9c563062f4e7c616ca84bf5bfdc9c1f960a2655133ce35", size = 5539, upload-time = "2025-03-04T10:33:00.558Z" },
 ]
 
 [[package]]
