@@ -161,10 +161,31 @@ SAM_EVENT_SOURCE_MAPPING_EVENT_TYPES = frozenset(
     }
 )
 
+# The subset of those whose SAM schema has a `DestinationConfig`. The other
+# three cannot carry a failure destination: neither Lambda nor SAM supports one
+# for an SQS, DocumentDB or self-managed Kafka event source.
+SAM_EVENT_SOURCE_MAPPING_DESTINATION_EVENT_TYPES = frozenset(
+    {
+        "DynamoDB",
+        "Kinesis",
+        "MSK",
+    }
+)
+
 # Event types that generate an `AWS::Events::Rule`.
 SAM_EVENT_BRIDGE_EVENT_TYPES = frozenset(
     {
         "CloudWatchEvent",
+        "EventBridgeRule",
+        "Schedule",
+    }
+)
+
+# The subset of those whose SAM schema has a `DeadLetterConfig`. SAM offers no
+# way to give the rule it generates for a `CloudWatchEvent` event a dead letter
+# queue, so asking for one would be a finding nobody can fix.
+SAM_DEAD_LETTER_EVENT_TYPES = frozenset(
+    {
         "EventBridgeRule",
         "Schedule",
     }

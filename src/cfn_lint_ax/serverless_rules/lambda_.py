@@ -11,6 +11,7 @@ from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from .._sam import (
     SAM_ASYNC_EVENT_PRINCIPALS,
     SAM_EVENT_PRINCIPALS,
+    SAM_EVENT_SOURCE_MAPPING_DESTINATION_EVENT_TYPES,
     serverless_function_events,
 )
 from .._utils import Value
@@ -69,6 +70,7 @@ class LambdaESMDestinationRule(CloudFormationLintRule):
     tags = ["lambda"]
 
     _message = "Lambda event source mapping {} should have a DestinationConfig.OnFailure.Destination property."
+    _sam_message = "Event {} of {} creates an event source mapping that should have a DestinationConfig.OnFailure.Destination property."  # noqa: E501
 
     def match(self, cfn):
         """
@@ -89,6 +91,27 @@ class LambdaESMDestinationRule(CloudFormationLintRule):
 
             if not destination:
                 matches.append(RuleMatch(["Resources", key], self._message.format(key)))
+
+        for key, value in cfn.get_resources([SERVERLESS_FUNCTION_TYPE]).items():
+            for event_name, event_type, event_properties in serverless_function_events(
+                value
+            ):
+                if event_type not in SAM_EVENT_SOURCE_MAPPING_DESTINATION_EVENT_TYPES:
+                    continue
+
+                destination = (
+                    event_properties.get("DestinationConfig", {})
+                    .get("OnFailure", {})
+                    .get("Destination", False)
+                )
+
+                if not destination:
+                    matches.append(
+                        RuleMatch(
+                            ["Resources", key, "Properties", "Events", event_name],
+                            self._sam_message.format(event_name, key),
+                        )
+                    )
 
         return matches
 

@@ -4,6 +4,10 @@
 Rules for SQS resources
 """
 
+# ES6000 needs nothing for SAM: the only `AWS::SQS::Queue` SAM generates is the
+# destination of an `EventInvokeConfig.DestinationConfig.OnFailure` of type
+# `SQS`, which is a dead letter queue and so needs no redrive policy itself.
+
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
 from .._utils import Value

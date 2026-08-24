@@ -30,13 +30,17 @@ class StepFunctionsTracingRule(CloudFormationLintRule):
         matches = []
 
         for key, value in cfn.get_resources(
-            ["AWS::StepFunctions::StateMachine"]
+            ["AWS::StepFunctions::StateMachine", "AWS::Serverless::StateMachine"]
         ).items():
-            tracing_enabled = (
-                value.get("Properties", {})
-                .get("TracingConfiguration", {})
-                .get("Enabled", False)
-            )
+            properties = value.get("Properties", {})
+
+            if value["Type"] == "AWS::Serverless::StateMachine":
+                # SAM spells this `Tracing.Enabled`
+                tracing_enabled = properties.get("Tracing", {}).get("Enabled", False)
+            else:
+                tracing_enabled = properties.get("TracingConfiguration", {}).get(
+                    "Enabled", False
+                )
 
             if not tracing_enabled:
                 matches.append(RuleMatch(["Resources", key], self._message.format(key)))

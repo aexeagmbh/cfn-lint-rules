@@ -27,7 +27,9 @@ class AppSyncTracingRule(CloudFormationLintRule):
 
         matches = []
 
-        for key, value in cfn.get_resources(["AWS::AppSync::GraphQLApi"]).items():
+        for key, value in cfn.get_resources(
+            ["AWS::AppSync::GraphQLApi", "AWS::Serverless::GraphQLApi"]
+        ).items():
             xray_enabled = value.get("Properties", {}).get("XrayEnabled", False)
 
             if not xray_enabled:

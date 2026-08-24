@@ -2,12 +2,30 @@ from cfnlint.schema import PROVIDER_SCHEMA_MANAGER
 
 from cfn_lint_ax._sam import (
     SAM_ASYNC_EVENT_PRINCIPALS,
+    SAM_DEAD_LETTER_EVENT_TYPES,
     SAM_EVENT_BRIDGE_EVENT_TYPES,
     SAM_EVENT_PRINCIPALS,
+    SAM_EVENT_SOURCE_MAPPING_DESTINATION_EVENT_TYPES,
     SAM_EVENT_SOURCE_MAPPING_EVENT_TYPES,
     SAM_GENERATED_RESOURCE_TYPES,
     serverless_function_events,
 )
+
+
+def _event_properties(event_type: str) -> set[str]:
+    """
+    Property names the SAM schema allows for an event of `event_type`
+    """
+
+    schema = PROVIDER_SCHEMA_MANAGER.get_resource_schema(
+        "us-east-1", "AWS::Serverless::Function"
+    ).schema
+    definitions = schema["definitions"]
+    # `CloudWatchEvent` is already named after its type, the others are not
+    name = f"{event_type}Event"
+    event = definitions[name if name in definitions else event_type]
+    reference = event["properties"]["Properties"]["allOf"][0]["$ref"]
+    return set(definitions[reference.rsplit("/", 1)[-1]]["properties"])
 
 
 def test_mapping_covers_exactly_the_sam_types_cfn_lint_knows() -> None:
@@ -107,3 +125,28 @@ def test_event_bridge_event_types() -> None:
     assert SAM_EVENT_BRIDGE_EVENT_TYPES == frozenset(
         {"CloudWatchEvent", "EventBridgeRule", "Schedule"}
     )
+
+
+def test_only_event_types_with_a_destination_ask_for_one() -> None:
+    for event_type in SAM_EVENT_SOURCE_MAPPING_EVENT_TYPES:
+        has_destination = "DestinationConfig" in _event_properties(event_type)
+        assert has_destination == (
+            event_type in SAM_EVENT_SOURCE_MAPPING_DESTINATION_EVENT_TYPES
+        ), event_type
+
+
+def test_only_event_types_with_a_dead_letter_config_ask_for_one() -> None:
+    for event_type in SAM_EVENT_BRIDGE_EVENT_TYPES:
+        has_dead_letter_config = "DeadLetterConfig" in _event_properties(event_type)
+        assert has_dead_letter_config == (
+            event_type in SAM_DEAD_LETTER_EVENT_TYPES
+        ), event_type
+
+
+def test_a_sam_sns_event_still_cannot_carry_a_redrive_policy() -> None:
+    # ES7000 reports every SNS event, because the `RedrivePolicy` that fixes it
+    # is missing from SAM's own schema source and therefore from the schema
+    # cfn-lint generates out of it - see `serverless_rules/sns.py`. When this
+    # test starts failing, SAM fixed its schema and cfn-lint imported it, so
+    # the note there and the missing `es7000-sam.pass.yaml` can be revisited.
+    assert "RedrivePolicy" not in _event_properties("SNS")
