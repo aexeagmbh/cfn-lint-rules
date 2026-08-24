@@ -8,6 +8,7 @@ from collections import defaultdict
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
+from .._sam import SAM_EVENT_PRINCIPALS, serverless_function_events
 from .._utils import Value
 
 # cfn-lint >= 1.54 no longer applies the SAM transform, so these rules see
@@ -113,6 +114,15 @@ class LambdaPermissionPrincipalsRule(CloudFormationLintRule):
 
             for reference in function_name.references:
                 permissions[reference].append(principal.id)
+
+        # cfn-lint >= 1.54 no longer applies the SAM transform, so the
+        # permissions SAM generates for a function's events are not in the
+        # template any more. Read them off the events instead.
+        for key, value in cfn.get_resources([SERVERLESS_FUNCTION_TYPE]).items():
+            for _, event_type, _ in serverless_function_events(value):
+                principal = SAM_EVENT_PRINCIPALS.get(event_type)
+                if principal is not None:
+                    permissions[key].append(principal)
 
         return permissions
 
