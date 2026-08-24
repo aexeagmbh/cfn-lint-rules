@@ -8,7 +8,11 @@ from collections import defaultdict
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
-from .._sam import SAM_EVENT_PRINCIPALS, serverless_function_events
+from .._sam import (
+    SAM_ASYNC_EVENT_PRINCIPALS,
+    SAM_EVENT_PRINCIPALS,
+    serverless_function_events,
+)
 from .._utils import Value
 
 # cfn-lint >= 1.54 no longer applies the SAM transform, so these rules see
@@ -432,6 +436,7 @@ class LambdaAsyncNoDestinationRule(CloudFormationLintRule):
     tags = ["lambda"]
 
     _message = "Lambda permission {} has an asynchronous permission but doesn't have an EventInvokeConfig resource related to it"  # noqa: E501
+    _sam_message = "Serverless function {} has an asynchronous event but doesn't have an EventInvokeConfig.DestinationConfig.OnFailure property"  # noqa: E501
 
     _async_principals = [
         "events.amazonaws.com",
@@ -467,6 +472,38 @@ class LambdaAsyncNoDestinationRule(CloudFormationLintRule):
 
         return async_functions
 
+    def _match_serverless_functions(self, cfn) -> list[RuleMatch]:
+        """
+        Match SAM functions with an asynchronous event and no failure destination
+        """
+
+        matches = []
+
+        for key, value in cfn.get_resources([SERVERLESS_FUNCTION_TYPE]).items():
+            has_async_event = any(
+                SAM_EVENT_PRINCIPALS.get(event_type) in SAM_ASYNC_EVENT_PRINCIPALS
+                for _, event_type, _ in serverless_function_events(value)
+            )
+
+            if not has_async_event:
+                continue
+
+            on_failure = (
+                value.get("Properties", {})
+                .get("EventInvokeConfig", {})
+                .get("DestinationConfig", {})
+                .get("OnFailure", {})
+            )
+
+            # SAM accepts either an ARN in `Destination` or a `Type` it then
+            # creates the destination for.
+            if not on_failure.get("Destination") and not on_failure.get("Type"):
+                matches.append(
+                    RuleMatch(["Resources", key], self._sam_message.format(key))
+                )
+
+        return matches
+
     def match(self, cfn):
         """
         Match against Lambda functions without an explicity Timeout
@@ -499,5 +536,7 @@ class LambdaAsyncNoDestinationRule(CloudFormationLintRule):
         for key, value in async_functions.items():
             if value not in found:
                 matches.append(RuleMatch(["Resources", key], self._message.format(key)))
+
+        matches.extend(self._match_serverless_functions(cfn))
 
         return matches
