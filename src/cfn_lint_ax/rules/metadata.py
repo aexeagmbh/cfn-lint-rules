@@ -3,6 +3,8 @@ from collections.abc import Iterator
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 from cfnlint.template import Template
 
+from .._sam import deployed_resource_types
+
 
 class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[misc]
     id = "E9401"
@@ -25,9 +27,10 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[mi
     base_path = ["Metadata", "AxChangesetAutoApprove"]
 
     def initialize(self, cfn: Template) -> None:
-        self.used_cloudformation_resource_types = {
-            resource.get("Type") for resource in cfn.get_resources().values()
-        }
+        # `None` if the template uses a SAM resource whose generated resource
+        # types are unknown - the types used in the template can't be
+        # determined then.
+        self.used_cloudformation_resource_types = deployed_resource_types(cfn)
 
     def match(self, cfn: Template) -> list[RuleMatch]:
         matches: list[RuleMatch] = []
@@ -101,7 +104,7 @@ class MetadataAxChangesetAutoApprove(CloudFormationLintRule):  # type: ignore[mi
                 path_str = "/".join(key_path) + f"[{list_idx}]"
                 if not isinstance(element, str):
                     yield RuleMatch(path, f"{path_str} must be a string.")
-                else:
+                elif self.used_cloudformation_resource_types is not None:
                     if element not in self.used_cloudformation_resource_types:
                         yield RuleMatch(
                             path,

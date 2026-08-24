@@ -1,0 +1,44 @@
+---
+Transform: AWS::Serverless-2016-10-31
+
+Metadata:
+  AxChangesetAutoApprove:
+    Add:
+      - AWS::Lambda::Function
+      - AWS::Lambda::Permission
+      - AWS::Logs::LogGroup
+
+Resources:
+  MyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: python3.13
+      CodeUri: .
+      PropagateTags: true
+      Tags:
+        Project: MetadataAxServerlessExample
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: MyFunction
+
+  MyFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${MyFunction}'
+      RetentionInDays: 30
+      Tags:
+        - Key: Project
+          Value: MetadataAxServerlessExample
+        - Key: ProjectPart
+          Value: !Ref AWS::StackName
+        - Key: ProjectPartDetail
+          Value: MyFunctionLogGroup
+
+  MyFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt MyFunction.Arn
+      Principal: elasticloadbalancing.amazonaws.com
