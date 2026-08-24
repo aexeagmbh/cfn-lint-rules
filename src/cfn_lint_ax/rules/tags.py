@@ -65,59 +65,9 @@ class CostAllocationTags(_CostAllocationTagBase):
     )
     tags = ["resources", "tags"]
 
-    def expeted_detail_tag_values(  # pylint: disable=too-many-return-statements
+    def expeted_detail_tag_values(  # pylint: disable=unused-argument
         self, resource_name: str, resource_obj: dict[str, object], cfn: Template
     ) -> set[str]:
-        if cfn.has_serverless_transform():
-            if resource_obj.get("Type") == "AWS::IAM::Role" and resource_name.endswith(
-                "Role"
-            ):
-
-                possible_serverless_function_id = resource_name.removesuffix("Role")
-                serverless_resources = cfn.get_resources(
-                    ["AWS::Lambda::Function", "AWS::StepFunctions::StateMachine"]
-                )
-                if possible_serverless_function_id in serverless_resources:
-                    return {possible_serverless_function_id, resource_name}
-            if resource_obj.get("Type") == "AWS::ApiGatewayV2::Stage":
-                if resource_name.endswith("ApiGatewayDefaultStage"):
-                    possible_serverless_httpapi_id = resource_name.removesuffix(
-                        "ApiGatewayDefaultStage"
-                    )
-                    if possible_serverless_httpapi_id == "":
-                        possible_serverless_httpapi_id = "Api"
-                    httpapi_resources = cfn.get_resources("AWS::ApiGatewayV2::Api")
-                    if possible_serverless_httpapi_id in httpapi_resources:
-                        return {possible_serverless_httpapi_id, resource_name}
-                else:
-                    httpapi_resources = cfn.get_resources("AWS::ApiGatewayV2::Api")
-                    possible_httpapi_resources_id = {
-                        k
-                        for k in httpapi_resources.keys()
-                        if resource_name.startswith(k)
-                    }
-                    return {resource_name}.union(possible_httpapi_resources_id)
-            if resource_obj.get(
-                "Type"
-            ) == "AWS::ApiGatewayV2::DomainName" and resource_name.startswith(
-                "ApiGatewayDomainName"
-            ):
-                httpapi_resources = cfn.get_resources("AWS::ApiGatewayV2::Api")
-                return {resource_name}.union(httpapi_resources.keys())
-            if resource_obj.get("Type") == "AWS::ApiGateway::Stage":
-                httpapi_resources = cfn.get_resources("AWS::ApiGateway::RestApi")
-                possible_httpapi_resources_id = {
-                    k for k in httpapi_resources.keys() if resource_name.startswith(k)
-                }
-                return {resource_name}.union(possible_httpapi_resources_id)
-            if resource_obj.get(
-                "Type"
-            ) == "AWS::ApiGateway::DomainName" and resource_name.startswith(
-                "ApiGatewayDomainName"
-            ):
-                restapi_resources = cfn.get_resources("AWS::ApiGateway::RestApi")
-                return {resource_name}.union(restapi_resources.keys())
-
         return {resource_name}
 
     def match(  # pylint: disable=too-many-locals
@@ -160,31 +110,7 @@ class CostAllocationTags(_CostAllocationTagBase):
             for required_tag in ["Project", "ProjectPart", "ProjectPartDetail"]:
                 if not _is_tag_present(required_tag):
                     missing_tags.append(required_tag)
-            if missing_tags and not (
-                cfn.has_serverless_transform()
-                and (
-                    resource_obj.get("Type")
-                    in {
-                        "AWS::CodeDeploy::Application",
-                        "AWS::CodeDeploy::DeploymentGroup",
-                        "AWS::Lambda::EventSourceMapping",
-                    }
-                    or (
-                        resource_obj.get("Type") == "AWS::Events::Rule"
-                        and isinstance(
-                            targets := resource_obj.get("Properties", {}).get(
-                                "Targets"
-                            ),
-                            list,
-                        )
-                        and len(targets) == 1
-                        and resources.get(
-                            targets[0].get("Arn", {}).get("Ref", ""), {}
-                        ).get("Type", "")
-                        == "AWS::Lambda::Alias"
-                    )
-                )
-            ):
+            if missing_tags:
                 message = f"Missing CostAllocationTag(s) {', '.join(missing_tags)} at {'/'.join(path)}"
                 matches.append(RuleMatch(path, message))
 
@@ -295,6 +221,52 @@ class EcsServicePropagateTags(CloudFormationLintRule):  # type: ignore[misc]
                     RuleMatch(
                         path,
                         f'PropagateTags should have the value "SERVICE" at {"/".join(path)}',
+                    )
+                )
+
+        return matches
+
+
+class ServerlessPropagateTags(CloudFormationLintRule):  # type: ignore[misc]
+    """Check that SAM resources propagate their tags"""
+
+    id = "I9306"
+    shortdesc = "Serverless Propagate Tags"
+    description = (
+        "Check that SAM resources propagate their tags to the resources they"
+        " generate."
+    )
+    tags = ["resources", "tags"]
+
+    # SAM only copies `Tags` onto the resources it generates - the function's
+    # role, the state machine's role, the deployment group - when
+    # `PropagateTags` is set. `AWS::Serverless::Api` and
+    # `AWS::Serverless::HttpApi` have the property too, but they tag their
+    # stage either way and that is the only taggable resource they generate,
+    # so they are left out.
+    resource_types = frozenset(
+        {
+            "AWS::Serverless::Function",
+            "AWS::Serverless::StateMachine",
+        }
+    )
+
+    def match(self, cfn: Template) -> list[RuleMatch]:
+        matches: list[RuleMatch] = []
+
+        for resource_name, resource_obj in cfn.get_resources(
+            list(self.resource_types)
+        ).items():
+            properties = resource_obj.get("Properties", {})
+            if not properties.get("Tags"):
+                # `CostAllocationTags` reports the missing tags already
+                continue
+            if properties.get("PropagateTags") is not True:
+                matches.append(
+                    RuleMatch(
+                        ["Resources", resource_name, "Properties"],
+                        f"{resource_name} should set PropagateTags to true so that"
+                        " its Tags reach the resources SAM generates from it",
                     )
                 )
 

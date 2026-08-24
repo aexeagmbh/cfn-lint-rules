@@ -169,6 +169,7 @@ Resources:
     Properties:
       Runtime: nodejs24.x
       Handler: index.handler
+      PropagateTags: true
       Tags:
         Foo: Bar
         ProjectPart: !Ref AWS::StackName

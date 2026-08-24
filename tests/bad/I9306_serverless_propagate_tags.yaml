@@ -1,0 +1,38 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+
+Resources:
+  FunctionWithoutPropagateTags:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs24.x
+      Handler: index.handler
+      Tags:
+        Project: FooBar
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: FunctionWithoutPropagateTags
+
+  StateMachineWithoutPropagateTags:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Definition:
+        StartAt: Done
+        States:
+          Done:
+            Type: Succeed
+      Tags:
+        Project: FooBar
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: StateMachineWithoutPropagateTags
+
+  FunctionWithPropagateTags:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs24.x
+      Handler: index.handler
+      PropagateTags: true
+      Tags:
+        Project: FooBar
+        ProjectPart: !Ref AWS::StackName
+        ProjectPartDetail: FunctionWithPropagateTags

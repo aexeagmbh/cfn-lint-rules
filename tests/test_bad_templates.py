@@ -21,6 +21,7 @@ from cfn_lint_ax.rules import (
     MetadataAxChangesetAutoApprove,
     S3BucketEncryption,
     S3BucketPublicAccess,
+    ServerlessPropagateTags,
     SqsQueueEncryption,
 )
 from tests.utils import BAD_TEMPLATE_FIXTURES_PATH, get_cnflint_errors
@@ -367,30 +368,6 @@ test_parameters = (
         CostAllocationTags,
         [
             (
-                4,
-                "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/FunctionWithoutAnyTagsRole/Properties/Tags",
-            ),
-            (
-                4,
-                "Missing CostAllocationTag(s) Project at Resources/FunctionWithBadCostAllocationTagsRole/Properties/Tags",
-            ),
-            (
-                4,
-                "Value of Tag ProjectPartDetail should be the resource id (FunctionWithBadCostAllocationTags, FunctionWithBadCostAllocationTagsRole) at Resources/FunctionWithBadCostAllocationTagsRole/Properties/Tags",
-            ),
-            (
-                4,
-                "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/ApiWithoutAnyTagsApiGatewayDefaultStage/Properties/Tags",
-            ),
-            (
-                4,
-                "Missing CostAllocationTag(s) Project at Resources/ApiWithBadCostAllocationTagsApiGatewayDefaultStage/Properties/Tags",
-            ),
-            (
-                4,
-                "Value of Tag ProjectPartDetail should be the resource id (ApiWithBadCostAllocationTags, ApiWithBadCostAllocationTagsApiGatewayDefaultStage) at Resources/ApiWithBadCostAllocationTagsApiGatewayDefaultStage/Properties/Tags",
-            ),
-            (
                 9,
                 "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/QueueWithoutAnyTags/Properties/Tags",
             ),
@@ -443,27 +420,44 @@ test_parameters = (
                 "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/ApiWithoutAnyTags/Properties/Tags",
             ),
             (
-                153,
+                156,
                 "Missing CostAllocationTag(s) Project at Resources/ApiWithBadCostAllocationTags/Properties/Tags",
             ),
             (
-                153,
+                156,
                 "Value of Tag ProjectPartDetail should be the resource id (ApiWithBadCostAllocationTags) at Resources/ApiWithBadCostAllocationTags/Properties/Tags",
             ),
             (
-                161,
+                163,
                 "Missing CostAllocationTag(s) Project, ProjectPart, ProjectPartDetail at Resources/FunctionWithoutAnyTags/Properties/Tags",
             ),
             (
-                167,
+                173,
                 "Missing CostAllocationTag(s) Project at Resources/FunctionWithBadCostAllocationTags/Properties/Tags",
             ),
             (
-                167,
+                173,
                 "Value of Tag ProjectPartDetail should be the resource id (FunctionWithBadCostAllocationTags) at Resources/FunctionWithBadCostAllocationTags/Properties/Tags",
             ),
         ],
         id="I9303_bad_cost_allocation_tags",
+    ),
+    pytest.param(
+        "I9306_serverless_propagate_tags.yaml",
+        ServerlessPropagateTags,
+        [
+            (
+                8,
+                "FunctionWithoutPropagateTags should set PropagateTags to true so"
+                " that its Tags reach the resources SAM generates from it",
+            ),
+            (
+                18,
+                "StateMachineWithoutPropagateTags should set PropagateTags to true"
+                " so that its Tags reach the resources SAM generates from it",
+            ),
+        ],
+        id="I9306_serverless_propagate_tags",
     ),
     pytest.param(
         "I9304_cost_allocation_tags_project.yaml",
