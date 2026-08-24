@@ -117,6 +117,59 @@ SAM_IMPLICIT_API_EVENT_TYPES = {
     "HttpApi": "AWS::Serverless::HttpApi",
 }
 
+# The principal SAM puts in the `AWS::Lambda::Permission` it generates for an
+# event. Event types that are absent generate no permission: the event source
+# mapping types below, and `ScheduleV2`, which uses a role instead.
+# Collected with `tools/collect_sam_resource_types.py`.
+SAM_EVENT_PRINCIPALS = {
+    "AlexaSkill": "alexa-appkit.amazon.com",
+    "Api": "apigateway.amazonaws.com",
+    "CloudWatchEvent": "events.amazonaws.com",
+    "CloudWatchLogs": "logs.amazonaws.com",
+    "Cognito": "cognito-idp.amazonaws.com",
+    "EventBridgeRule": "events.amazonaws.com",
+    "HttpApi": "apigateway.amazonaws.com",
+    "IoTRule": "iot.amazonaws.com",
+    "S3": "s3.amazonaws.com",
+    "SNS": "sns.amazonaws.com",
+    "Schedule": "events.amazonaws.com",
+}
+
+# Principals that invoke a Lambda function asynchronously, so that a failed
+# invocation is lost without a destination. Kept identical to the list the
+# rule used before cfn-lint dropped the SAM transform, when it read the
+# principal off the generated `AWS::Lambda::Permission`.
+SAM_ASYNC_EVENT_PRINCIPALS = frozenset(
+    {
+        "events.amazonaws.com",
+        "iot.amazonaws.com",
+        "s3.amazonaws.com",
+        "sns.amazonaws.com",
+    }
+)
+
+# Event types that generate an `AWS::Lambda::EventSourceMapping` instead of a
+# permission.
+SAM_EVENT_SOURCE_MAPPING_EVENT_TYPES = frozenset(
+    {
+        "DocumentDB",
+        "DynamoDB",
+        "Kinesis",
+        "MSK",
+        "SQS",
+        "SelfManagedKafka",
+    }
+)
+
+# Event types that generate an `AWS::Events::Rule`.
+SAM_EVENT_BRIDGE_EVENT_TYPES = frozenset(
+    {
+        "CloudWatchEvent",
+        "EventBridgeRule",
+        "Schedule",
+    }
+)
+
 
 def deployed_resource_types(cfn: Template) -> set[str] | None:
     """
