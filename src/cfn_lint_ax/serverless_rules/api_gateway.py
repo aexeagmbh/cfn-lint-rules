@@ -9,12 +9,37 @@ import re
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
+from .._sam import SAM_IMPLICIT_API_EVENT_TYPES, serverless_function_events
+
 # cfn-lint >= 1.54 no longer applies the SAM transform, so these rules see the
 # SAM resource instead of the stage it generates. The properties the rules read
 # are named the same on both.
 REST_API_TYPES = ("AWS::ApiGateway::Stage", "AWS::Serverless::Api")
 HTTP_API_TYPES = ("AWS::ApiGatewayV2::Stage", "AWS::Serverless::HttpApi")
 API_TYPES = REST_API_TYPES + HTTP_API_TYPES
+
+SERVERLESS_FUNCTION_TYPE = "AWS::Serverless::Function"
+
+
+def implicit_api_events(cfn):
+    """
+    Yield (function, event name, event type) for events creating an implicit api
+
+    SAM creates one `ServerlessRestApi` / `ServerlessHttpApi` for every `Api` /
+    `HttpApi` event that does not name an api of its own. That api configures
+    nothing, so it never has logging, throttling or tracing. cfn-lint >= 1.54
+    does not generate it, so the rules report against the event instead.
+    """
+
+    for key, value in cfn.get_resources([SERVERLESS_FUNCTION_TYPE]).items():
+        for event_name, event_type, event_properties in serverless_function_events(
+            value
+        ):
+            if event_type not in SAM_IMPLICIT_API_EVENT_TYPES:
+                continue
+            if event_properties.get("RestApiId") or event_properties.get("ApiId"):
+                continue
+            yield key, event_name, event_type
 
 
 class ApiGatewayLoggingRule(CloudFormationLintRule):
@@ -34,6 +59,7 @@ class ApiGatewayLoggingRule(CloudFormationLintRule):
     _message_destination_arn = (
         "API Gateway {} is missing the AccessLogSetting.DestinationArn property."
     )
+    _message_implicit = "The implicit API created by event {} of function {} has no access logging."  # noqa: E501
 
     def match(self, cfn) -> list[RuleMatch]:
         """
@@ -65,6 +91,14 @@ class ApiGatewayLoggingRule(CloudFormationLintRule):
                         ["Resources", key], self._message_destination_arn.format(key)
                     )
                 )
+
+        for key, event_name, _ in implicit_api_events(cfn):
+            matches.append(
+                RuleMatch(
+                    ["Resources", key, "Properties", "Events", event_name],
+                    self._message_implicit.format(event_name, key),
+                )
+            )
 
         return matches
 
@@ -148,6 +182,7 @@ class ApiGatewayDefaultThrottlingRule(CloudFormationLintRule):
 
     _message_method_settings = "API Gateway {} does not have a default MethodSettings property with ThrottlingBurstLimit and ThrottlingRateLimit."  # noqa: E501
     _message_default_route_settings = "API Gateway {} does not have a default DefaultRouteSettings property with ThrottlingBurstLimit and ThrottlingRateLimit."  # noqa: E501
+    _message_implicit = "The implicit API created by event {} of function {} has no default throttling."  # noqa: E501
 
     def _match_rest_api(self, key: str, value: dict) -> list[RuleMatch]:
         """
@@ -205,6 +240,14 @@ class ApiGatewayDefaultThrottlingRule(CloudFormationLintRule):
         for key, value in cfn.get_resources(list(HTTP_API_TYPES)).items():
             matches.extend(self._match_http_api(key, value))
 
+        for key, event_name, _ in implicit_api_events(cfn):
+            matches.append(
+                RuleMatch(
+                    ["Resources", key, "Properties", "Events", event_name],
+                    self._message_implicit.format(event_name, key),
+                )
+            )
+
         return matches
 
 
@@ -220,6 +263,7 @@ class ApiGatewayTracingRule(CloudFormationLintRule):
     tags = ["apigateway"]
 
     _message = "API Gateway {} does not have the TracingEnabled property set to true."
+    _message_implicit = "The implicit API created by event {} of function {} has no tracing."  # noqa: E501
 
     def match(self, cfn):
         """
@@ -235,5 +279,17 @@ class ApiGatewayTracingRule(CloudFormationLintRule):
 
             if not tracing_enabled:
                 matches.append(RuleMatch(["Resources", key], self._message.format(key)))
+
+        # HTTP APIs don't support X-Ray, so only a REST API event counts here
+        for key, event_name, event_type in implicit_api_events(cfn):
+            if event_type != "Api":
+                continue
+
+            matches.append(
+                RuleMatch(
+                    ["Resources", key, "Properties", "Events", event_name],
+                    self._message_implicit.format(event_name, key),
+                )
+            )
 
         return matches

@@ -1,0 +1,44 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+
+Resources:
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      TracingEnabled: true
+      AccessLogSetting:
+        DestinationArn: arn:aws:logs:eu-west-1:111122223333:log-group:my-log-group
+        Format: '{"request_id": "$context.requestId"}'
+      MethodSettings:
+        - HttpMethod: "*"
+          ResourcePath: "/*"
+          ThrottlingRateLimit: 10
+          ThrottlingBurstLimit: 1000
+      DefinitionBody:
+        openapi: "3.0.1"
+        info:
+          title: test-api
+          version: 1.0.0
+        paths:
+          /:
+            get:
+              responses: {}
+              x-amazon-apigateway-integration:
+                type: mock
+
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Runtime: python3.12
+      Handler: main.handler
+      Tracing: Active
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+            RestApiId: !Ref Api
