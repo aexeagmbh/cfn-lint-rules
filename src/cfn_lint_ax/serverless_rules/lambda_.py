@@ -144,6 +144,7 @@ class LambdaStarPermissionRule(CloudFormationLintRule):
     tags = ["lambda"]
 
     _message = "IAM Role {} with Lambda as principal has policy actions with stars"
+    _sam_message = "Serverless function {} has policy actions with stars"
 
     def _get_principals(self, properties) -> list[str]:
         """
@@ -188,6 +189,40 @@ class LambdaStarPermissionRule(CloudFormationLintRule):
 
         return actions
 
+    def _get_sam_actions(self, properties) -> list[str]:
+        """
+        Retrieve actions from the inline policy documents of a SAM function
+
+        `Policies` also holds SAM policy templates (a dict keyed by template
+        name) and managed policy ARNs (a str). Neither spells out actions.
+        """
+
+        actions = []
+
+        policies = properties.get("Policies", [])
+        if isinstance(policies, dict):
+            policies = [policies]
+        elif not isinstance(policies, list):
+            return actions
+
+        for policy in policies:
+            if not isinstance(policy, dict):
+                continue
+
+            for statement in policy.get("Statement", []):
+                if not isinstance(statement, dict):
+                    continue
+
+                action = statement.get("Action")
+
+                if isinstance(action, str):
+                    actions.append(action)
+                elif isinstance(action, list):
+                    actions.extend(action)
+                # Ignored for now if it's not a list of str
+
+        return actions
+
     def match(self, cfn):
         """
         Match against IAM roles with Lambda as principal and stars in actions
@@ -203,6 +238,14 @@ class LambdaStarPermissionRule(CloudFormationLintRule):
                 a == "*" or ":*" in a for a in actions
             ):
                 matches.append(RuleMatch(["Resources", key], self._message.format(key)))
+
+        for key, value in cfn.get_resources([SERVERLESS_FUNCTION_TYPE]).items():
+            actions = self._get_sam_actions(value.get("Properties", {}))
+
+            if any(a == "*" or ":*" in a for a in actions):
+                matches.append(
+                    RuleMatch(["Resources", key], self._sam_message.format(key))
+                )
 
         return matches
 
