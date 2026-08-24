@@ -9,6 +9,13 @@ import re
 
 from cfnlint.rules import CloudFormationLintRule, RuleMatch
 
+# cfn-lint >= 1.54 no longer applies the SAM transform, so these rules see the
+# SAM resource instead of the stage it generates. The properties the rules read
+# are named the same on both.
+REST_API_TYPES = ("AWS::ApiGateway::Stage", "AWS::Serverless::Api")
+HTTP_API_TYPES = ("AWS::ApiGatewayV2::Stage", "AWS::Serverless::HttpApi")
+API_TYPES = REST_API_TYPES + HTTP_API_TYPES
+
 
 class ApiGatewayLoggingRule(CloudFormationLintRule):
     """
@@ -22,10 +29,10 @@ class ApiGatewayLoggingRule(CloudFormationLintRule):
     tags = ["apigateway"]
 
     _message_access_log_settings = (
-        "API Gateway stage {} is missing the AccessLogSetting property."
+        "API Gateway {} is missing the AccessLogSetting property."
     )
     _message_destination_arn = (
-        "API Gateway stage {} is missing the AccessLogSetting.DestinationArn property."
+        "API Gateway {} is missing the AccessLogSetting.DestinationArn property."
     )
 
     def match(self, cfn) -> list[RuleMatch]:
@@ -35,10 +42,8 @@ class ApiGatewayLoggingRule(CloudFormationLintRule):
 
         matches = []
 
-        for key, value in cfn.get_resources(
-            ["AWS::ApiGateway::Stage", "AWS::ApiGatewayV2::Stage"]
-        ).items():
-            if value["Type"] == "AWS::ApiGateway::Stage":
+        for key, value in cfn.get_resources(list(API_TYPES)).items():
+            if value["Type"] in REST_API_TYPES:
                 # REST APIs
                 log_settings = value.get("Properties", {}).get("AccessLogSetting", None)
             else:
@@ -75,7 +80,7 @@ class ApiGatewayStructuredLoggingRule(CloudFormationLintRule):
     source_url = "https://awslabs.github.io/serverless-rules/rules/api_gateway/structured_logging/"
     tags = ["apigateway"]
 
-    _message = "API Gateway stage {} is not using structured logging for the AccessLogSetting.Format property."
+    _message = "API Gateway {} is not using structured logging for the AccessLogSetting.Format property."  # noqa: E501
     _log_format_pattern = re.compile(r"\$context\.[a-zA-Z\.]+")
 
     def _check_log_format(self, log_format: str) -> bool:
@@ -102,10 +107,8 @@ class ApiGatewayStructuredLoggingRule(CloudFormationLintRule):
 
         matches = []
 
-        for key, value in cfn.get_resources(
-            ["AWS::ApiGateway::Stage", "AWS::ApiGatewayV2::Stage"]
-        ).items():
-            if value["Type"] == "AWS::ApiGateway::Stage":
+        for key, value in cfn.get_resources(list(API_TYPES)).items():
+            if value["Type"] in REST_API_TYPES:
                 # REST APIs
                 log_format = (
                     value.get("Properties", {})
@@ -143,8 +146,8 @@ class ApiGatewayDefaultThrottlingRule(CloudFormationLintRule):
     source_url = "https://awslabs.github.io/serverless-rules/rules/api_gateway/default_throttling/"
     tags = ["apigateway"]
 
-    _message_method_settings = "API Gateway stage {} does not have a default MethodSettings property with ThrottlingBurstLimit and ThrottlingRateLimit."  # noqa: E501
-    _message_default_route_settings = "API Gateway stage {} does not have a default DefaultRouteSettings property with ThrottlingBurstLimit and ThrottlingRateLimit."  # noqa: E501
+    _message_method_settings = "API Gateway {} does not have a default MethodSettings property with ThrottlingBurstLimit and ThrottlingRateLimit."  # noqa: E501
+    _message_default_route_settings = "API Gateway {} does not have a default DefaultRouteSettings property with ThrottlingBurstLimit and ThrottlingRateLimit."  # noqa: E501
 
     def _match_rest_api(self, key: str, value: dict) -> list[RuleMatch]:
         """
@@ -195,11 +198,11 @@ class ApiGatewayDefaultThrottlingRule(CloudFormationLintRule):
         matches = []
 
         # API Gateway REST APIs
-        for key, value in cfn.get_resources(["AWS::ApiGateway::Stage"]).items():
+        for key, value in cfn.get_resources(list(REST_API_TYPES)).items():
             matches.extend(self._match_rest_api(key, value))
 
         # API Gateway HTTP APIs
-        for key, value in cfn.get_resources(["AWS::ApiGatewayV2::Stage"]).items():
+        for key, value in cfn.get_resources(list(HTTP_API_TYPES)).items():
             matches.extend(self._match_http_api(key, value))
 
         return matches
@@ -216,9 +219,7 @@ class ApiGatewayTracingRule(CloudFormationLintRule):
     source_url = "https://awslabs.github.io/serverless-rules/rules/api_gateway/tracing/"
     tags = ["apigateway"]
 
-    _message = (
-        "API Gateway stage {} does not have the TracingEnabled property set to true."
-    )
+    _message = "API Gateway {} does not have the TracingEnabled property set to true."
 
     def match(self, cfn):
         """
@@ -229,7 +230,7 @@ class ApiGatewayTracingRule(CloudFormationLintRule):
 
         # HTTP APIs don't support X-Ray
         # for key, value in cfn.get_resources(["AWS::ApiGateway::Stage", "AWS::ApiGatewayV2::Stage"]).items():
-        for key, value in cfn.get_resources(["AWS::ApiGateway::Stage"]).items():
+        for key, value in cfn.get_resources(list(REST_API_TYPES)).items():
             tracing_enabled = value.get("Properties", {}).get("TracingEnabled", False)
 
             if not tracing_enabled:

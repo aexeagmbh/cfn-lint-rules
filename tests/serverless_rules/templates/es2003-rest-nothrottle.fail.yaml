@@ -53,4 +53,5 @@ Resources:
       MethodSettings:
         - HttpMethod: "*"
           ResourcePath: "/*"
+          LoggingLevel: INFO
       TracingEnabled: true
