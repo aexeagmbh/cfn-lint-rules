@@ -6,7 +6,7 @@ Resources:
       DomainName: example.com
       Tags:
         - Key: Name
-          Value: !Sub example.com (${AWS::StackName})
+          Value: !Sub example.com - ${AWS::StackName}
         - Key: Project
           Value: CertificateExample
         - Key: ProjectPart
@@ -19,7 +19,7 @@ Resources:
       DomainName: subdomain.example.com
       Tags:
         - Key: Name
-          Value: !Sub subdomain.example.com (${AWS::StackName})
+          Value: !Sub subdomain.example.com - ${AWS::StackName}
         - Key: foo
           Value: bar
         - Key: Project

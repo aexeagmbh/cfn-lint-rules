@@ -39,7 +39,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
-      Runtime: nodejs20.x
+      Runtime: nodejs24.x
       CodeUri: .
       AutoPublishAlias: live
       Tags:
