@@ -6,6 +6,11 @@ cfn-lint-ax
 
 Additional rules for [cfn-lint](https://github.com/aws-cloudformation/cfn-lint).
 
+Requires cfn-lint >= 1.54.0, the release that removed the SAM transform.
+`AWS::Serverless::*` resources are no longer expanded into the resources
+CloudFormation deploys them as, so the rules read the SAM resources directly.
+See [docs/sam-transform-removal.md](docs/sam-transform-removal.md).
+
 Installation
 ------------
 
@@ -45,6 +50,7 @@ User Rules (E9XXX)
 * I9303 CostAllocationTags
 * I9304 CostAllocationTagProject
 * I9305 EcsServicePropagateTags
+* I9306 ServerlessPropagateTags
 * W9301 S3BucketPublicAccess
 * W9302 S3BucketEncryption
 * W9303 CloudfrontDistributionLogging
