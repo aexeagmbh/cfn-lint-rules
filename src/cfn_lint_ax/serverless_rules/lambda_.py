@@ -274,9 +274,10 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
 
         known_refs = []
         known_names = []
+        known_log_groups = []
 
         # Scan log groups for resource names
-        for resource in log_groups.values():
+        for key, resource in log_groups.items():
             log_group_name = Value(
                 resource.get("Properties", {}).get("LogGroupName", None)
             )
@@ -286,6 +287,9 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
             if log_group_name is None or retention is None:
                 continue
 
+            # A function can also point at the log group directly
+            known_log_groups.append(key)
+
             # Searching for references in log group name
             if len(log_group_name.references) > 0:
                 known_refs.extend(log_group_name.references)
@@ -293,7 +297,11 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
             elif log_group_name.id.find("/aws/lambda/") == 0:
                 known_names.append(log_group_name.id[12:])
 
-        return {"ref": known_refs, "name": known_names}
+        return {
+            "ref": known_refs,
+            "name": known_names,
+            "log_group": known_log_groups,
+        }
 
     def match(self, cfn):
         """
@@ -302,7 +310,7 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
 
         matches = []
 
-        functions = cfn.get_resources(["AWS::Lambda::Function"])
+        functions = cfn.get_resources(list(FUNCTION_TYPES))
         log_groups = cfn.get_resources(["AWS::Logs::LogGroup"])
 
         known = self._get_valid_functions(log_groups)
@@ -317,6 +325,18 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
             function_name = function.get("Properties", {}).get("FunctionName", None)
             if function_name is not None and function_name in known["name"]:
                 log_group_found = True
+
+            # A function may point at its log group instead of relying on the
+            # `/aws/lambda/<name>` convention
+            log_group = (
+                function.get("Properties", {})
+                .get("LoggingConfig", {})
+                .get("LogGroup", None)
+            )
+            if log_group is not None:
+                log_group_value = Value(log_group)
+                if any(ref in known["log_group"] for ref in log_group_value.references):
+                    log_group_found = True
 
             if not log_group_found:
                 matches.append(
