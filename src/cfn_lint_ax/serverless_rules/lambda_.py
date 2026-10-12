@@ -308,13 +308,14 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
         """
         Return what a function can match a log group with retention by: the
         references in the group's name ("ref"), the function name of a literal
-        /aws/lambda/<name> ("name"), and the group's logical id, for
-        LoggingConfig.LogGroup ("log_group")
+        /aws/lambda/<name> ("name"), and, for LoggingConfig.LogGroup, the
+        group's logical id ("log_group") and its literal name ("group_name")
         """
 
         known_refs = []
         known_names = []
         known_log_groups = []
+        known_group_names = []
 
         # Scan log groups for resource names
         for key, resource in log_groups.items():
@@ -337,24 +338,35 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
             # Searching for references in log group name
             if len(log_group_name.references) > 0:
                 known_refs.extend(log_group_name.references)
-            # Otherwise, check if this is a hardcoded name
-            elif log_group_name.id.find("/aws/lambda/") == 0:
+                continue
+
+            # A hardcoded name, which LoggingConfig.LogGroup can give verbatim
+            known_group_names.append(log_group_name.id)
+
+            # A hardcoded name can also follow the /aws/lambda/<name> convention
+            if log_group_name.id.find("/aws/lambda/") == 0:
                 known_names.append(log_group_name.id[12:])
 
         return {
             "ref": known_refs,
             "name": known_names,
             "log_group": known_log_groups,
+            "group_name": known_group_names,
         }
 
     @staticmethod
-    def _points_at(value, log_groups):
+    def _points_at(value, known):
         """
         Whether a LoggingConfig.LogGroup value is one of the log groups itself:
-        `!Ref LogGroup` (or a Join of nothing else), or a Sub of nothing but one
-        placeholder for it. A value that only mentions a group, such as
-        `!Sub "${LogGroup}-other"`, names a different log group.
+        `!Ref LogGroup` (or a Join of nothing else), a Sub of nothing but one
+        placeholder for it, or its hardcoded name. A value that only mentions a
+        group, such as `!Sub "${LogGroup}-other"`, names a different log group.
         """
+
+        log_groups = known["log_group"]
+
+        if not value.references:
+            return value.id in known["group_name"]
 
         if value.id in log_groups and value.references == [value.id]:
             return True
@@ -395,9 +407,7 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
                 .get("LoggingConfig", {})
                 .get("LogGroup", None)
             )
-            if log_group is not None and self._points_at(
-                Value(log_group), known["log_group"]
-            ):
+            if log_group is not None and self._points_at(Value(log_group), known):
                 log_group_found = True
 
             if not log_group_found:
