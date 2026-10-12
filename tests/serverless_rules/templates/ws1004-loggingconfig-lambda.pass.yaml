@@ -1,0 +1,34 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+
+# What CDK synthesizes for `logGroup: new logs.LogGroup(..., { retention })`:
+# a plain AWS::Lambda::Function, and a log group without a name
+Resources:
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+  Function:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.12
+      Handler: main.handler
+      Role: !GetAtt Role.Arn
+      Code:
+        ZipFile: "def handler(event, context): pass"
+      TracingConfig:
+        Mode: Active
+      LoggingConfig:
+        LogGroup: !Ref LogGroup
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      RetentionInDays: 7

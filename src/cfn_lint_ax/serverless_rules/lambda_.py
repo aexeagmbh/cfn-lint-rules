@@ -14,7 +14,7 @@ from .._sam import (
     SAM_EVENT_SOURCE_MAPPING_DESTINATION_EVENT_TYPES,
     serverless_function_events,
 )
-from .._utils import Value
+from .._utils import SUB_PATTERN, Value
 
 # cfn-lint >= 1.54 no longer applies the SAM transform, so these rules see
 # `AWS::Serverless::Function` instead of the `AWS::Lambda::Function` it
@@ -306,7 +306,10 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
 
     def _get_valid_functions(self, log_groups):
         """
-        Return function names with valid LogGroups
+        Return what a function can match a log group with retention by: the
+        references in the group's name ("ref"), the function name of a literal
+        /aws/lambda/<name> ("name"), and the group's logical id, for
+        LoggingConfig.LogGroup ("log_group")
         """
 
         known_refs = []
@@ -315,17 +318,21 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
 
         # Scan log groups for resource names
         for key, resource in log_groups.items():
-            log_group_name = Value(
-                resource.get("Properties", {}).get("LogGroupName", None)
-            )
-            retention = resource.get("Properties", {}).get("RetentionInDays", None)
+            properties = resource.get("Properties", {})
 
-            # No retention or log group name, break early
-            if log_group_name is None or retention is None:
+            # Without retention, the group satisfies nothing
+            if properties.get("RetentionInDays", None) is None:
                 continue
 
-            # A function can also point at the log group directly
+            # A function can also point at the log group directly. Its name
+            # does not matter then, and CDK leaves it unset by default.
             known_log_groups.append(key)
+
+            log_group_name = Value(properties.get("LogGroupName", None))
+
+            # Without a name, only a direct pointer can match
+            if log_group_name is None:
+                continue
 
             # Searching for references in log group name
             if len(log_group_name.references) > 0:
@@ -339,6 +346,24 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
             "name": known_names,
             "log_group": known_log_groups,
         }
+
+    @staticmethod
+    def _points_at(value, log_groups):
+        """
+        Whether a LoggingConfig.LogGroup value is one of the log groups itself:
+        `!Ref LogGroup` (or a Join of nothing else), or a Sub of nothing but one
+        placeholder for it. A value that only mentions a group, such as
+        `!Sub "${LogGroup}-other"`, names a different log group.
+        """
+
+        if value.id in log_groups and value.references == [value.id]:
+            return True
+
+        return (
+            SUB_PATTERN.fullmatch(value.id) is not None
+            and len(value.references) == 1
+            and value.references[0] in log_groups
+        )
 
     def match(self, cfn):
         """
@@ -370,10 +395,10 @@ class LambdaLogRetentionRule(CloudFormationLintRule):
                 .get("LoggingConfig", {})
                 .get("LogGroup", None)
             )
-            if log_group is not None:
-                log_group_value = Value(log_group)
-                if any(ref in known["log_group"] for ref in log_group_value.references):
-                    log_group_found = True
+            if log_group is not None and self._points_at(
+                Value(log_group), known["log_group"]
+            ):
+                log_group_found = True
 
             if not log_group_found:
                 matches.append(
